@@ -1,18 +1,18 @@
-import LandingPage from "../views/landing";
+import RegisterPage from "../views/register";
 import Page from "../components/page";
 
-const Landing: React.FC = () => {
+const Register: React.FC = () => {
   return (
     <Page
       image={"/images/banner.jpg"}
-      title={"Find out what others think about you | Druz"}
+      title={"Join Druz | Druz"}
       description={
         "Druz is an interactive, fun, secure and safe app. Create an account, set your questions, share your profile link and see what your friends think about you. All for free!"
       }
     >
-      <LandingPage />
+      <RegisterPage />
     </Page>
   );
 };
 
-export default Landing;
+export default Register;

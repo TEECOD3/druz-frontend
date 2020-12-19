@@ -1,18 +1,18 @@
-import LandingPage from "../views/landing";
+import ForgotPasswordPage from "../views/forgotPassword";
 import Page from "../components/page";
 
-const Landing: React.FC = () => {
+const ForgotPassword: React.FC = () => {
   return (
     <Page
       image={"/images/banner.jpg"}
-      title={"Find out what others think about you | Druz"}
+      title={"Forgot your password? | Druz"}
       description={
         "Druz is an interactive, fun, secure and safe app. Create an account, set your questions, share your profile link and see what your friends think about you. All for free!"
       }
     >
-      <LandingPage />
+      <ForgotPasswordPage />
     </Page>
   );
 };
 
-export default Landing;
+export default ForgotPassword;
