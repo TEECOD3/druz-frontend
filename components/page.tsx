@@ -81,12 +81,17 @@ const Page: React.FC<{
               }
               property="og:image:alt"
             />
+            <meta name="twitter:image" content={featuredImage} />
           </>
         ) : (
           <>
             <meta
               content="https://res.cloudinary.com/djksghat4/image/upload/v1590483641/Druz/android-chrome-512x512.png"
               property="og:image"
+            />
+            <meta
+              name="twitter:image"
+              content="https://res.cloudinary.com/djksghat4/image/upload/v1590483641/Druz/android-chrome-512x512.png"
             />
             <meta
               content={
@@ -115,7 +120,7 @@ const Page: React.FC<{
           datePublished={dateTime(date)}
           description={description}
           images={[featuredImage]}
-          publisherLogo="https://www.druz.xyz/logo192.png"
+          publisherLogo={`${domain}/logo192.png`}
           publisherName="Druz"
           title={title}
           url={canonical}
