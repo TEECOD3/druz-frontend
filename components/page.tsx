@@ -3,6 +3,7 @@ import Head from "next/head";
 import { withRouter, Router } from "next/router";
 import { ArticleJsonLd } from "next-seo";
 import { dateTime } from "../utils/dateFormat";
+import Wrapper from "./wrapper";
 
 const Page: React.FC<{
   children: React.ReactNode;
@@ -12,6 +13,7 @@ const Page: React.FC<{
   title: string;
   keywords?: string;
   router: Router;
+  excludeWrapper?: boolean;
 }> = ({
   children,
   date,
@@ -20,6 +22,7 @@ const Page: React.FC<{
   title = "Druz",
   keywords,
   router,
+  excludeWrapper,
 }) => {
   const domain = process.env.DOMAIN || "https://www.druz.xyz";
   const url = router && router.asPath ? router.asPath : undefined;
@@ -117,7 +120,7 @@ const Page: React.FC<{
         <meta content="@druz_app" name="twitter:site" />
         <meta content="@druz_app" name="twitter:creator" />
       </Head>
-      {children}
+      {excludeWrapper ? <>{children}</> : <Wrapper>{children}</Wrapper>}
       {date && (
         <ArticleJsonLd
           authorName="Aigbiluese Eronmonsele"
