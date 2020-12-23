@@ -1,10 +1,25 @@
 import { extendTheme } from "@chakra-ui/react";
 
 const customTheme = extendTheme({
-  fonts: {
-    body: "Mulish, sans-serif",
-    heading: "Playfair Display, serif",
-    mono: "Menlo, monospace",
+  styles: {
+    global: {
+      body: {
+        fontFamily: "Rubik, sans-serif",
+      },
+      // a: {
+      //   color: "teal.500",
+      //   _hover: {
+      //     textDecoration: "underline",
+      //   },
+      // },
+    },
+  },
+  components: {
+    Heading: {
+      baseStyle: {
+        fontWeight: 700,
+      },
+    },
   },
   colors: {
     brand: {
@@ -24,5 +39,11 @@ const customTheme = extendTheme({
     boldest: 900,
   },
 });
+
+export const mainColors = {
+  primary: "#3B9795",
+  borderColor: "rgba(0, 0, 0, 0.08)",
+  white: "#ffffff",
+};
 
 export default customTheme;

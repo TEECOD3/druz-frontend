@@ -1,40 +1,37 @@
 import * as React from "react";
-import {
-  ButtonProps,
-  Button as ChakraButton,
-  useColorMode,
-} from "@chakra-ui/react";
+import { ButtonProps, Button as ChakraButton } from "@chakra-ui/react";
+import { mainColors } from "utils/customTheme";
 
 export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
   return (
     <ChakraButton
       as="button"
       borderRadius="5px"
-      py="1rem"
+      height="3rem"
       px="1.4rem"
       color="brand.white"
-      // transition=".3s ease-out"
-      transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
+      transition=".2s ease-out"
       bgColor="brand.primary"
-      _hover={{ paddingRight: "2rem" }}
+      _hover={{ paddingRight: "1.6rem" }}
+      fontWeight={500}
       {...props}
     />
   );
 };
 
 export const OutlinedButton: React.FC<ButtonProps> = (props: ButtonProps) => {
-  const { colorMode } = useColorMode();
   return (
     <ChakraButton
       as="button"
       borderRadius="5px"
-      py="1rem"
+      height="2.8rem"
       px="1.4rem"
-      color="brand.white"
-      // transition=".3s ease-out"
-      transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
-      bgColor="brand.primary"
-      _hover={{ paddingRight: "2rem" }}
+      color="brand.primary"
+      transition=".2s ease-out"
+      background="none"
+      border={`1px solid ${mainColors.primary}`}
+      _hover={{ paddingRight: "1.6rem" }}
+      fontWeight={500}
       {...props}
     />
   );

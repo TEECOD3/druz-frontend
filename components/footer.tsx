@@ -9,8 +9,9 @@ const Footer: React.FC = () => {
       bottom="0"
       height="auto"
       w="100%"
-      pb={["2rem", "3rem"]}
+      py={["1.3rem", "1.6rem"]}
       px={["1rem", "1.5rem", "2rem"]}
+      borderTop="1px solid rgba(0, 0, 0, 0.08)"
     >
       <Box m="0 auto" maxW={["1200px"]}>
         <Text fontSize="md" d="block" textAlign="center">

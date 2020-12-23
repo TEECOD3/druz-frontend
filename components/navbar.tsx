@@ -2,11 +2,13 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Box, Flex, useColorMode, Heading } from "@chakra-ui/react";
-import { MoonIcon, SunIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import { FaSun } from "react-icons/fa";
 import Container from "./container";
 import MobileNav from "./mobileNav";
 import { OutlinedButton } from "./buttons";
-import { backgroundColor, color } from "utils/colorValues";
+import { MoonIcon } from "utils/customIcons";
+import { backgroundColor, color, borderColor } from "utils/colorValues";
 
 const Header: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -28,10 +30,11 @@ const Header: React.FC = () => {
         w="100%"
         backgroundColor={backgroundColor[colorMode]}
         mb="1rem"
-        py={[".5rem"]}
+        py={[2, 4]}
         position="fixed"
         top="0"
         zIndex="400"
+        borderBottom={`1px solid ${borderColor[colorMode]}`}
       >
         <Container>
           <Flex
@@ -40,7 +43,7 @@ const Header: React.FC = () => {
             align="center"
             m="0 auto"
           >
-            <Heading as="h1" size="xl">
+            <Heading color="brand.primary" as="h1" size="lg">
               <Link href="/">
                 <a>
                   Druz
@@ -59,18 +62,24 @@ const Header: React.FC = () => {
               <Box onClick={toggleColorMode} as="button" mr={4} padding="5px">
                 <MoonIcon
                   d={colorMode === "light" ? "flex" : "none"}
-                  w={["18px", "25px"]}
-                  h={["18px", "25px"]}
-                  color="#718096"
+                  w="22px"
+                  h="22px"
+                  color="transparent"
                 />
-                <SunIcon
-                  d={colorMode === "dark" ? "flex" : "none"}
-                  w={["18px", "25px"]}
-                  h={["18px", "25px"]}
-                  color="#718096"
+                <FaSun
+                  style={{
+                    display: colorMode === "dark" ? "flex" : "none",
+                    color: "#718096",
+                    width: "22px",
+                    height: "22px",
+                  }}
                 />
               </Box>
-              <OutlinedButton>Login</OutlinedButton>
+              <Link href="/login" passHref>
+                <OutlinedButton d="flex" w="fit-content" as="a" height="2.5rem">
+                  Login
+                </OutlinedButton>
+              </Link>
             </Flex>
             <Box d={["block", "block", "none"]}>
               <HamburgerIcon

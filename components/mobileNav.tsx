@@ -8,7 +8,9 @@ import {
   useColorMode,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { CloseIcon } from "@chakra-ui/icons";
+import { FaSun } from "react-icons/fa";
+import { MoonIcon } from "utils/customIcons";
 import { color, backgroundColor } from "utils/colorValues";
 
 interface MobileNavProps {
@@ -49,13 +51,15 @@ const MobileNav: React.FC<MobileNavProps> = ({
             d={colorMode === "light" ? "flex" : "none"}
             w="20px"
             h="20px"
-            color="#718096"
+            color="transparent"
           />
-          <SunIcon
-            d={colorMode === "dark" ? "flex" : "none"}
-            w="20px"
-            h="20px"
-            color="#718096"
+          <FaSun
+            style={{
+              display: colorMode === "dark" ? "flex" : "none",
+              color: "#718096",
+              width: "20px",
+              height: "20px",
+            }}
           />
         </Box>
       </Flex>

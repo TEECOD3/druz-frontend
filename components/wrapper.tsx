@@ -16,7 +16,7 @@ const Wrapper: React.FC<React.ReactNode> = (props) => {
       <Navbar />
       <Box pt="5rem" />
 
-      <Box overflow="hidden" pb="5rem">
+      <Box overflow="hidden" pb="7rem">
         {props.children}
       </Box>
       <Footer />

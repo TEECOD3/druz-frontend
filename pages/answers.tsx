@@ -7,7 +7,7 @@ const Answers: React.FC = () => {
       image={"/images/banner.png"}
       title={"Your Answers"}
       description={
-        "Druz helps you find out what others think about you by getting them to answer some questions."
+        "Druz helps you find out what people think about you by getting them to answer some questions."
       }
     >
       <AnswersPage />

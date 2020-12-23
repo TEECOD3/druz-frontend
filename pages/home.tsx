@@ -7,7 +7,7 @@ const Home: React.FC = () => {
       image={"/images/banner.png"}
       title={"Home | Druz"}
       description={
-        "Druz helps you find out what others think about you by getting them to answer some questions."
+        "Druz helps you find out what people think about you by getting them to answer some questions."
       }
     >
       <HomePage />
