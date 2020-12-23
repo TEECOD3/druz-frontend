@@ -13,6 +13,7 @@ import Container from "components/container";
 import Wrapper from "components/wrapper";
 import { Button } from "components/buttons";
 import { GetStartedIcon } from "utils/customIcons";
+import { borderColor } from "utils/colorValues";
 
 const LandingPage: React.FC = () => {
   const { colorMode } = useColorMode();
@@ -143,7 +144,7 @@ const LandingPage: React.FC = () => {
         </Container>
 
         <Box
-          borderTop="1px solid rgba(0, 0, 0, 0.08)"
+          borderTop={`1px solid ${borderColor[colorMode]}`}
           pt={{ base: 14, md: 24 }}
           mb={{ base: 10, md: 16 }}
         >

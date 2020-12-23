@@ -1,8 +1,10 @@
 import * as React from "react";
 import Link from "next/link";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, useColorMode } from "@chakra-ui/react";
+import { borderColor } from "utils/colorValues";
 
 const Footer: React.FC = () => {
+  const { colorMode } = useColorMode();
   return (
     <Box
       position="absolute"
@@ -11,7 +13,7 @@ const Footer: React.FC = () => {
       w="100%"
       py={["1.3rem", "1.6rem"]}
       px={["1rem", "1.5rem", "2rem"]}
-      borderTop="1px solid rgba(0, 0, 0, 0.08)"
+      borderTop={`1px solid ${borderColor[colorMode]}`}
     >
       <Box m="0 auto" maxW={["1200px"]}>
         <Text fontSize="md" d="block" textAlign="center">
