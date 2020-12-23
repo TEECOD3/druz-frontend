@@ -67,10 +67,10 @@ const Page: React.FC<{
         <meta content={title} property="og:title" />
         <meta content={description} property="og:description" />
         <meta content={canonical} property="og:url" />
-        <meta
+        {/* <meta
           content="t28Kl2fGmZjIEgh6q3mGsf-7gGb8115VMQm1qbMMIKc"
           name="google-site-verification"
-        />
+        /> */}
         {featuredImage ? (
           <>
             <meta content={featuredImage} property="og:image" />
