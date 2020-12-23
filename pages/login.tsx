@@ -4,7 +4,7 @@ import Page from "../components/page";
 const Login: React.FC = () => {
   return (
     <Page
-      image={"/images/banner.jpg"}
+      image={"/images/banner.png"}
       title={"Sign in to Druz | Druz"}
       description={
         "Druz is an interactive, fun, secure and safe app. Create an account, set your questions, share your profile link and see what your friends think about you. All for free!"

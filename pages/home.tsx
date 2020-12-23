@@ -4,7 +4,7 @@ import Page from "../components/page";
 const Home: React.FC = () => {
   return (
     <Page
-      image={"/images/banner.jpg"}
+      image={"/images/banner.png"}
       title={"Home | Druz"}
       description={
         "Druz helps you find out what others think about you by getting them to answer some questions."
