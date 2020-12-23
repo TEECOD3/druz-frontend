@@ -9,8 +9,7 @@ import {
   Link as ChakraLink,
 } from "@chakra-ui/react";
 import { CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { OutlinedButton } from "./buttons";
-import { color, backgroundColor, borderColor } from "utils/colorValues";
+import { color, backgroundColor } from "utils/colorValues";
 
 interface MobileNavProps {
   showMobileNav: boolean;
