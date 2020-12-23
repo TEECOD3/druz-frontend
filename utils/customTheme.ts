@@ -10,10 +10,11 @@ const customTheme = extendTheme({
     brand: {
       primary: "#3B9795",
       borderColor: "rgba(0, 0, 0, 0.08)",
+      white: "#ffffff",
       grey: "#A0AEC0",
-      orangeButton: {
-        500: "#fb8f1d",
-        600: "#e27604",
+      primaryButton: {
+        500: "#3B9795",
+        600: "#3B9795",
       },
     },
   },

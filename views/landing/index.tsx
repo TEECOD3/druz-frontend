@@ -1,11 +1,15 @@
 import * as React from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
+import Container from "components/container";
+import Wrapper from "components/wrapper";
 
 const LandingPage: React.FC = () => {
   return (
-    <Box>
-      <Text>Landing page </Text>
-    </Box>
+    <Wrapper>
+      <Container>
+        <Text>hell yeah</Text>
+      </Container>
+    </Wrapper>
   );
 };
 
