@@ -21,7 +21,7 @@ const Page: React.FC<{
   keywords,
   router,
 }) => {
-  const domain = "https://www.druz.xyz";
+  const domain = process.env.DOMAIN || "https://www.druz.xyz";
   const url = router && router.asPath ? router.asPath : undefined;
   const canonical = url && url === "/" ? domain : domain + url;
   const featuredImage = domain + image;
