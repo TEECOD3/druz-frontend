@@ -29,7 +29,7 @@ const customTheme = extendTheme({
       grey: "#A0AEC0",
       primaryButton: {
         500: "#3B9795",
-        600: "#3B9795",
+        600: "#20615f",
       },
     },
   },

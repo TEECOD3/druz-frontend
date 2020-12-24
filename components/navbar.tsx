@@ -1,40 +1,57 @@
 import * as React from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
-import { Box, Flex, useColorMode, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  useColorMode,
+  Heading,
+  chakra,
+  Slide,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { useViewportScroll } from "framer-motion";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { FaSun } from "react-icons/fa";
 import Container from "./container";
 import MobileNav from "./mobileNav";
 import { OutlinedButton } from "./buttons";
 import { MoonIcon } from "utils/customIcons";
-import { backgroundColor, color, borderColor } from "utils/colorValues";
+import { backgroundColor, color } from "utils/colorValues";
 
 const Header: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const router = useRouter();
 
   const [showMobileNav, setShowMobileNav] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const ref = React.useRef<HTMLHeadingElement>();
+  const [y, setY] = React.useState(0);
+  const { height = 0 } = ref.current?.getBoundingClientRect() ?? {};
+  const { scrollY } = useViewportScroll();
+
   const handleRemoveMobileNav = () => {
     setShowMobileNav(false);
   };
-  const handleLogout = () => {
-    localStorage.clear();
-    router.replace("/login");
-  };
+
+  React.useEffect(() => {
+    return scrollY.onChange(() => setY(scrollY.get()));
+  }, [scrollY]);
 
   return (
     <>
-      <Box
+      <chakra.header
+        shadow={y > height ? (colorMode == "dark" ? "xl" : "base") : undefined}
+        transition="box-shadow 0.2s"
         w="100%"
-        backgroundColor={backgroundColor[colorMode]}
+        backgroundColor={
+          colorMode == "dark" && y > height
+            ? "rgb(25 29 39)"
+            : backgroundColor[colorMode]
+        }
         mb="1rem"
         py={[2, 4]}
         position="fixed"
         top="0"
         zIndex="400"
-        borderBottom={`1px solid ${borderColor[colorMode]}`}
       >
         <Container>
           <Flex
@@ -76,7 +93,7 @@ const Header: React.FC = () => {
                 />
               </Box>
               <Link href="/login" passHref>
-                <OutlinedButton d="flex" w="fit-content" as="a" height="2.5rem">
+                <OutlinedButton as="a" d="flex" w="fit-content" height="2.5rem">
                   Login
                 </OutlinedButton>
               </Link>
@@ -91,12 +108,13 @@ const Header: React.FC = () => {
             </Box>
           </Flex>
         </Container>
-      </Box>
-      <MobileNav
-        showMobileNav={showMobileNav}
-        handleRemoveMobileNav={handleRemoveMobileNav}
-        loggedIn={loggedIn}
-      />
+      </chakra.header>
+      {showMobileNav && (
+        <MobileNav
+          handleRemoveMobileNav={handleRemoveMobileNav}
+          loggedIn={loggedIn}
+        />
+      )}
     </>
   );
 };

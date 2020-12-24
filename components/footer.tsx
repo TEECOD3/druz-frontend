@@ -14,6 +14,7 @@ const Footer: React.FC = () => {
       py={["1.3rem", "1.6rem"]}
       px={["1rem", "1.5rem", "2rem"]}
       borderTop={`1px solid ${borderColor[colorMode]}`}
+      borderBottom="6px solid #3B9795"
     >
       <Box m="0 auto" maxW={["1200px"]}>
         <Text fontSize="md" d="block" textAlign="center">

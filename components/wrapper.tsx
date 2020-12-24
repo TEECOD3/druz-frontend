@@ -1,18 +1,14 @@
 import * as React from "react";
-import { Box, useColorMode } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import Navbar from "./navbar";
 import Footer from "./footer";
 import { backgroundColor, color } from "utils/colorValues";
 
 const Wrapper: React.FC<React.ReactNode> = (props) => {
-  const { colorMode } = useColorMode();
+  const bg = useColorModeValue(backgroundColor.light, backgroundColor.dark);
+  const colorValue = useColorModeValue(color.light, color.dark);
   return (
-    <Box
-      bg={backgroundColor[colorMode]}
-      color={color[colorMode]}
-      minH="100vh"
-      position="relative"
-    >
+    <Box bg={bg} color={colorValue} minH="100vh" position="relative">
       <Navbar />
       <Box pt="5rem" />
 
