@@ -1,14 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
-import {
-  Box,
-  Flex,
-  useColorMode,
-  Heading,
-  chakra,
-  Slide,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Flex, useColorMode, Heading, chakra } from "@chakra-ui/react";
 import { useViewportScroll } from "framer-motion";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { FaSun } from "react-icons/fa";
