@@ -1,21 +1,41 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Box, Flex, useColorMode, Heading, chakra } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  useColorMode,
+  useColorModeValue,
+  Heading,
+  chakra,
+  Image,
+  Text,
+  useDisclosure,
+  SlideFade,
+  HStack,
+} from "@chakra-ui/react";
 import { useViewportScroll } from "framer-motion";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { FaSun } from "react-icons/fa";
+import { AiOutlineHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import Container from "./container";
 import MobileNav from "./mobileNav";
 import { OutlinedButton } from "./buttons";
-import { MoonIcon } from "utils/customIcons";
+import { MoonIcon, ResponseIcon } from "utils/customIcons";
 import { backgroundColor, color } from "utils/colorValues";
 
 const pathsToRemoveShadow = ["/", "/login", "/register"];
+const pathsToRemoveLastNavItem = ["/register", "/login"];
 
 const Header: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const backgroundColorValue = useColorModeValue(
+    backgroundColor.light,
+    backgroundColor.dark,
+  );
+  const colorValue = useColorModeValue(color.light, color.dark);
   const router = useRouter();
+  const { isOpen: isMenuOpen, onToggle: onMenuToggle } = useDisclosure();
 
   const [showMobileNav, setShowMobileNav] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -26,6 +46,21 @@ const Header: React.FC = () => {
 
   const handleRemoveMobileNav = () => {
     setShowMobileNav(false);
+  };
+  const handleLogout = () => {
+    setLoggedIn(false);
+    typeof window != "undefined" && localStorage.clear();
+    router.replace("/login");
+  };
+
+  const navLinkTextColor = (path: string): string => {
+    return router.pathname == path ? "inherit" : "brand.grey";
+  };
+  const navLinkIconColor = (path: string): string => {
+    return router.pathname == path ? "#3B9795" : "#A0AEC0";
+  };
+  const borderColor = (path: string): string => {
+    return router.pathname == path ? "#3B9795" : "transparent";
   };
 
   React.useEffect(() => {
@@ -51,17 +86,16 @@ const Header: React.FC = () => {
         backgroundColor={
           colorMode == "dark" && y > height
             ? "rgb(25 29 39)"
-            : backgroundColor[colorMode]
+            : backgroundColorValue
         }
         mb="1rem"
-        py={[2, 4]}
         position="fixed"
         top="0"
         zIndex="400"
       >
         <Container>
           <Flex justify="space-between" align="center" m="0 auto">
-            <Heading color="brand.primary" as="h1" size="lg">
+            <Heading py={[2, 4]} color="brand.primary" as="h1" size="lg">
               <Link href="/">
                 <a>
                   Druz
@@ -71,8 +105,97 @@ const Header: React.FC = () => {
                 </a>
               </Link>
             </Heading>
-            {/* the second flex items */}
+            <HStack
+              d={{ base: "none", md: "flex" }}
+              spacing={{ md: "1.5rem", lg: "2rem" }}
+            >
+              <Link href="/home" passHref>
+                <HStack
+                  as="a"
+                  _after={{
+                    content: '""',
+                    background: borderColor("/home"),
+                    height: "3px",
+                    position: "absolute",
+                    bottom: 0,
+                    width: "5.5rem",
+                    borderRadius: "40px 40px 0 0",
+                  }}
+                  py="1.2rem"
+                >
+                  <AiOutlineHome
+                    size="1.5rem"
+                    color={navLinkIconColor("/home")}
+                  />
+                  <Text
+                    color={navLinkTextColor("/home")}
+                    fontSize="lg"
+                    fontWeight={500}
+                  >
+                    Home
+                  </Text>
+                </HStack>
+              </Link>
+              <Link href="/responses" passHref>
+                <HStack
+                  as="a"
+                  _after={{
+                    content: '""',
+                    background: borderColor("/responses"),
+                    height: "3px",
+
+                    position: "absolute",
+                    bottom: 0,
+                    width: "8rem",
+                    borderRadius: "40px 40px 0 0",
+                  }}
+                  py="1.2rem"
+                >
+                  <ResponseIcon
+                    w="1.5rem"
+                    h="1.5rem"
+                    color={navLinkIconColor("/responses")}
+                  />
+                  <Text
+                    color={navLinkTextColor("/responses")}
+                    fontSize="lg"
+                    fontWeight={500}
+                  >
+                    Responses
+                  </Text>
+                </HStack>
+              </Link>
+              <Link href="/questions" passHref>
+                <HStack
+                  as="a"
+                  _after={{
+                    content: '""',
+                    background: borderColor("/questions"),
+                    height: "3px",
+
+                    position: "absolute",
+                    bottom: 0,
+                    width: "8rem",
+                    borderRadius: "40px 40px 0 0",
+                  }}
+                  py="1.2rem"
+                >
+                  <AiOutlineQuestionCircle
+                    size="1.6rem"
+                    color={navLinkIconColor("/questions")}
+                  />
+                  <Text
+                    color={navLinkTextColor("/questions")}
+                    fontSize="lg"
+                    fontWeight={500}
+                  >
+                    Questions
+                  </Text>
+                </HStack>
+              </Link>
+            </HStack>
             <Flex
+              py={[2, 4]}
               d={["none", "none", "flex"]}
               justify="space-between"
               align="center"
@@ -80,7 +203,7 @@ const Header: React.FC = () => {
               <Box
                 onClick={toggleColorMode}
                 as="button"
-                mr={router.pathname == "/" ? 4 : 0}
+                mr={!pathsToRemoveLastNavItem.includes(router.pathname) ? 4 : 0}
                 padding="5px"
               >
                 <MoonIcon
@@ -98,18 +221,71 @@ const Header: React.FC = () => {
                   }}
                 />
               </Box>
-              {router.pathname == "/" && (
-                <Link href="/login" passHref>
-                  <OutlinedButton
-                    toAnimate={true}
-                    as="a"
-                    d="flex"
-                    w="fit-content"
-                    height="2.5rem"
-                  >
-                    Login
-                  </OutlinedButton>
-                </Link>
+              {!pathsToRemoveLastNavItem.includes(router.pathname) && (
+                <Box
+                  d={
+                    !pathsToRemoveLastNavItem.includes(router.pathname)
+                      ? "block"
+                      : "none"
+                  }
+                >
+                  {router.pathname == "/" ? (
+                    <Link href="/login" passHref>
+                      <OutlinedButton
+                        toAnimate={true}
+                        as="a"
+                        d="flex"
+                        w="fit-content"
+                        height="2.5rem"
+                      >
+                        Login
+                      </OutlinedButton>
+                    </Link>
+                  ) : (
+                    <>
+                      <Box onClick={onMenuToggle} cursor="pointer">
+                        <Image
+                          borderRadius="50%"
+                          w="2rem"
+                          src={"/images/default_avatar.svg"}
+                        />
+                      </Box>
+                      <Box
+                        d={isMenuOpen ? "block" : "none"}
+                        position="absolute"
+                        top="3.5rem"
+                        right="7rem"
+                        p={4}
+                        borderRadius="5px"
+                        shadow={colorMode == "dark" ? "dark-lg" : "base"}
+                        background={backgroundColorValue}
+                      >
+                        <SlideFade offsetX={0} offsetY={30} in={isMenuOpen}>
+                          <Link href="/profile" passHref>
+                            <Text
+                              d="block"
+                              mb={4}
+                              fontWeight={500}
+                              pr={16}
+                              as="a"
+                            >
+                              Profile
+                            </Text>
+                          </Link>
+
+                          <Text
+                            cursor="pointer"
+                            pr={16}
+                            onClick={handleLogout}
+                            fontWeight={500}
+                          >
+                            Logout
+                          </Text>
+                        </SlideFade>
+                      </Box>
+                    </>
+                  )}
+                </Box>
               )}
             </Flex>
             <Box d={["block", "block", "none"]}>
@@ -117,7 +293,7 @@ const Header: React.FC = () => {
                 onClick={() => setShowMobileNav(true)}
                 w="20px"
                 h="20px"
-                color={color[colorMode]}
+                color={colorValue}
               />
             </Box>
           </Flex>

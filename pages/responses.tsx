@@ -1,18 +1,18 @@
-import AnswersPage from "../views/answers";
-import Page from "../components/page";
+import ResponsesPage from "views/responses";
+import Page from "components/page";
 
-const Answers: React.FC = () => {
+const Responses: React.FC = () => {
   return (
     <Page
       image={"/images/banner.png"}
-      title={"Your Answers"}
+      title={"Your Responses"}
       description={
         "Druz helps you find out what people think about you by getting them to answer some questions."
       }
     >
-      <AnswersPage />
+      <ResponsesPage />
     </Page>
   );
 };
 
-export default Answers;
+export default Responses;

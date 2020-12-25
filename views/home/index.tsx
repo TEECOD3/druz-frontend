@@ -9,7 +9,7 @@ import {
   InputRightElement,
   Button as ChakraButton,
   useColorMode,
-  Image,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { FaFacebook } from "react-icons/fa";
@@ -17,10 +17,13 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { ImTwitter } from "react-icons/im";
 import PageTransition from "components/pageTransition";
 import Container from "components/container";
+import { QuestionIcon, ResponseIcon } from "utils/customIcons";
 import CustomInput from "components/customInput";
+import { color } from "utils/colorValues";
 
 const Home: React.FC = () => {
   const { colorMode } = useColorMode();
+  const colorValue = useColorModeValue(color.light, color.dark);
 
   return (
     <PageTransition>
@@ -40,7 +43,12 @@ const Home: React.FC = () => {
                 challenge
               </Text>
               <InputGroup mb={{ base: 6, md: 8 }}>
-                <CustomInput isDisabled defaultValue="https://druz.xyz/erons" />
+                <CustomInput
+                  backgroundColor={colorMode == "dark" ? "inherit" : "#d3edff"}
+                  color={colorValue}
+                  isReadOnly
+                  defaultValue="https://druz.xyz/erons"
+                />
                 <InputRightElement height="100%" width="5.5rem">
                   <ChakraButton
                     colorScheme="brand.primaryButton"
@@ -76,7 +84,7 @@ const Home: React.FC = () => {
                 />
               </HStack>
             </Box>
-            <Box width="100%" flexBasis="50%">
+            <Box width={["100%", "70%", "100%"]} flexBasis="50%">
               <Stack
                 justify="space-between"
                 align="center"
@@ -92,7 +100,7 @@ const Home: React.FC = () => {
                   px={10}
                 >
                   <HStack mb={{ base: 8, md: 12 }} justify="space-between">
-                    <Image alt="" src="/icons/response.svg" />
+                    <ResponseIcon w="1.7rem" h="1.7rem" />
                     <Text fontSize="2xl" fontWeight="bold">
                       10
                     </Text>
@@ -124,7 +132,7 @@ const Home: React.FC = () => {
                   px={10}
                 >
                   <HStack mb={{ base: 8, md: 12 }} justify="space-between">
-                    <Image alt="" src="/icons/question.svg" />
+                    <QuestionIcon w="1.7rem" h="1.7rem" />
                     <Text fontSize="2xl" fontWeight="bold">
                       20
                     </Text>

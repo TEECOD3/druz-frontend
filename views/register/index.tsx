@@ -85,10 +85,14 @@ const Register: React.FC = () => {
                         isRequired
                         type={showPassword ? "text" : "password"}
                       />
-                      <InputRightElement height="100%" width="4.5rem">
+                      <InputRightElement height="100%" width="5.5rem">
                         <ChakraButton
-                          h="1.75rem"
-                          size="sm"
+                          colorScheme="brand.primaryButton"
+                          backgroundColor="brand.primary"
+                          height="2.2rem"
+                          fontWeight="normal"
+                          fontSize="sm"
+                          color="brand.white"
                           onClick={() => setShowPassword(!showPassword)}
                         >
                           {showPassword ? "Hide" : "Show"}
@@ -107,10 +111,14 @@ const Register: React.FC = () => {
                         isRequired
                         type={showConfirmPassword ? "text" : "password"}
                       />
-                      <InputRightElement height="100%" width="4.5rem">
+                      <InputRightElement height="100%" width="5.5rem">
                         <ChakraButton
-                          h="1.75rem"
-                          size="sm"
+                          colorScheme="brand.primaryButton"
+                          backgroundColor="brand.primary"
+                          height="2.2rem"
+                          fontWeight="normal"
+                          fontSize="sm"
+                          color="brand.white"
                           onClick={() =>
                             setShowConfirmPassword(!showConfirmPassword)
                           }
