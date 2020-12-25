@@ -1,21 +1,28 @@
 import * as React from "react";
 import {
-  ButtonProps,
+  ButtonProps as ChakraButtonProps,
   Button as ChakraButton,
   forwardRef,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { mainColors } from "utils/customTheme";
 
+interface ButtonProps extends ChakraButtonProps {
+  toAnimate?: boolean;
+  fullWidth?: boolean;
+}
+
 export const Button: React.FC<ButtonProps> = forwardRef(
   (props: ButtonProps, ref) => {
+    const { toAnimate, fullWidth, ...rest } = props;
     return (
       <motion.div
-        style={{ width: "fit-content", margin: "0 auto" }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.9 }}
+        style={{ width: fullWidth ? "100%" : "fit-content", margin: "0 auto" }}
+        whileHover={{ scale: toAnimate ? 1.05 : 1 }}
+        whileTap={{ scale: toAnimate ? 0.9 : 1 }}
       >
         <ChakraButton
+          width={fullWidth ? "100%" : "auto"}
           colorScheme="brand.primaryButton"
           borderRadius="5px"
           height="3rem"
@@ -23,7 +30,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
           color="brand.white"
           bgColor="brand.primary"
           fontWeight={500}
-          {...props}
+          {...rest}
           ref={ref}
         />
       </motion.div>
@@ -33,13 +40,15 @@ export const Button: React.FC<ButtonProps> = forwardRef(
 
 export const OutlinedButton: React.FC<ButtonProps> = forwardRef(
   (props: ButtonProps, ref) => {
+    const { toAnimate, fullWidth, ...rest } = props;
     return (
       <motion.div
-        style={{ width: "fit-content", margin: "0 auto" }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.9 }}
+        style={{ width: fullWidth ? "100%" : "fit-content", margin: "0 auto" }}
+        whileHover={{ scale: toAnimate ? 1.05 : 1 }}
+        whileTap={{ scale: toAnimate ? 0.9 : 1 }}
       >
         <ChakraButton
+          width={fullWidth ? "100%" : "auto"}
           borderRadius="5px"
           height="2.8rem"
           px="1.4rem"
@@ -48,7 +57,7 @@ export const OutlinedButton: React.FC<ButtonProps> = forwardRef(
           _hover={{ background: "none" }}
           border={`1px solid ${mainColors.primary}`}
           fontWeight={500}
-          {...props}
+          {...rest}
           ref={ref}
         />
       </motion.div>

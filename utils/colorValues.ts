@@ -4,7 +4,7 @@ interface Colors {
 }
 
 export const color: Colors = {
-  light: "rgb(26, 32, 44)",
+  light: "#2D3748",
   dark: "rgba(255, 255, 255, 0.92)",
 };
 

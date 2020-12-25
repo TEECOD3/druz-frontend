@@ -28,3 +28,31 @@ export const GetStartedIcon: React.FC<IconProps> = (props: IconProps) => {
     </Icon>
   );
 };
+
+export const ResponseIcon: React.FC<IconProps> = (props: IconProps) => {
+  return (
+    <Icon viewBox="0 0 29 29" {...props}>
+      <path
+        d="M21.792 7.167h2.916a2.917 2.917 0 012.917 2.916v8.75a2.917 2.917 0 01-2.917 2.917h-2.916v5.833l-5.834-5.833h-5.833a2.907 2.907 0 01-2.062-.855m0 0l4.979-4.978h5.833A2.917 2.917 0 0021.792 13V4.25a2.917 2.917 0 00-2.917-2.917H4.292A2.917 2.917 0 001.375 4.25V13a2.917 2.917 0 002.917 2.917h2.916v5.833l.855-.855z"
+        stroke="#A0AEC0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Icon>
+  );
+};
+
+export const QuestionIcon: React.FC<IconProps> = (props: IconProps) => {
+  return (
+    <Icon viewBox="0 0 29 29" {...props}>
+      <path
+        d="M9 10.625c.8-1.699 2.96-2.917 5.5-2.917 3.223 0 5.833 1.959 5.833 4.375 0 2.042-1.863 3.755-4.383 4.24-.79.151-1.45.787-1.45 1.594m0 4.375h.015M27.625 15a13.125 13.125 0 11-26.25 0 13.125 13.125 0 0126.25 0z"
+        stroke="#A0AEC0"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Icon>
+  );
+};

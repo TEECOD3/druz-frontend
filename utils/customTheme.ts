@@ -26,7 +26,9 @@ const customTheme = extendTheme({
       primary: "#3B9795",
       borderColor: "rgba(0, 0, 0, 0.08)",
       white: "#ffffff",
+      black: "#2D3748",
       grey: "#A0AEC0",
+      greyText: "#8E8E93",
       primaryButton: {
         500: "#3B9795",
         600: "#20615f",

@@ -38,6 +38,7 @@ const LandingPage: React.FC = () => {
           </Text>
           <Link href="/register" passHref>
             <Button
+              toAnimate={true}
               d="flex"
               w="fit-content"
               as="a"
@@ -174,7 +175,14 @@ const LandingPage: React.FC = () => {
             Ready to dive in? <br /> Start creating questions
           </Heading>
           <Link href="/register" passHref>
-            <Button d="flex" w="fit-content" as="a" height="3.2rem" mx="auto">
+            <Button
+              toAnimate={true}
+              d="flex"
+              w="fit-content"
+              as="a"
+              height="3.2rem"
+              mx="auto"
+            >
               Get Started
             </Button>
           </Link>
