@@ -1,7 +1,7 @@
-import ProfilePage from "views/profile";
+import SettingsPage from "views/settings";
 import Page from "components/page";
 
-const Profile: React.FC = () => {
+const Settings: React.FC = () => {
   return (
     <Page
       image={"/images/banner.png"}
@@ -10,9 +10,9 @@ const Profile: React.FC = () => {
         "Druz helps you find out what people think about you by getting them to answer some Profile."
       }
     >
-      <ProfilePage />
+      <SettingsPage />
     </Page>
   );
 };
 
-export default Profile;
+export default Settings;

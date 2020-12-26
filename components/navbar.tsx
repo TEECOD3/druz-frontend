@@ -15,9 +15,10 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { useViewportScroll } from "framer-motion";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, SettingsIcon } from "@chakra-ui/icons";
 import { FaSun } from "react-icons/fa";
 import { AiOutlineHome, AiOutlineQuestionCircle } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
 import Container from "./container";
 import MobileNav from "./mobileNav";
 import { OutlinedButton } from "./buttons";
@@ -38,7 +39,7 @@ const Header: React.FC = () => {
   const { isOpen: isMenuOpen, onToggle: onMenuToggle } = useDisclosure();
 
   const [showMobileNav, setShowMobileNav] = React.useState(false);
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(true);
   const ref = React.useRef<HTMLHeadingElement>();
   const [y, setY] = React.useState(0);
   const { height = 0 } = ref.current?.getBoundingClientRect() ?? {};
@@ -105,95 +106,98 @@ const Header: React.FC = () => {
                 </a>
               </Link>
             </Heading>
-            <HStack
-              d={{ base: "none", md: "flex" }}
-              spacing={{ md: "1.5rem", lg: "2rem" }}
-            >
-              <Link href="/home" passHref>
-                <HStack
-                  as="a"
-                  _after={{
-                    content: '""',
-                    background: borderColor("/home"),
-                    height: "3px",
-                    position: "absolute",
-                    bottom: 0,
-                    width: "5.5rem",
-                    borderRadius: "40px 40px 0 0",
-                  }}
-                  py="1.2rem"
-                >
-                  <AiOutlineHome
-                    size="1.5rem"
-                    color={navLinkIconColor("/home")}
-                  />
-                  <Text
-                    color={navLinkTextColor("/home")}
-                    fontSize="lg"
-                    fontWeight={500}
-                  >
-                    Home
-                  </Text>
-                </HStack>
-              </Link>
-              <Link href="/responses" passHref>
-                <HStack
-                  as="a"
-                  _after={{
-                    content: '""',
-                    background: borderColor("/responses"),
-                    height: "3px",
 
-                    position: "absolute",
-                    bottom: 0,
-                    width: "8rem",
-                    borderRadius: "40px 40px 0 0",
-                  }}
-                  py="1.2rem"
-                >
-                  <ResponseIcon
-                    w="1.5rem"
-                    h="1.5rem"
-                    color={navLinkIconColor("/responses")}
-                  />
-                  <Text
-                    color={navLinkTextColor("/responses")}
-                    fontSize="lg"
-                    fontWeight={500}
+            {loggedIn && (
+              <HStack
+                d={{ base: "none", md: "flex" }}
+                spacing={{ md: "1.5rem", lg: "2rem" }}
+              >
+                <Link href="/home" passHref>
+                  <HStack
+                    as="a"
+                    _after={{
+                      content: '""',
+                      background: borderColor("/home"),
+                      height: "3px",
+                      position: "absolute",
+                      bottom: 0,
+                      width: "5.5rem",
+                      borderRadius: "40px 40px 0 0",
+                    }}
+                    py="1.2rem"
                   >
-                    Responses
-                  </Text>
-                </HStack>
-              </Link>
-              <Link href="/questions" passHref>
-                <HStack
-                  as="a"
-                  _after={{
-                    content: '""',
-                    background: borderColor("/questions"),
-                    height: "3px",
+                    <AiOutlineHome
+                      size="1.5rem"
+                      color={navLinkIconColor("/home")}
+                    />
+                    <Text
+                      color={navLinkTextColor("/home")}
+                      fontSize="lg"
+                      fontWeight={500}
+                    >
+                      Home
+                    </Text>
+                  </HStack>
+                </Link>
+                <Link href="/responses" passHref>
+                  <HStack
+                    as="a"
+                    _after={{
+                      content: '""',
+                      background: borderColor("/responses"),
+                      height: "3px",
 
-                    position: "absolute",
-                    bottom: 0,
-                    width: "8rem",
-                    borderRadius: "40px 40px 0 0",
-                  }}
-                  py="1.2rem"
-                >
-                  <AiOutlineQuestionCircle
-                    size="1.6rem"
-                    color={navLinkIconColor("/questions")}
-                  />
-                  <Text
-                    color={navLinkTextColor("/questions")}
-                    fontSize="lg"
-                    fontWeight={500}
+                      position: "absolute",
+                      bottom: 0,
+                      width: "8rem",
+                      borderRadius: "40px 40px 0 0",
+                    }}
+                    py="1.2rem"
                   >
-                    Questions
-                  </Text>
-                </HStack>
-              </Link>
-            </HStack>
+                    <ResponseIcon
+                      w="1.5rem"
+                      h="1.5rem"
+                      color={navLinkIconColor("/responses")}
+                    />
+                    <Text
+                      color={navLinkTextColor("/responses")}
+                      fontSize="lg"
+                      fontWeight={500}
+                    >
+                      Responses
+                    </Text>
+                  </HStack>
+                </Link>
+                <Link href="/questions" passHref>
+                  <HStack
+                    as="a"
+                    _after={{
+                      content: '""',
+                      background: borderColor("/questions"),
+                      height: "3px",
+
+                      position: "absolute",
+                      bottom: 0,
+                      width: "8rem",
+                      borderRadius: "40px 40px 0 0",
+                    }}
+                    py="1.2rem"
+                  >
+                    <AiOutlineQuestionCircle
+                      size="1.6rem"
+                      color={navLinkIconColor("/questions")}
+                    />
+                    <Text
+                      color={navLinkTextColor("/questions")}
+                      fontSize="lg"
+                      fontWeight={500}
+                    >
+                      Questions
+                    </Text>
+                  </HStack>
+                </Link>
+              </HStack>
+            )}
             <Flex
               py={[2, 4]}
               d={["none", "none", "flex"]}
@@ -229,7 +233,7 @@ const Header: React.FC = () => {
                       : "none"
                   }
                 >
-                  {router.pathname == "/" ? (
+                  {!loggedIn ? (
                     <Link href="/login" passHref>
                       <OutlinedButton
                         toAnimate={true}
@@ -261,15 +265,17 @@ const Header: React.FC = () => {
                         background={backgroundColorValue}
                       >
                         <SlideFade offsetX={0} offsetY={30} in={isMenuOpen}>
-                          <Link href="/profile" passHref>
+                          <Link href="/settings" passHref>
                             <Text
-                              d="block"
                               mb={4}
                               fontWeight={500}
                               pr={16}
                               as="a"
+                              d="flex"
+                              alignItems="center"
                             >
-                              Profile
+                              <SettingsIcon mr={2} />
+                              Settings
                             </Text>
                           </Link>
 
@@ -278,7 +284,15 @@ const Header: React.FC = () => {
                             pr={16}
                             onClick={handleLogout}
                             fontWeight={500}
+                            d="flex"
+                            alignItems="center"
                           >
+                            <FiLogOut
+                              style={{
+                                marginRight: ".5rem",
+                                display: "inline-block",
+                              }}
+                            />
                             Logout
                           </Text>
                         </SlideFade>

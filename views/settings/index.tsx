@@ -26,7 +26,7 @@ const VIEW_STATES: IViewStates = {
   security: "SECURITY",
 };
 
-const Profile: React.FC = () => {
+const Settings: React.FC = () => {
   const { colorMode } = useColorMode();
   const [showOldPassword, setShowOldPassword] = React.useState<boolean>(false);
   const [showNewPassword, setShowNewPassword] = React.useState<boolean>(false);
@@ -192,7 +192,7 @@ const Profile: React.FC = () => {
                   </form>
                 ) : (
                   <form>
-                    <FormControl mb={{ base: 4, md: 6 }} id="password">
+                    <FormControl mb={{ base: 4, md: 6 }} id="oldPassword">
                       <FormLabel
                         color={
                           colorMode == "dark" ? "inherit" : "brand.greyText"
@@ -220,7 +220,7 @@ const Profile: React.FC = () => {
                         </InputRightElement>
                       </InputGroup>
                     </FormControl>
-                    <FormControl mb={{ base: 4, md: 6 }} id="password">
+                    <FormControl mb={{ base: 4, md: 6 }} id="newPassword">
                       <FormLabel
                         color={
                           colorMode == "dark" ? "inherit" : "brand.greyText"
@@ -267,4 +267,4 @@ const Profile: React.FC = () => {
   );
 };
 
-export default Profile;
+export default Settings;
