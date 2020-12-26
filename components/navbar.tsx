@@ -267,14 +267,16 @@ const Header: React.FC = () => {
                         <SlideFade offsetX={0} offsetY={30} in={isMenuOpen}>
                           <Link href="/settings" passHref>
                             <Text
-                              mb={4}
+                              mb={6}
                               fontWeight={500}
                               pr={16}
                               as="a"
                               d="flex"
                               alignItems="center"
+                              color="brand.primary"
+                              fontSize="md"
                             >
-                              <SettingsIcon mr={2} />
+                              <SettingsIcon color="brand.primary" mr={2} />
                               Settings
                             </Text>
                           </Link>
@@ -286,11 +288,14 @@ const Header: React.FC = () => {
                             fontWeight={500}
                             d="flex"
                             alignItems="center"
+                            color="#C53030"
+                            fontSize="md"
                           >
                             <FiLogOut
                               style={{
                                 marginRight: ".5rem",
                                 display: "inline-block",
+                                color: "#C53030",
                               }}
                             />
                             Logout

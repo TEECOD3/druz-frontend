@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import {
   Box,
@@ -7,11 +8,15 @@ import {
   ListItem,
   useColorMode,
   Link as ChakraLink,
+  HStack,
+  Text,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { CloseIcon } from "@chakra-ui/icons";
+import { CloseIcon, SettingsIcon } from "@chakra-ui/icons";
+import { AiOutlineHome, AiOutlineQuestionCircle } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
 import { FaSun } from "react-icons/fa";
-import { MoonIcon } from "utils/customIcons";
+import { MoonIcon, ResponseIcon } from "utils/customIcons";
 import { color, backgroundColor } from "utils/colorValues";
 
 interface MobileNavProps {
@@ -24,6 +29,22 @@ const MobileNav: React.FC<MobileNavProps> = ({
   loggedIn,
 }) => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const router = useRouter();
+
+  const navLinkTextColor = (path: string): string => {
+    return router.pathname == path ? "inherit" : "brand.grey";
+  };
+  const navLinkIconColor = (path: string): string => {
+    return router.pathname == path ? "#3B9795" : "#A0AEC0";
+  };
+  const borderBottom = (path: string): string => {
+    return router.pathname == path ? "3px solid #3B9795" : "1px solid #bdbdbd";
+  };
+
+  const handleLogout = () => {
+    typeof window != "undefined" && localStorage.clear();
+    router.replace("/login");
+  };
 
   return (
     <Box
@@ -82,50 +103,118 @@ const MobileNav: React.FC<MobileNavProps> = ({
                   py="1rem"
                   fontWeight="500"
                   borderTop="1px solid #bdbdbd"
-                  borderBottom="1px solid #bdbdbd"
+                  borderBottom={borderBottom("/home")}
                 >
                   <Link href="/home">
-                    <ChakraLink
-                      pb=".8rem"
-                      display="block"
-                      _hover={{ textDecoration: "none" }}
-                      onClick={handleRemoveMobileNav}
+                    <HStack
+                      pb={router.pathname == "/home" ? ".5rem" : ".8rem"}
+                      spacing={4}
                     >
-                      Home
-                    </ChakraLink>
+                      <AiOutlineHome
+                        size="1.5rem"
+                        color={navLinkIconColor("/home")}
+                      />
+                      <ChakraLink
+                        color={navLinkTextColor("/home")}
+                        display="flex"
+                        _hover={{ textDecoration: "none" }}
+                        onClick={handleRemoveMobileNav}
+                      >
+                        Home
+                      </ChakraLink>
+                    </HStack>
                   </Link>
                 </ListItem>
                 <ListItem
                   py="1rem"
                   fontWeight="500"
-                  borderBottom="1px solid #bdbdbd"
+                  borderBottom={borderBottom("/responses")}
                 >
                   <Link href="/responses">
-                    <ChakraLink
-                      pb=".8rem"
-                      display="block"
-                      _hover={{ textDecoration: "none" }}
-                      onClick={handleRemoveMobileNav}
+                    <HStack
+                      pb={router.pathname == "/responses" ? ".5rem" : ".8rem"}
+                      spacing={4}
                     >
-                      Responses
-                    </ChakraLink>
+                      <ResponseIcon
+                        w="1.5rem"
+                        h="1.5rem"
+                        color={navLinkIconColor("/responses")}
+                      />
+                      <ChakraLink
+                        color={navLinkTextColor("/responses")}
+                        display="flex"
+                        _hover={{ textDecoration: "none" }}
+                        onClick={handleRemoveMobileNav}
+                      >
+                        Responses
+                      </ChakraLink>
+                    </HStack>
+                  </Link>
+                </ListItem>
+                <ListItem
+                  py="1rem"
+                  fontWeight="500"
+                  borderBottom={borderBottom("/questions")}
+                >
+                  <Link href="/questions">
+                    <HStack
+                      pb={router.pathname == "/questions" ? ".5rem" : ".8rem"}
+                      spacing={4}
+                    >
+                      <AiOutlineQuestionCircle
+                        size="1.5rem"
+                        color={navLinkIconColor("/questions")}
+                      />
+                      <ChakraLink
+                        color={navLinkTextColor("/questions")}
+                        display="flex"
+                        _hover={{ textDecoration: "none" }}
+                        onClick={handleRemoveMobileNav}
+                      >
+                        Questions
+                      </ChakraLink>
+                    </HStack>
+                  </Link>
+                </ListItem>
+                <ListItem
+                  py="1rem"
+                  fontWeight="500"
+                  borderBottom={borderBottom("/settings")}
+                >
+                  <Link href="/settings">
+                    <HStack
+                      pb={router.pathname == "/settings" ? ".5rem" : ".8rem"}
+                      spacing={4}
+                    >
+                      <SettingsIcon
+                        h="1.5rem"
+                        w="1.5rem"
+                        color={navLinkIconColor("/settings")}
+                      />
+                      <ChakraLink
+                        color={navLinkTextColor("/settings")}
+                        display="flex"
+                        _hover={{ textDecoration: "none" }}
+                        onClick={handleRemoveMobileNav}
+                      >
+                        Settings
+                      </ChakraLink>
+                    </HStack>
                   </Link>
                 </ListItem>
                 <ListItem
                   py="1rem"
                   fontWeight="500"
                   borderBottom="1px solid #bdbdbd"
+                  onClick={() => {
+                    handleLogout();
+                    handleRemoveMobileNav();
+                  }}
                 >
-                  <Link href="/questions">
-                    <ChakraLink
-                      pb=".8rem"
-                      display="block"
-                      _hover={{ textDecoration: "none" }}
-                      onClick={handleRemoveMobileNav}
-                    >
-                      Questions
-                    </ChakraLink>
-                  </Link>
+                  <HStack pb=".8rem" spacing={4}>
+                    <FiLogOut size="1.5rem" color="#C53030" />
+                    <Text color="#C53030">Logout</Text>
+                  </HStack>
                 </ListItem>
               </>
             ) : (
