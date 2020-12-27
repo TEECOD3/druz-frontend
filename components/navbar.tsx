@@ -252,6 +252,7 @@ const Header: React.FC = () => {
                           borderRadius="50%"
                           w="2rem"
                           src={"/images/default_avatar.svg"}
+                          alt="User avatar"
                         />
                       </Box>
                       <Box
