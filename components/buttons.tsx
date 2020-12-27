@@ -10,14 +10,18 @@ import { mainColors } from "utils/customTheme";
 interface ButtonProps extends ChakraButtonProps {
   toAnimate?: boolean;
   fullWidth?: boolean;
+  margin?: string;
 }
 
 export const Button: React.FC<ButtonProps> = forwardRef(
   (props: ButtonProps, ref) => {
-    const { toAnimate, fullWidth, ...rest } = props;
+    const { toAnimate, fullWidth, margin, ...rest } = props;
     return (
       <motion.div
-        style={{ width: fullWidth ? "100%" : "fit-content", margin: "0 auto" }}
+        style={{
+          width: fullWidth ? "100%" : "fit-content",
+          margin: margin ? margin : "0 auto",
+        }}
         whileHover={{ scale: toAnimate ? 1.05 : 1 }}
         whileTap={{ scale: toAnimate ? 0.9 : 1 }}
       >
@@ -40,10 +44,13 @@ export const Button: React.FC<ButtonProps> = forwardRef(
 
 export const OutlinedButton: React.FC<ButtonProps> = forwardRef(
   (props: ButtonProps, ref) => {
-    const { toAnimate, fullWidth, ...rest } = props;
+    const { toAnimate, fullWidth, margin, ...rest } = props;
     return (
       <motion.div
-        style={{ width: fullWidth ? "100%" : "fit-content", margin: "0 auto" }}
+        style={{
+          width: fullWidth ? "100%" : "fit-content",
+          margin: margin ? margin : "0 auto",
+        }}
         whileHover={{ scale: toAnimate ? 1.05 : 1 }}
         whileTap={{ scale: toAnimate ? 0.9 : 1 }}
       >

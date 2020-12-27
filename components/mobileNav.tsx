@@ -70,7 +70,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
             h="20px"
             color={color[colorMode]}
           />
-          <Box onClick={toggleColorMode} as="button" mr={4} padding="5px">
+          <Box onClick={toggleColorMode} as="button" padding="5px">
             <MoonIcon
               d={colorMode === "light" ? "flex" : "none"}
               w="20px"

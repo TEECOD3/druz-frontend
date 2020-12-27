@@ -89,7 +89,7 @@ const Header: React.FC = () => {
             ? "rgb(25 29 39)"
             : backgroundColorValue
         }
-        mb="1rem"
+        mb={router.pathname == "/questions" ? 0 : "1rem"}
         position="fixed"
         top="0"
         zIndex="400"
