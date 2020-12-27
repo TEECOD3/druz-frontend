@@ -26,15 +26,17 @@ const Responses: React.FC = () => {
         py={4}
       >
         <Container>
-          <Stack
-            direction={{ base: "column", md: "row" }}
-            justify="space-between"
-            align="center"
-          >
-            <Heading size="md" as="h1">
-              All Responses
-            </Heading>
-          </Stack>
+          <Box mx="auto" width={["100%", "70%", "50%"]}>
+            <Stack
+              direction={{ base: "column", md: "row" }}
+              justify="space-between"
+              align="center"
+            >
+              <Heading size="md" as="h1">
+                All Responses
+              </Heading>
+            </Stack>
+          </Box>
         </Container>
       </Box>
       <Box pt={{ base: 6, md: 8 }}>

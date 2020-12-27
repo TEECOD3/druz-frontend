@@ -19,13 +19,53 @@ const Footer: React.FC = () => {
       <Box m="0 auto" maxW={["1200px"]}>
         <Text fontSize="md" d="block" textAlign="center">
           &copy; {new Date().getFullYear()}{" "}
-          <Link href="https://twitter.com/druz_app">
-            <a>Druz</a>
-          </Link>{" "}
-          |{" "}
-          <Link href="/disclaimer">
-            <a>Disclaimer</a>
-          </Link>
+          <Text
+            color="brand.primary"
+            fontWeight={500}
+            _hover={{ textDecoration: "underline" }}
+            as="span"
+          >
+            <Link href="https://twitter.com/druz_app">
+              <a>Druz</a>
+            </Link>
+          </Text>{" "}
+          &#8226;{" "}
+          <Text
+            color="brand.primary"
+            fontWeight={500}
+            _hover={{ textDecoration: "underline" }}
+            as="span"
+          >
+            <Link href="/privacy-policy">
+              <a>Privacy Policy</a>
+            </Link>
+          </Text>{" "}
+          &#8226;{" "}
+          <Text
+            color="brand.primary"
+            fontWeight={500}
+            _hover={{ textDecoration: "underline" }}
+            as="span"
+          >
+            <Link href="/terms-of-use">
+              <a>Terms of Use</a>
+            </Link>
+          </Text>{" "}
+          <Text d={{ base: "none", md: "inline" }} as="span">
+            &#8226;
+          </Text>{" "}
+          <Text
+            color="brand.primary"
+            fontWeight={500}
+            _hover={{ textDecoration: "underline" }}
+            d={{ base: "block", md: "inline" }}
+            textAlign="center"
+            as="span"
+          >
+            <Link href="mailto:druzcontact@gmail.com">
+              <a>Contact us</a>
+            </Link>
+          </Text>
         </Text>
       </Box>
     </Box>

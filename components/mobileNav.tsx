@@ -15,8 +15,7 @@ import { motion } from "framer-motion";
 import { CloseIcon, SettingsIcon } from "@chakra-ui/icons";
 import { AiOutlineHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
-import { FaSun } from "react-icons/fa";
-import { MoonIcon, ResponseIcon } from "utils/customIcons";
+import { ResponseIcon } from "utils/customIcons";
 import { color, backgroundColor } from "utils/colorValues";
 
 interface MobileNavProps {
@@ -28,7 +27,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
   handleRemoveMobileNav,
   loggedIn,
 }) => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode } = useColorMode();
   const router = useRouter();
 
   const navLinkTextColor = (path: string): string => {
@@ -70,22 +69,6 @@ const MobileNav: React.FC<MobileNavProps> = ({
             h="20px"
             color={color[colorMode]}
           />
-          <Box onClick={toggleColorMode} as="button" padding="5px">
-            <MoonIcon
-              d={colorMode === "light" ? "flex" : "none"}
-              w="20px"
-              h="20px"
-              color="transparent"
-            />
-            <FaSun
-              style={{
-                display: colorMode === "dark" ? "flex" : "none",
-                color: "#718096",
-                width: "20px",
-                height: "20px",
-              }}
-            />
-          </Box>
         </Flex>
 
         <Box mt="1rem">
@@ -100,39 +83,41 @@ const MobileNav: React.FC<MobileNavProps> = ({
               <>
                 {" "}
                 <ListItem
-                  py="1rem"
+                  py=".6rem"
                   fontWeight="500"
                   borderTop="1px solid #bdbdbd"
                   borderBottom={borderBottom("/home")}
                 >
-                  <Link href="/home">
+                  <Link href="/home" passHref>
                     <HStack
-                      pb={router.pathname == "/home" ? ".5rem" : ".8rem"}
+                      as="a"
+                      py={router.pathname == "/home" ? ".5rem" : ".8rem"}
                       spacing={4}
                     >
                       <AiOutlineHome
                         size="1.5rem"
                         color={navLinkIconColor("/home")}
                       />
-                      <ChakraLink
+                      <Text
                         color={navLinkTextColor("/home")}
                         display="flex"
-                        _hover={{ textDecoration: "none" }}
+                        fontSize="xl"
                         onClick={handleRemoveMobileNav}
                       >
                         Home
-                      </ChakraLink>
+                      </Text>
                     </HStack>
                   </Link>
                 </ListItem>
                 <ListItem
-                  py="1rem"
+                  py=".6rem"
                   fontWeight="500"
                   borderBottom={borderBottom("/responses")}
                 >
-                  <Link href="/responses">
+                  <Link href="/responses" passHref>
                     <HStack
-                      pb={router.pathname == "/responses" ? ".5rem" : ".8rem"}
+                      as="a"
+                      py={router.pathname == "/responses" ? ".5rem" : ".8rem"}
                       spacing={4}
                     >
                       <ResponseIcon
@@ -140,50 +125,52 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         h="1.5rem"
                         color={navLinkIconColor("/responses")}
                       />
-                      <ChakraLink
+                      <Text
                         color={navLinkTextColor("/responses")}
                         display="flex"
-                        _hover={{ textDecoration: "none" }}
+                        fontSize="xl"
                         onClick={handleRemoveMobileNav}
                       >
                         Responses
-                      </ChakraLink>
+                      </Text>
                     </HStack>
                   </Link>
                 </ListItem>
                 <ListItem
-                  py="1rem"
+                  py=".6rem"
                   fontWeight="500"
                   borderBottom={borderBottom("/questions")}
                 >
-                  <Link href="/questions">
+                  <Link href="/questions" passHref>
                     <HStack
-                      pb={router.pathname == "/questions" ? ".5rem" : ".8rem"}
+                      as="a"
+                      py={router.pathname == "/questions" ? ".5rem" : ".8rem"}
                       spacing={4}
                     >
                       <AiOutlineQuestionCircle
                         size="1.5rem"
                         color={navLinkIconColor("/questions")}
                       />
-                      <ChakraLink
+                      <Text
                         color={navLinkTextColor("/questions")}
                         display="flex"
-                        _hover={{ textDecoration: "none" }}
+                        fontSize="xl"
                         onClick={handleRemoveMobileNav}
                       >
                         Questions
-                      </ChakraLink>
+                      </Text>
                     </HStack>
                   </Link>
                 </ListItem>
                 <ListItem
-                  py="1rem"
+                  py=".6rem"
                   fontWeight="500"
                   borderBottom={borderBottom("/settings")}
                 >
-                  <Link href="/settings">
+                  <Link href="/settings" passHref>
                     <HStack
-                      pb={router.pathname == "/settings" ? ".5rem" : ".8rem"}
+                      as="a"
+                      py={router.pathname == "/settings" ? ".5rem" : ".8rem"}
                       spacing={4}
                     >
                       <SettingsIcon
@@ -191,19 +178,19 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         w="1.5rem"
                         color={navLinkIconColor("/settings")}
                       />
-                      <ChakraLink
+                      <Text
                         color={navLinkTextColor("/settings")}
                         display="flex"
-                        _hover={{ textDecoration: "none" }}
+                        fontSize="xl"
                         onClick={handleRemoveMobileNav}
                       >
                         Settings
-                      </ChakraLink>
+                      </Text>
                     </HStack>
                   </Link>
                 </ListItem>
                 <ListItem
-                  py="1rem"
+                  py=".6rem"
                   fontWeight="500"
                   borderBottom="1px solid #bdbdbd"
                   onClick={() => {
@@ -211,9 +198,11 @@ const MobileNav: React.FC<MobileNavProps> = ({
                     handleRemoveMobileNav();
                   }}
                 >
-                  <HStack pb=".8rem" spacing={4}>
+                  <HStack py=".8rem" spacing={4}>
                     <FiLogOut size="1.5rem" color="#C53030" />
-                    <Text color="#C53030">Logout</Text>
+                    <Text fontSize="xl" color="#C53030">
+                      Logout
+                    </Text>
                   </HStack>
                 </ListItem>
               </>
@@ -227,7 +216,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 >
                   <Link href="/register">
                     <ChakraLink
-                      pb=".8rem"
+                      py=".8rem"
                       display="block"
                       _hover={{ textDecoration: "none" }}
                       onClick={handleRemoveMobileNav}
@@ -243,7 +232,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                 >
                   <Link href="/login">
                     <ChakraLink
-                      pb=".8rem"
+                      py=".8rem"
                       display="block"
                       _hover={{ textDecoration: "none" }}
                       onClick={handleRemoveMobileNav}

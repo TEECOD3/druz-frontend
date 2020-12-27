@@ -24,12 +24,15 @@ const SingleQuestion: React.FC = () => {
       borderRadius="5px"
       align="flex-start"
       mb={{ base: 4, md: 6 }}
+      width={{ base: "100%", md: "70%" }}
+      mx="auto"
     >
       <Box width="100%" p={{ base: "1rem", md: "1rem 1.5rem" }}>
         <Text fontSize="lg">How&rsquo;s my name stored on your phone?</Text>
       </Box>
       <HStack
-        p={{ base: ".7rem", md: ".7rem 1.5rem" }}
+        py=".7rem"
+        px={{ base: "3rem", md: "2rem" }}
         width="100%"
         justify="flex-end"
         align="center"

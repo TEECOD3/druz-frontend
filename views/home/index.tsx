@@ -114,7 +114,11 @@ const Home: React.FC = () => {
                     Responses
                   </Text>
                   <HStack justify="flex-end">
-                    <Text fontWeight={500} color="brand.primary">
+                    <Text
+                      _hover={{ textDecoration: "underline" }}
+                      fontWeight={500}
+                      color="brand.primary"
+                    >
                       <Link href="/responses">
                         <a>View all</a>
                       </Link>
@@ -146,7 +150,11 @@ const Home: React.FC = () => {
                     Questions
                   </Text>
                   <HStack justify="flex-end">
-                    <Text fontWeight={500} color="brand.primary">
+                    <Text
+                      _hover={{ textDecoration: "underline" }}
+                      fontWeight={500}
+                      color="brand.primary"
+                    >
                       <Link href="/responses">
                         <a>View all</a>
                       </Link>

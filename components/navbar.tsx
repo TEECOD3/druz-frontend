@@ -308,14 +308,39 @@ const Header: React.FC = () => {
                 </Box>
               )}
             </Flex>
-            <Box d={["block", "block", "none"]}>
+            <Flex
+              justify="flex-end"
+              align="center"
+              d={{ base: "flex", md: "none" }}
+            >
+              <Box
+                mr=".8rem"
+                onClick={toggleColorMode}
+                as="button"
+                padding="5px"
+              >
+                <MoonIcon
+                  d={colorMode === "light" ? "flex" : "none"}
+                  w="20px"
+                  h="20px"
+                  color="transparent"
+                />
+                <FaSun
+                  style={{
+                    display: colorMode === "dark" ? "flex" : "none",
+                    color: "#718096",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />
+              </Box>
               <HamburgerIcon
                 onClick={() => setShowMobileNav(true)}
                 w="20px"
                 h="20px"
                 color={colorValue}
               />
-            </Box>
+            </Flex>
           </Flex>
         </Container>
       </chakra.header>

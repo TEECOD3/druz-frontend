@@ -28,25 +28,29 @@ const Questions: React.FC = () => {
         py={4}
       >
         <Container>
-          <Stack
-            direction={{ base: "column", md: "row" }}
-            justify="space-between"
-            align="center"
-          >
-            <Heading mb={{ base: 4, md: 0 }} size="md" as="h1">
-              All Questions
-            </Heading>
-            <Button margin="0" leftIcon={<AddIcon />}>
-              Add a New Question
-            </Button>
-          </Stack>
+          <Box mx="auto" width={{ base: "100%", md: "70%" }}>
+            <Stack
+              direction={{ base: "column", md: "row" }}
+              justify="space-between"
+              align="center"
+            >
+              <Heading mb={{ base: 4, md: 0 }} size="md" as="h1">
+                All Questions
+              </Heading>
+              <Button margin="0" leftIcon={<AddIcon />}>
+                Add a New Question
+              </Button>
+            </Stack>
+          </Box>
         </Container>
       </Box>
       <Box pt={{ base: 6, md: 8 }}>
         <Container>
           <Text
+            mx="auto"
+            width={{ base: "100%", md: "70%" }}
             fontWeight="bold"
-            mb={2}
+            mb={4}
             color={colorMode == "dark" ? "inherit" : "brand.grey"}
           >
             Showing 10 Questions
