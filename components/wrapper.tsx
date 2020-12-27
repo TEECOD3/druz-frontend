@@ -9,10 +9,18 @@ const Wrapper: React.FC<React.ReactNode> = (props) => {
   const router = useRouter();
   const bg = useColorModeValue(backgroundColor.light, backgroundColor.dark);
   const colorValue = useColorModeValue(color.light, color.dark);
+
+  const pathToReducePadding = ["/questions", "/responses"];
   return (
     <Box bg={bg} color={colorValue} minH="100vh" position="relative">
       <Navbar />
-      <Box pt={router.pathname == "/questions" ? ["3rem", "4rem"] : "5rem"} />
+      <Box
+        pt={
+          pathToReducePadding.includes(router.pathname)
+            ? ["3rem", "4rem"]
+            : "5rem"
+        }
+      />
 
       <Box overflow="hidden" pb="7rem">
         {props.children}
