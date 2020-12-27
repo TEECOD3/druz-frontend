@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^1.0.1",
     "@emotion/react": "^11.1.1",
     "@emotion/styled": "^11.0.0",
+    "axios": "^0.21.1",
     "date-fns": "^2.16.1",
     "formik": "^2.2.5",
     "framer-motion": "^3.1.1",
@@ -22,11 +23,13 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-icons": "^4.1.0",
+    "react-toast-notifications": "^2.4.0",
     "uuid": "^8.3.1"
   },
   "devDependencies": {
     "@types/node": "^14.14.9",
     "@types/react": "^17.0.0",
+    "@types/react-toast-notifications": "^2.4.0",
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
     "eslint": "^7.15.0",
