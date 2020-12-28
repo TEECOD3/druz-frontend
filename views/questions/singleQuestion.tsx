@@ -6,11 +6,26 @@ import {
   VStack,
   HStack,
   useColorModeValue,
+  Skeleton,
 } from "@chakra-ui/react";
 import { HiOutlinePencil } from "react-icons/hi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const SingleQuestion: React.FC = () => {
+interface IQuestion {
+  loading: boolean;
+  content: string;
+  handleEditQuestion: (id: string, question: string) => void;
+  questionId: string;
+  handleRemoveQuestion: (id: string) => void;
+}
+
+const SingleQuestion: React.FC<IQuestion> = ({
+  loading,
+  content,
+  questionId,
+  handleEditQuestion,
+  handleRemoveQuestion,
+}) => {
   const { colorMode } = useColorMode();
   const boxBackgroundColor = useColorModeValue(
     "rgba(242, 242, 242, 0.25)",
@@ -28,7 +43,11 @@ const SingleQuestion: React.FC = () => {
       mx="auto"
     >
       <Box width="100%" p={{ base: "1rem", md: "1rem 1.5rem" }}>
-        <Text fontSize="lg">How&rsquo;s my name stored on your phone?</Text>
+        <Skeleton isLoaded={!loading}>
+          <Text fontWeight={500} fontSize="lg">
+            {content ? content : "loading loading loading loading loading"}
+          </Text>
+        </Skeleton>
       </Box>
       <HStack
         py=".7rem"
@@ -39,14 +58,30 @@ const SingleQuestion: React.FC = () => {
         spacing={{ base: "1rem", md: "2rem" }}
         backgroundColor={boxBackgroundColor}
       >
-        <HStack cursor="pointer" align="center">
-          <HiOutlinePencil size="1.2rem" color="A0AEC0" />
-          <Text>Edit</Text>
-        </HStack>
-        <HStack cursor="pointer" align="center">
-          <RiDeleteBin6Line size="1.2rem" color="A0AEC0" />
-          <Text>Remove</Text>
-        </HStack>
+        <Skeleton isLoaded={!loading}>
+          <HStack
+            onClick={() => {
+              handleEditQuestion(questionId, content);
+            }}
+            cursor="pointer"
+            align="center"
+          >
+            <HiOutlinePencil size="1.2rem" color="#3B9795" />
+            <Text color="#3B9795">Edit</Text>
+          </HStack>
+        </Skeleton>
+        <Skeleton isLoaded={!loading}>
+          <HStack
+            onClick={() => {
+              handleRemoveQuestion(questionId);
+            }}
+            cursor="pointer"
+            align="center"
+          >
+            <RiDeleteBin6Line size="1.2rem" color="#E53E3E" />
+            <Text color="#E53E3E">Remove</Text>
+          </HStack>
+        </Skeleton>
       </HStack>
     </VStack>
   );

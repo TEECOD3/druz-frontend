@@ -11,11 +11,12 @@ interface ButtonProps extends ChakraButtonProps {
   toAnimate?: boolean;
   fullWidth?: boolean;
   margin?: string;
+  small?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = forwardRef(
   (props: ButtonProps, ref) => {
-    const { toAnimate, fullWidth, margin, ...rest } = props;
+    const { toAnimate, fullWidth, small, margin, ...rest } = props;
     return (
       <motion.div
         style={{
@@ -29,7 +30,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
           width={fullWidth ? "100%" : "auto"}
           colorScheme="brand.primaryButton"
           borderRadius="5px"
-          height="3rem"
+          height={small ? "2.7rem" : "3rem"}
           px="1.4rem"
           color="brand.white"
           bgColor="brand.primary"
@@ -44,7 +45,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
 
 export const OutlinedButton: React.FC<ButtonProps> = forwardRef(
   (props: ButtonProps, ref) => {
-    const { toAnimate, fullWidth, margin, ...rest } = props;
+    const { toAnimate, fullWidth, small, margin, ...rest } = props;
     return (
       <motion.div
         style={{
@@ -57,7 +58,7 @@ export const OutlinedButton: React.FC<ButtonProps> = forwardRef(
         <ChakraButton
           width={fullWidth ? "100%" : "auto"}
           borderRadius="5px"
-          height="2.8rem"
+          height={small ? "2.5rem" : "2.8rem"}
           px="1.4rem"
           color="brand.primary"
           background="none"

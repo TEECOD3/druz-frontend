@@ -54,7 +54,7 @@ const Home: React.FC = () => {
         const { data } = res;
         setUser(data?.data?.user);
       } catch (err) {
-        // catch error
+        // error boundary or something
       } finally {
         setLoading(false);
       }
