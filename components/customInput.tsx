@@ -6,7 +6,7 @@ const CustomInput: React.FC<InputProps> = (props: InputProps) => {
   return (
     <Input
       py="1.7rem"
-      backgroundColor={colorMode == "dark" ? "inherit" : "#F7FAFC"}
+      backgroundColor={colorMode == "dark" ? "inherit" : "#e9f6ff"}
       color={colorMode == "dark" ? "inherit" : "brand.greyText"}
       fontWeight={500}
       borderStyle={colorMode == "dark" ? "solid" : "hidden"}

@@ -1,5 +1,7 @@
 import * as React from "react";
+import axios from "utils/axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   Box,
   Text,
@@ -13,14 +15,96 @@ import {
   Button as ChakraButton,
   useColorMode,
 } from "@chakra-ui/react";
+import { useToasts } from "react-toast-notifications";
+import { useFormik, FormikState } from "formik";
 import Container from "components/container";
 import { Button } from "components/buttons";
 import CustomInput from "components/customInput";
 import PageTransition from "components/pageTransition";
+import UserService from "utils/UserService";
+
+interface IUser {
+  name: string;
+  password: string;
+}
 
 const Login: React.FC = () => {
+  const { addToast } = useToasts();
+  const router = useRouter();
   const { colorMode } = useColorMode();
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const loginUser = async (
+    user: IUser,
+    resetForm: (nextState?: Partial<FormikState<IUser>>) => void,
+  ) => {
+    setLoading(true);
+    try {
+      const res = await axios.post("/api/v1/auth/login", user);
+      const { data } = res;
+      UserService.setToken(data.data.token);
+      UserService.setUser(data.data.user);
+      resetForm();
+      addToast("Successfully logged in!", {
+        appearance: "success",
+      });
+      setTimeout(() => {
+        router.replace("/home");
+      }, 1500);
+    } catch (err) {
+      UserService.clearCredentials();
+      if (err.response) {
+        const response = err.response;
+        if (response.data) {
+          addToast(response.data.errors?.[0]?.msg, {
+            appearance: "error",
+          });
+        } else if (response.status) {
+          const status = response.status;
+          if (/^4/.test(status)) {
+            addToast("Invalid values entered. Please try again", {
+              appearance: "error",
+            });
+          } else if (/^5/.test(status)) {
+            addToast("Something went wrong. Please refresh and try again", {
+              appearance: "error",
+            });
+          }
+        }
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const validate = (values: IUser) => {
+    const errors: {
+      name?: string;
+      password?: string;
+    } = {};
+    if (!values.name) {
+      errors.name = "Name is required";
+    }
+
+    if (!values.password) {
+      errors.password = "Password is required";
+    }
+
+    return errors;
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      password: "",
+    },
+    validate,
+    onSubmit: (values, { resetForm }) => {
+      const { name, password } = values;
+      loginUser({ name, password }, resetForm);
+    },
+  });
 
   return (
     <PageTransition>
@@ -52,14 +136,28 @@ const Login: React.FC = () => {
               </Box>
 
               <Box>
-                <form>
+                <form onSubmit={formik.handleSubmit}>
                   <FormControl mb={{ base: 4, md: 6 }} id="name">
                     <FormLabel
                       color={colorMode == "dark" ? "inherit" : "brand.greyText"}
                     >
                       Name
                     </FormLabel>
-                    <CustomInput placeholder="Jabari" isRequired type="text" />
+                    <CustomInput
+                      placeholder="Jabari"
+                      isRequired
+                      type="text"
+                      name="name"
+                      id="name"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.name}
+                    />
+                    {formik.touched.name && formik.errors.name ? (
+                      <Text as="small" color="red.400">
+                        {formik.errors.name}
+                      </Text>
+                    ) : null}
                   </FormControl>
                   <FormControl mb={{ base: 4, md: 6 }} id="password">
                     <FormLabel
@@ -71,6 +169,13 @@ const Login: React.FC = () => {
                       <CustomInput
                         isRequired
                         type={showPassword ? "text" : "password"}
+                        id="password"
+                        name="password"
+                        pr="4.5rem"
+                        placeholder="**********"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
                       />
                       <InputRightElement height="100%" width="5.5rem">
                         <ChakraButton
@@ -86,11 +191,18 @@ const Login: React.FC = () => {
                         </ChakraButton>
                       </InputRightElement>
                     </InputGroup>
+                    {formik.touched.password && formik.errors.password ? (
+                      <Text as="small" color="red.400">
+                        {formik.errors.password}
+                      </Text>
+                    ) : null}
                   </FormControl>
                   <Button
                     height="3.5rem"
                     fullWidth={true}
                     mt={{ base: 4, md: 6 }}
+                    type="submit"
+                    isLoading={loading}
                   >
                     Login
                   </Button>

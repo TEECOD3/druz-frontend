@@ -1,4 +1,6 @@
 import * as React from "react";
+import axios from "utils/axios";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import {
   Box,
@@ -13,15 +15,131 @@ import {
   Button as ChakraButton,
   useColorMode,
 } from "@chakra-ui/react";
+import { useToasts } from "react-toast-notifications";
+import { useFormik, FormikState } from "formik";
 import Container from "components/container";
 import { Button } from "components/buttons";
 import CustomInput from "components/customInput";
 import PageTransition from "components/pageTransition";
+import UserService from "utils/UserService";
+
+interface IUser {
+  name: string;
+  email: string;
+  password: string;
+}
+
+interface IValues extends IUser {
+  confirmPassword: string;
+}
 
 const Register: React.FC = () => {
+  const router = useRouter();
+  const { addToast } = useToasts();
   const { colorMode } = useColorMode();
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState<boolean>(
+    false,
+  );
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const registerUser = async (
+    user: IUser,
+    resetForm: (nextState?: Partial<FormikState<IValues>>) => void,
+  ) => {
+    setLoading(true);
+    try {
+      const res = await axios.post("/api/v1/auth/register", user);
+      const { data } = res;
+      UserService.setToken(data.data.token);
+      UserService.setUser(data.data.user);
+      resetForm();
+      addToast("Successfully registered!", {
+        appearance: "success",
+      });
+      setTimeout(() => {
+        router.replace("/home");
+      }, 1500);
+    } catch (err) {
+      UserService.clearCredentials();
+      if (err.response) {
+        const response = err.response;
+        if (response.data && addToast) {
+          addToast(response.data.errors?.[0]?.msg, {
+            appearance: "error",
+          });
+        } else if (response.status) {
+          const status = response.status;
+          if (/^4/.test(status)) {
+            addToast("Invalid values entered. Please try again", {
+              appearance: "error",
+            });
+          } else if (/^5/.test(status)) {
+            addToast("Something went wrong. Please refresh and try again", {
+              appearance: "error",
+            });
+          }
+        }
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const validate = (values: IValues) => {
+    const errors: {
+      name?: string;
+      email?: string;
+      password?: string;
+      confirmPassword?: string;
+    } = {};
+    if (!values.name) {
+      errors.name = "Name is required";
+    } else if (values.name.length > 15) {
+      errors.name = "Name must be 15 characters or less";
+    } else if (!/^[a-z0-9_]+$/gi.test(values.name)) {
+      errors.name =
+        "Your name can only contain letters, numbers and underscore";
+    }
+
+    if (!values.email) {
+      errors.email = "Email is required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = "Invalid email";
+    }
+
+    if (!values.password) {
+      errors.password = "Password is required";
+    } else if (values.password.length < 4) {
+      errors.password = "Password must be at least 4 characters";
+    }
+
+    if (!values.confirmPassword) {
+      errors.confirmPassword = "Confirm your password";
+    } else if (values.password !== values.confirmPassword) {
+      errors.confirmPassword = "Passwords don't match!";
+    }
+
+    return errors;
+  };
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validate,
+    onSubmit: (values, { resetForm }) => {
+      const { name, email, password } = values;
+      registerUser(
+        { name: name.trim(), email: email.trim(), password },
+        resetForm,
+      );
+    },
+  });
 
   return (
     <PageTransition>
@@ -53,14 +171,28 @@ const Register: React.FC = () => {
               </Box>
 
               <Box>
-                <form>
+                <form onSubmit={formik.handleSubmit}>
                   <FormControl mb={{ base: 4, md: 6 }} id="name">
                     <FormLabel
                       color={colorMode == "dark" ? "inherit" : "brand.greyText"}
                     >
                       Name
                     </FormLabel>
-                    <CustomInput placeholder="Jabari" isRequired type="text" />
+                    <CustomInput
+                      placeholder="Jabari"
+                      isRequired
+                      type="text"
+                      name="name"
+                      id="name"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.name}
+                    />
+                    {formik.touched.name && formik.errors.name ? (
+                      <Text as="small" color="red.400">
+                        {formik.errors.name}
+                      </Text>
+                    ) : null}
                   </FormControl>
                   <FormControl mb={{ base: 4, md: 6 }} id="email">
                     <FormLabel
@@ -72,7 +204,17 @@ const Register: React.FC = () => {
                       placeholder="jabari@yahoo.com"
                       isRequired
                       type="email"
+                      name="email"
+                      id="email"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.email}
                     />
+                    {formik.touched.email && formik.errors.email ? (
+                      <Text as="small" color="red.400">
+                        {formik.errors.email}
+                      </Text>
+                    ) : null}
                   </FormControl>
                   <FormControl mb={{ base: 4, md: 6 }} id="password">
                     <FormLabel
@@ -84,6 +226,12 @@ const Register: React.FC = () => {
                       <CustomInput
                         isRequired
                         type={showPassword ? "text" : "password"}
+                        name="password"
+                        id="password"
+                        placeholder="***********"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
                       />
                       <InputRightElement height="100%" width="5.5rem">
                         <ChakraButton
@@ -99,6 +247,11 @@ const Register: React.FC = () => {
                         </ChakraButton>
                       </InputRightElement>
                     </InputGroup>
+                    {formik.touched.password && formik.errors.password ? (
+                      <Text as="small" color="red.400">
+                        {formik.errors.password}
+                      </Text>
+                    ) : null}
                   </FormControl>
                   <FormControl mb={{ base: 4, md: 6 }} id="confirmPassword">
                     <FormLabel
@@ -110,6 +263,12 @@ const Register: React.FC = () => {
                       <CustomInput
                         isRequired
                         type={showConfirmPassword ? "text" : "password"}
+                        name="confirmPassword"
+                        id="confirmPassword"
+                        placeholder="**********"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.confirmPassword}
                       />
                       <InputRightElement height="100%" width="5.5rem">
                         <ChakraButton
@@ -127,11 +286,19 @@ const Register: React.FC = () => {
                         </ChakraButton>
                       </InputRightElement>
                     </InputGroup>
+                    {formik.touched.confirmPassword &&
+                    formik.errors.confirmPassword ? (
+                      <Text as="small" color="red.400">
+                        {formik.errors.confirmPassword}
+                      </Text>
+                    ) : null}
                   </FormControl>
                   <Button
                     height="3.5rem"
                     fullWidth={true}
                     mt={{ base: 4, md: 6 }}
+                    type="submit"
+                    isLoading={loading}
                   >
                     Create Account
                   </Button>

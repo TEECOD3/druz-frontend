@@ -20,12 +20,14 @@ import { color, backgroundColor } from "utils/colorValues";
 
 interface MobileNavProps {
   handleRemoveMobileNav: () => unknown;
+  handleLogout: () => void;
   loggedIn: boolean;
 }
 
 const MobileNav: React.FC<MobileNavProps> = ({
   handleRemoveMobileNav,
   loggedIn,
+  handleLogout,
 }) => {
   const { colorMode } = useColorMode();
   const router = useRouter();
@@ -38,11 +40,6 @@ const MobileNav: React.FC<MobileNavProps> = ({
   };
   const borderBottom = (path: string): string => {
     return router.pathname == path ? "3px solid #3B9795" : "1px solid #bdbdbd";
-  };
-
-  const handleLogout = () => {
-    typeof window != "undefined" && localStorage.clear();
-    router.replace("/login");
   };
 
   return (

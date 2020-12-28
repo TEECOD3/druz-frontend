@@ -155,7 +155,7 @@ const Home: React.FC = () => {
                       fontWeight={500}
                       color="brand.primary"
                     >
-                      <Link href="/responses">
+                      <Link href="/questions">
                         <a>View all</a>
                       </Link>
                     </Text>

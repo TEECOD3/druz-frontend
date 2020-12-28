@@ -24,6 +24,7 @@ import MobileNav from "./mobileNav";
 import { OutlinedButton } from "./buttons";
 import { MoonIcon, ResponseIcon } from "utils/customIcons";
 import { backgroundColor, color } from "utils/colorValues";
+import UserService from "utils/UserService";
 
 const pathsToRemoveShadow = ["/", "/login", "/register"];
 const pathsToRemoveLastNavItem = ["/register", "/login"];
@@ -39,7 +40,9 @@ const Header: React.FC = () => {
   const { isOpen: isMenuOpen, onToggle: onMenuToggle } = useDisclosure();
 
   const [showMobileNav, setShowMobileNav] = React.useState(false);
-  const [loggedIn, setLoggedIn] = React.useState(true);
+
+  const loggedIn = !!UserService.getUser() && !!UserService.getToken();
+
   const ref = React.useRef<HTMLHeadingElement>();
   const [y, setY] = React.useState(0);
   const { height = 0 } = ref.current?.getBoundingClientRect() ?? {};
@@ -49,8 +52,7 @@ const Header: React.FC = () => {
     setShowMobileNav(false);
   };
   const handleLogout = () => {
-    setLoggedIn(false);
-    typeof window != "undefined" && localStorage.clear();
+    UserService.clearCredentials();
     router.replace("/login");
   };
 
@@ -67,7 +69,6 @@ const Header: React.FC = () => {
   React.useEffect(() => {
     return scrollY.onChange(() => setY(scrollY.get()));
   }, [scrollY]);
-
   return (
     <>
       <chakra.header
@@ -97,7 +98,7 @@ const Header: React.FC = () => {
         <Container>
           <Flex justify="space-between" align="center" m="0 auto">
             <Heading py={[2, 4]} color="brand.primary" as="h1" size="lg">
-              <Link href="/">
+              <Link href={loggedIn ? "/home" : "/"}>
                 <a>
                   Druz
                   <span aria-labelledby="eyes emoji" role="img">
@@ -347,6 +348,7 @@ const Header: React.FC = () => {
       {showMobileNav && (
         <MobileNav
           handleRemoveMobileNav={handleRemoveMobileNav}
+          handleLogout={handleLogout}
           loggedIn={loggedIn}
         />
       )}
