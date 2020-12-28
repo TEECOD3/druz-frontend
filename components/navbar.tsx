@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from "utils/axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
@@ -51,9 +52,10 @@ const Header: React.FC = () => {
   const handleRemoveMobileNav = () => {
     setShowMobileNav(false);
   };
-  const handleLogout = () => {
+  const handleLogout = async () => {
     UserService.clearCredentials();
     router.replace("/login");
+    await axios.post("/api/v1/auth/logout");
   };
 
   const navLinkTextColor = (path: string): string => {

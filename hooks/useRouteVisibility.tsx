@@ -8,7 +8,7 @@ const useRouteVisibility = (routeVisibility: "public" | "private"): boolean => {
 
   React.useLayoutEffect(() => {
     if (routeVisibility == "private") {
-      if (UserService.getUser() && UserService.getToken()) {
+      if (UserService.getToken()) {
         setShouldRender(true);
       } else {
         setShouldRender(false);
@@ -16,7 +16,7 @@ const useRouteVisibility = (routeVisibility: "public" | "private"): boolean => {
         router.replace("/login");
       }
     } else if (routeVisibility == "public") {
-      if (!UserService.getUser() || !UserService.getToken()) {
+      if (!UserService.getToken()) {
         setShouldRender(true);
       } else {
         setShouldRender(false);

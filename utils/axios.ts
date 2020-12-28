@@ -9,4 +9,8 @@ const instance = axios.create({
   },
 });
 
+export const setAuthorization = (token: string): void => {
+  instance.defaults.headers["authorization"] = `Bearer ${token}`;
+};
+
 export default instance;

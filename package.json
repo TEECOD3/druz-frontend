@@ -24,6 +24,7 @@
     "react-dom": "17.0.1",
     "react-icons": "^4.1.0",
     "react-notifications": "^1.7.2",
+    "react-share": "^4.3.1",
     "react-toast-notifications": "^2.4.0",
     "uuid": "^8.3.1"
   },

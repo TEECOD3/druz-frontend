@@ -1,5 +1,4 @@
 import * as React from "react";
-import axios from "utils/axios";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import {
@@ -22,6 +21,7 @@ import { Button } from "components/buttons";
 import CustomInput from "components/customInput";
 import PageTransition from "components/pageTransition";
 import UserService from "utils/UserService";
+import axios, { setAuthorization } from "utils/axios";
 
 interface IUser {
   name: string;
@@ -52,7 +52,9 @@ const Register: React.FC = () => {
       const res = await axios.post("/api/v1/auth/register", user);
       const { data } = res;
       UserService.setToken(data.data.token);
+      setAuthorization(data.data.token);
       UserService.setUser(data.data.user);
+
       resetForm();
       addToast("Successfully registered!", {
         appearance: "success",

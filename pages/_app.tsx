@@ -1,5 +1,5 @@
 import * as React from "react";
-import axios from "axios";
+import axios from "utils/axios";
 import { useRouter } from "next/router";
 import customTheme from "../utils/customTheme";
 import { ChakraProvider, Box } from "@chakra-ui/react";
@@ -8,6 +8,7 @@ import "react-notifications/lib/notifications.css";
 import { NotificationManager } from "react-notifications";
 import { NotificationContainer } from "react-notifications";
 import PageLoader from "components/pageLoader";
+import UserService from "utils/UserService";
 
 interface Props {
   Component: React.FC;
@@ -27,7 +28,7 @@ const MyApp: React.FC<Props> = ({ Component, pageProps }) => {
           NotificationManager.error("Check your network connection");
         }
 
-        if (err.response.status === 401 && router.pathname !== "/login") {
+        if (err.response.status == 401 && router.pathname !== "/login") {
           setTimeout(() => {
             router.replace("/login");
             typeof window != "undefined" && localStorage.clear();
@@ -36,8 +37,7 @@ const MyApp: React.FC<Props> = ({ Component, pageProps }) => {
         return Promise.reject(err);
       },
     );
-    // eslint-disable-next-line
-  }, []);
+  }, [router.pathname, router]);
 
   React.useEffect(() => {
     setTimeout(() => {
