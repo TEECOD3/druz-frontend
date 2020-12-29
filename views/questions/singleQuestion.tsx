@@ -7,9 +7,19 @@ import {
   HStack,
   useColorModeValue,
   Skeleton,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalOverlay,
+  ModalHeader,
+  ModalCloseButton,
+  useDisclosure,
+  ModalContent,
 } from "@chakra-ui/react";
+import { WarningTwoIcon } from "@chakra-ui/icons";
 import { HiOutlinePencil } from "react-icons/hi";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { Button } from "components/buttons";
 
 interface IQuestion {
   loading: boolean;
@@ -27,6 +37,7 @@ const SingleQuestion: React.FC<IQuestion> = ({
   handleRemoveQuestion,
 }) => {
   const { colorMode } = useColorMode();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const boxBackgroundColor = useColorModeValue(
     "rgba(242, 242, 242, 0.25)",
     "rgb(25 29 39)",
@@ -71,18 +82,59 @@ const SingleQuestion: React.FC<IQuestion> = ({
           </HStack>
         </Skeleton>
         <Skeleton isLoaded={!loading}>
-          <HStack
-            onClick={() => {
-              handleRemoveQuestion(questionId);
-            }}
-            cursor="pointer"
-            align="center"
-          >
+          <HStack onClick={onOpen} cursor="pointer" align="center">
             <RiDeleteBin6Line size="1.2rem" color="#E53E3E" />
             <Text color="#E53E3E">Remove</Text>
           </HStack>
         </Skeleton>
       </HStack>
+
+      <Modal isCentered isOpen={isOpen} onClose={onClose}>
+        <Box>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Delete Question?</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Text
+                textAlign="center"
+                color="red.500"
+                fontWeight="bold"
+                fontSize="lg"
+                px="3rem"
+                pt={2}
+                pb={6}
+              >
+                Are you sure you want to delete this question?
+              </Text>
+              <Button
+                onClick={() => {
+                  onClose();
+                  handleRemoveQuestion(questionId);
+                }}
+                small
+                fullWidth
+                _hover={{ backgroundColor: "red.600" }}
+                color="#fff"
+                backgroundColor="red.500"
+                leftIcon={<WarningTwoIcon />}
+              >
+                Yes
+              </Button>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                small
+                onClick={onClose}
+                display="block"
+                margin="0 0 0 auto"
+              >
+                Cancel
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Box>
+      </Modal>
     </VStack>
   );
 };

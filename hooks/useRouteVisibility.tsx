@@ -6,7 +6,7 @@ const useRouteVisibility = (routeVisibility: "public" | "private"): boolean => {
   const router = useRouter();
   const [shouldRender, setShouldRender] = React.useState<boolean>(false);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if (routeVisibility == "private") {
       if (UserService.getToken()) {
         setShouldRender(true);

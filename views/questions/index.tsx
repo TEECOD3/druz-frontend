@@ -14,10 +14,10 @@ import {
   ModalOverlay,
   ModalHeader,
   ModalCloseButton,
+  ModalContent,
   FormLabel,
   FormControl,
   Textarea,
-  ModalContent,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
@@ -38,11 +38,13 @@ const Questions: React.FC = () => {
   );
   const [questions, setQuestions] = React.useState<QuestionsType>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
-  const [questionModalState, setQuestionModalState] = React.useState<
-    "add" | "edit" | null
-  >(null);
   const [editQuestionId, setEditQuestionId] = React.useState<string>("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isEditOpen,
+    onOpen: onEditOpen,
+    onClose: onEditClose,
+  } = useDisclosure();
   const [minMaxContent, setMinMaxContent] = React.useState("");
 
   const addQuestion = async (payload: { question: string }) => {
@@ -124,6 +126,20 @@ const Questions: React.FC = () => {
     return errors;
   };
 
+  const validateEdit = (values: { editQuestion: string }) => {
+    const errors: { editQuestion?: string } = {};
+    if (!values.editQuestion) {
+      errors.editQuestion = "Question can't be empty";
+    } else if (values.editQuestion.length < 5) {
+      errors.editQuestion = "Your question must be at least 5 characters";
+    } else if (values.editQuestion.length > 120) {
+      errors.editQuestion =
+        "Your question should not be more than 120 characters";
+    }
+
+    return errors;
+  };
+
   const formik = useFormik({
     initialValues: {
       question: "",
@@ -131,11 +147,19 @@ const Questions: React.FC = () => {
     validate,
     onSubmit: (values, { resetForm }) => {
       onClose();
-      if (questionModalState === "add") {
-        addQuestion({ question: values.question });
-      } else if (questionModalState === "edit") {
-        editQuestion(editQuestionId, { question: values.question });
-      }
+      addQuestion({ question: values.question });
+      resetForm();
+    },
+  });
+
+  const formikEdit = useFormik({
+    initialValues: {
+      editQuestion: "",
+    },
+    validate: validateEdit,
+    onSubmit: (values, { resetForm }) => {
+      onEditClose();
+      editQuestion(editQuestionId, { question: values.editQuestion });
       resetForm();
     },
   });
@@ -154,16 +178,14 @@ const Questions: React.FC = () => {
         onMinMaxClose();
       }, 3000);
     } else {
-      setQuestionModalState("add");
       onOpen();
     }
   };
 
   const handleEditQuestion = (id: string, question: string) => {
-    setQuestionModalState("edit");
     setEditQuestionId(id);
-    formik.values.question = question;
-    onOpen();
+    formikEdit.values.editQuestion = question;
+    onEditOpen();
   };
 
   const handleRemoveQuestion = (id: string) => {
@@ -268,23 +290,18 @@ const Questions: React.FC = () => {
         </Container>
       </Box>
 
-      {/* modals */}
+      {/* add question modal */}
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
         <Box>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>
-              {questionModalState === "add"
-                ? "Add a new question to your profile"
-                : "Edit your question"}
-            </ModalHeader>
+            <ModalHeader>Add a new question to your profile</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <form onSubmit={formik.handleSubmit}>
                 <FormControl mb={["1rem", "1.5rem", "2rem"]}>
                   <FormLabel htmlFor="question">Question</FormLabel>
                   <Textarea
-                    backgroundColor="#fff"
                     color="rgb(26, 32, 44)"
                     name="question"
                     id="question"
@@ -324,7 +341,58 @@ const Questions: React.FC = () => {
         </Box>
       </Modal>
 
-      {/* minmax error */}
+      {/* edit question modal */}
+      <Modal isCentered isOpen={isEditOpen} onClose={onEditClose}>
+        <Box>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Edit your question</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <form onSubmit={formikEdit.handleSubmit}>
+                <FormControl mb={["1rem", "1.5rem", "2rem"]}>
+                  <FormLabel htmlFor="editQuestion">Question</FormLabel>
+                  <Textarea
+                    color="rgb(26, 32, 44)"
+                    name="editQuestion"
+                    id="editQuestion"
+                    type="text"
+                    placeholder="Add your new question"
+                    onChange={formikEdit.handleChange}
+                    value={formikEdit.values.editQuestion}
+                    required
+                    maxLength={123}
+                  />
+                  {formikEdit.errors.editQuestion ? (
+                    <Text as="small" color="red.400">
+                      {formikEdit.errors.editQuestion}
+                    </Text>
+                  ) : null}
+                </FormControl>
+                <Button small fullWidth type="submit">
+                  Submit
+                </Button>
+              </form>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                small
+                _focus={{ outline: 0 }}
+                _hover={{ backgroundColor: "red.600" }}
+                backgroundColor="red.500"
+                color="#fff"
+                onClick={onClose}
+                display="block"
+                margin="0 0 0 auto"
+              >
+                Cancel
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Box>
+      </Modal>
+
+      {/* minmax error modal */}
       <Modal isCentered isOpen={isMinMaxOpen} onClose={onMinMaxClose}>
         <Box>
           <ModalOverlay />
