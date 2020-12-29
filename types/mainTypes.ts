@@ -1,10 +1,23 @@
-export type Answers = {
+export type Answer = {
   _id: string;
   user: string;
   name: string;
   answers: { question: string; answer: string }[];
   date: string;
 }[];
+
+export interface AllAnswers {
+  docs: Answer;
+  totalDocs: number;
+  limit: number;
+  totalPages: number;
+  page: number;
+  pagingCounter: number;
+  hasPrevPage: boolean | null;
+  hasNextPage: boolean | null;
+  prevPage: boolean | null;
+  nextPage: boolean | null;
+}
 
 export type Questions = {
   _id: string;

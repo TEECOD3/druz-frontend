@@ -16,7 +16,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { useViewportScroll } from "framer-motion";
-import { HamburgerIcon, SettingsIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, SettingsIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { FaSun } from "react-icons/fa";
 import { AiOutlineHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
@@ -251,12 +251,13 @@ const Header: React.FC = () => {
                   ) : (
                     <>
                       <Box onClick={onMenuToggle} cursor="pointer">
-                        <Image
+                        {/* <Image
                           borderRadius="50%"
                           w="2rem"
                           src={"/images/default_avatar.svg"}
-                          alt="User avatar"
-                        />
+                          alt=""
+                        /> */}
+                        <ChevronDownIcon h="2rem" w="2rem" />
                       </Box>
                       <Box
                         d={isMenuOpen ? "block" : "none"}

@@ -5,11 +5,26 @@ import {
   useColorMode,
   VStack,
   HStack,
+  Skeleton,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { PersonIcon } from "utils/customIcons";
+import { Answer } from "types/mainTypes";
 
-const SingleQuestion: React.FC = () => {
+interface IResponse {
+  loading: boolean;
+  name?: string;
+  answers?: { question: string; answer: string }[];
+  questionId: string;
+  date?: string;
+}
+
+const SingleQuestion: React.FC<IResponse> = ({
+  name,
+  loading,
+  answers,
+  date,
+}) => {
   const { colorMode } = useColorMode();
   const boxBackgroundColor = useColorModeValue(
     "rgba(242, 242, 242, 0.25)",
@@ -27,9 +42,12 @@ const SingleQuestion: React.FC = () => {
       mx="auto"
     >
       <Box p={{ base: "1rem", md: "1rem 1.5rem" }}>
-        <Text fontWeight={500} d="flex" alignItems="center" fontSize="lg">
-          <PersonIcon h="1.2rem" w="1.2rem" mr=".5rem" /> Mike Tyson
-        </Text>
+        <Skeleton isLoaded={!loading}>
+          <Text fontWeight={500} d="flex" alignItems="center" fontSize="lg">
+            <PersonIcon h="1.2rem" w="1.2rem" mr=".5rem" />
+            {name ? name : "loading loading loading"}
+          </Text>
+        </Skeleton>
       </Box>
       <HStack
         p={{ base: ".7rem", md: ".7rem 1.5rem" }}
@@ -39,12 +57,16 @@ const SingleQuestion: React.FC = () => {
         spacing={{ base: "1rem", md: "2rem" }}
         backgroundColor={boxBackgroundColor}
       >
-        <Text color={colorMode == "dark" ? "inherit" : "brand.grey"}>
-          3 days ago
-        </Text>
-        <Text color="brand.primary" cursor="pointer" fontWeight="bold">
-          View response
-        </Text>
+        <Skeleton isLoaded={!loading}>
+          <Text color={colorMode == "dark" ? "inherit" : "brand.grey"}>
+            {date ? date : "loading loading loading"}
+          </Text>
+        </Skeleton>
+        <Skeleton isLoaded={!loading}>
+          <Text color="brand.primary" cursor="pointer" fontWeight="bold">
+            View response
+          </Text>
+        </Skeleton>
       </HStack>
     </VStack>
   );

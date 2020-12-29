@@ -214,9 +214,7 @@ const Questions: React.FC = () => {
       }
     };
 
-    setTimeout(() => {
-      getQuestions();
-    }, 3500);
+    getQuestions();
   }, []);
 
   return (
@@ -259,7 +257,7 @@ const Questions: React.FC = () => {
             mb={4}
             color={colorMode == "dark" ? "inherit" : "brand.grey"}
           >
-            <Skeleton as="p" isLoaded={!loading}>
+            <Skeleton as="span" d="block" isLoaded={!loading}>
               Showing {questions.length} Questions
             </Skeleton>
           </Text>
