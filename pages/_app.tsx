@@ -37,7 +37,7 @@ const MyApp: React.FC<Props> = ({ Component, pageProps }) => {
         return Promise.reject(err);
       },
     );
-  }, [router.pathname, router]);
+  }, []);
 
   React.useEffect(() => {
     setTimeout(() => {
