@@ -13,11 +13,14 @@ import {
   InputRightElement,
   Button as ChakraButton,
   useClipboard,
+  Flex,
 } from "@chakra-ui/react";
+import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { useToasts } from "react-toast-notifications";
 import PageTransition from "components/pageTransition";
 import Container from "components/container";
 import CustomInput from "components/customInput";
+import { Button } from "components/buttons";
 import { color } from "utils/colorValues";
 import SingleResponse from "./singleResponse";
 import { AllAnswers } from "types/mainTypes";
@@ -42,24 +45,24 @@ const Responses: React.FC = () => {
     addToast("Link copied to clipboard!", { appearance: "success" });
   };
 
-  React.useEffect(() => {
-    const getQuestions = async (page = 1) => {
-      setLoading(true);
-      try {
-        const res = await axios.get(
-          `/api/v1/auth/user?alongwith=answers&page=${page}`,
-        );
-        const { data } = res;
-        setAllResponses(data?.data?.user?.answers);
-        setUser(data?.data?.user?.name);
-      } catch (err) {
-        // catch error
-      } finally {
-        setLoading(false);
-      }
-    };
+  const getResponses = async (page = 1) => {
+    setLoading(true);
+    try {
+      const res = await axios.get(
+        `/api/v1/auth/user?alongwith=answers&page=${page}`,
+      );
+      const { data } = res;
+      setAllResponses(data?.data?.user?.answers);
+      setUser(data?.data?.user?.name);
+    } catch (err) {
+      // catch error
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    getQuestions(1);
+  React.useEffect(() => {
+    getResponses(1);
   }, []);
 
   return (
@@ -85,12 +88,12 @@ const Responses: React.FC = () => {
       </Box>
       <Box
         mt={
-          !loading && allResponses && allResponses?.docs?.length <= 1
+          !loading && allResponses && allResponses?.docs?.length <= 0
             ? 0
             : "-5px"
         }
         pt={
-          !loading && allResponses && allResponses?.docs?.length <= 1
+          !loading && allResponses && allResponses?.docs?.length <= 0
             ? 0
             : { base: 6, md: 8 }
         }
@@ -104,16 +107,23 @@ const Responses: React.FC = () => {
             </Text>
           ) : !loading &&
             allResponses &&
-            allResponses?.docs?.length <= 1 ? null : (
+            allResponses?.docs?.length <= 0 ? null : allResponses?.page &&
+            allResponses?.limit &&
+            allResponses?.totalDocs ? (
             <Text
               fontWeight="bold"
               textAlign="center"
               mb={4}
               color={colorMode == "dark" ? "inherit" : "brand.grey"}
             >
-              Showing 1 - 10 of 50 responses
+              Showing {(allResponses?.page - 1) * allResponses?.limit + 1} -{" "}
+              {allResponses?.docs?.length === allResponses.limit
+                ? allResponses?.page * allResponses?.limit
+                : allResponses?.docs?.length +
+                  (allResponses?.totalPages - 1) * allResponses?.limit}{" "}
+              of {allResponses?.totalDocs} responses
             </Text>
-          )}
+          ) : null}
 
           {loading
             ? new Array(5)
@@ -135,8 +145,45 @@ const Responses: React.FC = () => {
                   date={response.date}
                 />
               ))}
+
+          <Flex
+            width={["100%", "70%", "50%"]}
+            mx="auto"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Button
+              small
+              _focus={{ outline: 0 }}
+              display={allResponses?.hasPrevPage ? "block" : "none"}
+              mt={["2rem", "2.5rem"]}
+              margin="0"
+              leftIcon={<ArrowLeftIcon />}
+              onClick={() => {
+                typeof window !== "undefined" && window.scrollTo(0, 0);
+                allResponses?.prevPage && getResponses(allResponses.prevPage);
+              }}
+            >
+              Newer
+            </Button>
+
+            <Button
+              small
+              _focus={{ outline: 0 }}
+              display={allResponses?.hasNextPage ? "block" : "none"}
+              mt={["2rem", "2.5rem"]}
+              margin="0"
+              rightIcon={<ArrowRightIcon />}
+              onClick={() => {
+                typeof window !== "undefined" && window.scrollTo(0, 0);
+                allResponses?.nextPage && getResponses(allResponses.nextPage);
+              }}
+            >
+              Older
+            </Button>
+          </Flex>
           <Box>
-            {!loading && allResponses && allResponses?.docs?.length <= 1 && (
+            {!loading && allResponses && allResponses?.docs?.length <= 0 && (
               <Box>
                 <Image
                   d={colorMode == "dark" ? "none" : "block"}

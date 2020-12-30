@@ -15,8 +15,8 @@ export interface AllAnswers {
   pagingCounter: number;
   hasPrevPage: boolean | null;
   hasNextPage: boolean | null;
-  prevPage: boolean | null;
-  nextPage: boolean | null;
+  prevPage: number | null;
+  nextPage: number | null;
 }
 
 export type Questions = {

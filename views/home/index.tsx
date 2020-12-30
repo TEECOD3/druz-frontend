@@ -170,7 +170,7 @@ const Home: React.FC = () => {
                 <Box
                   width="100%"
                   flexBasis="48%"
-                  shadow={colorMode == "dark" ? "dark-lg" : "base"}
+                  shadow={colorMode == "dark" ? "dark-lg" : "md"}
                   borderRadius="5px"
                   mb={{ base: 6, md: 0 }}
                   py={{ base: 4, md: 6 }}
@@ -213,7 +213,7 @@ const Home: React.FC = () => {
                 <Box
                   flexBasis="48%"
                   width="100%"
-                  shadow={colorMode == "dark" ? "dark-lg" : "base"}
+                  shadow={colorMode == "dark" ? "dark-lg" : "md"}
                   borderRadius="5px"
                   mb={{ base: 6, md: 0 }}
                   py={{ base: 4, md: 6 }}

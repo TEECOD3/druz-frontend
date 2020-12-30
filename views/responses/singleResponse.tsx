@@ -7,9 +7,18 @@ import {
   HStack,
   Skeleton,
   useColorModeValue,
+  Modal,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  ModalContent,
+  ModalOverlay,
+  useDisclosure,
 } from "@chakra-ui/react";
+import Moment from "react-moment";
 import { PersonIcon } from "utils/customIcons";
-import { Answer } from "types/mainTypes";
+import { Button } from "components/buttons";
 
 interface IResponse {
   loading: boolean;
@@ -30,11 +39,13 @@ const SingleQuestion: React.FC<IResponse> = ({
     "rgba(242, 242, 242, 0.25)",
     "rgb(25 29 39)",
   );
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <VStack
       spacing={0}
       border={colorMode == "dark" ? 0 : "1px solid rgba(0, 0, 0, 0.08)"}
-      shadow={colorMode == "dark" ? "dark-lg" : "none"}
+      shadow={colorMode == "dark" ? "dark-lg" : "md"}
       borderRadius="5px"
       align="flex-start"
       mb={{ base: 4, md: 6 }}
@@ -59,15 +70,65 @@ const SingleQuestion: React.FC<IResponse> = ({
       >
         <Skeleton isLoaded={!loading}>
           <Text color={colorMode == "dark" ? "inherit" : "brand.grey"}>
-            {date ? date : "loading loading loading"}
+            {date ? <Moment fromNow>{date}</Moment> : "loading loading loading"}
           </Text>
         </Skeleton>
         <Skeleton isLoaded={!loading}>
-          <Text color="brand.primary" cursor="pointer" fontWeight="bold">
+          <Text
+            onClick={onOpen}
+            color="brand.primary"
+            cursor="pointer"
+            fontWeight="bold"
+          >
             View response
           </Text>
         </Skeleton>
       </HStack>
+
+      <Modal size="xl" isOpen={isOpen} onClose={onClose}>
+        <Box mx="1.2rem">
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader></ModalHeader>
+            <ModalCloseButton size="lg" />
+            <ModalBody>
+              <Box>
+                {answers?.map((elem, index) => {
+                  return (
+                    <Box
+                      borderLeft="3px solid #319795"
+                      mb={["1.3rem", "1.6rem"]}
+                      key={index}
+                      shadow={colorMode == "dark" ? "dark-lg" : "md"}
+                      padding={["1rem .5rem", "1.5rem 1rem"]}
+                    >
+                      <Text style={{ wordWrap: "break-word" }} fontSize="md">
+                        <Text fontWeight="bold" as="span">
+                          Question:
+                        </Text>{" "}
+                        {elem.question} <br />
+                        <Text fontWeight="bold" as="span">
+                          Answer:
+                        </Text>{" "}
+                        {elem.answer}
+                      </Text>
+                    </Box>
+                  );
+                })}
+              </Box>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                _focus={{ outline: 0 }}
+                onClick={onClose}
+                margin="0 0 0 auto"
+              >
+                Close
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Box>
+      </Modal>
     </VStack>
   );
 };
