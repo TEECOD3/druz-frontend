@@ -41,7 +41,7 @@ const Header: React.FC = () => {
 
   const [showMobileNav, setShowMobileNav] = React.useState(false);
 
-  const loggedIn = !!UserService.getToken();
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   const ref = React.useRef<HTMLHeadingElement>();
   const [y, setY] = React.useState(0);
@@ -66,6 +66,11 @@ const Header: React.FC = () => {
   const borderColor = (path: string): string => {
     return router.pathname == path ? "#3B9795" : "transparent";
   };
+
+  React.useEffect(() => {
+    const getToken = localStorage.getItem("druz_token");
+    setLoggedIn(!!getToken);
+  }, []);
 
   React.useEffect(() => {
     return scrollY.onChange(() => setY(scrollY.get()));

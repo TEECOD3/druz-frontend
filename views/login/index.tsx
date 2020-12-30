@@ -45,7 +45,6 @@ const Login: React.FC = () => {
       const { data } = res;
       UserService.setToken(data.data.token);
       setAuthorization(data.data.token);
-      UserService.setUser(data.data.user);
 
       resetForm();
       addToast("Successfully logged in!", {
