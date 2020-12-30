@@ -89,7 +89,7 @@ const SingleQuestion: React.FC<IResponse> = ({
         <Box mx="1.2rem">
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader></ModalHeader>
+            <ModalHeader mb={4}></ModalHeader>
             <ModalCloseButton size="lg" />
             <ModalBody>
               <Box>

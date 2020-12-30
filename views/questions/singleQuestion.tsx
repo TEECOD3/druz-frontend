@@ -114,8 +114,8 @@ const SingleQuestion: React.FC<IQuestion> = ({
                 }}
                 small
                 fullWidth
-                _hover={{ backgroundColor: "red.600" }}
                 color="#fff"
+                _hover={{ backgroundColor: "red.600" }}
                 backgroundColor="red.500"
                 leftIcon={<WarningTwoIcon />}
               >
