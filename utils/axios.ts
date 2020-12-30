@@ -1,6 +1,6 @@
 import axios from "axios";
 import UserService from "utils/UserService";
-const rootEndpoint = process.env.BASE_URL || "http://localhost:4000/";
+const rootEndpoint = process.env.BASE_URL;
 
 const instance = axios.create({
   baseURL: rootEndpoint,
