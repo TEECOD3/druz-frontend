@@ -39,7 +39,7 @@ type UserData = {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const res = await axios.get(
-      `/api/v1/user?name=${context!.params!.username}`,
+      `/api/v1/user?name=${context?.params?.username}`,
     );
     const { data } = res;
     const user: UserData = data?.data?.user;

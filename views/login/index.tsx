@@ -207,23 +207,39 @@ const Login: React.FC = () => {
                   >
                     Login
                   </Button>
-                  <Text
-                    d="block"
+                  <Stack
+                    direction={{ base: "column", md: "row" }}
+                    align="center"
+                    justify="space-between"
                     mt={4}
-                    color={colorMode == "dark" ? "inherit" : "brand.greyText"}
-                    as="small"
                   >
-                    Don&apos;t have an account?{" "}
+                    <Text
+                      color={colorMode == "dark" ? "inherit" : "brand.greyText"}
+                      as="small"
+                    >
+                      Don&apos;t have an account?{" "}
+                      <Text
+                        _hover={{ textDecor: "underline" }}
+                        fontWeight="bold"
+                        as="span"
+                      >
+                        <Link href="/register">
+                          <a>Create now</a>
+                        </Link>
+                      </Text>{" "}
+                    </Text>
+
                     <Text
                       _hover={{ textDecor: "underline" }}
                       fontWeight="bold"
-                      as="span"
+                      color={colorMode == "dark" ? "inherit" : "brand.greyText"}
+                      as="small"
                     >
-                      <Link href="/register">
-                        <a>Create now</a>
+                      <Link href="/forgot-password">
+                        <a>Forgot your password?</a>
                       </Link>
-                    </Text>{" "}
-                  </Text>
+                    </Text>
+                  </Stack>
                 </form>
               </Box>
             </Box>

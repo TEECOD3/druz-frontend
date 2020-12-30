@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "utils/axios";
-import { Text, FormControl, FormLabel, Box } from "@chakra-ui/react";
+import { Text, FormControl, FormLabel, Box, Heading } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import Link from "next/link";
 import PageTransition from "components/pageTransition";
@@ -39,16 +39,15 @@ const ForgotPassword: React.FC = () => {
     <PageTransition>
       <Container>
         <Box mt={{ base: 8, md: 12 }}>
-          <Text
+          <Heading
             textAlign="center"
             as="h1"
-            fontWeight="bold"
-            fontSize={["3xl", "3xl", "4xl"]}
+            size="xl"
             mx="auto"
             mb={[".5rem", "1.3rem"]}
           >
-            Reset password
-          </Text>
+            Forgot your password?
+          </Heading>
           <Box maxWidth="500px" mx="auto" textAlign="center">
             <Box
               as="span"
