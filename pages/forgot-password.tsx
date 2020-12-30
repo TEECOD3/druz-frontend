@@ -5,19 +5,15 @@ import useRouteVisibility from "hooks/useRouteVisibility";
 const ForgotPassword: React.FC = () => {
   const shouldRender = useRouteVisibility("public");
   return (
-    <>
-      {shouldRender && (
-        <Page
-          image={"/images/banner.png"}
-          title={"Forgot your password? | Druz"}
-          description={
-            "Druz is an interactive, fun, secure and safe app. Create an account, set your questions, share your profile link and see what your friends think about you. All for free!"
-          }
-        >
-          <ForgotPasswordPage />
-        </Page>
-      )}
-    </>
+    <Page
+      image={"/images/banner.png"}
+      title={"Forgot your password? | Druz"}
+      description={
+        "Druz is an interactive, fun, secure and safe app. Create an account, set your questions, share your profile link and see what your friends think about you. All for free!"
+      }
+    >
+      {shouldRender && <ForgotPasswordPage />}
+    </Page>
   );
 };
 

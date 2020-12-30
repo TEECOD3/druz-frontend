@@ -11,22 +11,17 @@ const User: React.FC<{ user: UserData }> = ({ user }) => {
   const router = useRouter();
   const { username } = router.query;
   return (
-    <>
-      {shouldRender && (
-        <Page
-          image={"/images/banner.png"}
-          // @ts-ignore
-          title={`Take a challenge by ${capitalizeString(username)} | Druz`}
-          description={`${capitalizeString(
-            // @ts-ignore
-            username,
-          )} has a challenge for you. Get started by answering their questions!`}
-        >
-          {/* @ts-ignore */}
-          <UserPage user={user} />
-        </Page>
-      )}
-    </>
+    <Page
+      image={"/images/banner.png"}
+      // @ts-ignore
+      title={`Take a challenge by ${capitalizeString(username)} | Druz`}
+      description={`${capitalizeString(
+        // @ts-ignore
+        username,
+      )} has a challenge for you. Get started by answering their questions!`}
+    >
+      {shouldRender && <UserPage user={user} />}
+    </Page>
   );
 };
 

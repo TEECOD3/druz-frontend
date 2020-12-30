@@ -5,19 +5,15 @@ import useRouteVisibility from "hooks/useRouteVisibility";
 const Home: React.FC = () => {
   const shouldRender = useRouteVisibility("private");
   return (
-    <>
-      {shouldRender && (
-        <Page
-          image={"/images/banner.png"}
-          title={"Home | Druz"}
-          description={
-            "Druz helps you find out what people think about you by getting them to answer some questions."
-          }
-        >
-          <HomePage />
-        </Page>
-      )}
-    </>
+    <Page
+      image={"/images/banner.png"}
+      title={"Home | Druz"}
+      description={
+        "Druz helps you find out what people think about you by getting them to answer some questions."
+      }
+    >
+      {shouldRender && <HomePage />}
+    </Page>
   );
 };
 
