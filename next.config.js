@@ -1,7 +1,7 @@
 const environment = process.env.NODE_ENV;
 const rootEndPoint =
   environment == "production"
-    ? "http://104.248.173.191:4000/"
+    ? "https://druz-api.herokuapp.com/"
     : "http://localhost:4000/";
 
 module.exports = {
