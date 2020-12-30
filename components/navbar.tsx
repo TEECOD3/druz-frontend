@@ -9,7 +9,6 @@ import {
   useColorModeValue,
   Heading,
   chakra,
-  Image,
   Text,
   useDisclosure,
   SlideFade,
@@ -42,7 +41,7 @@ const Header: React.FC = () => {
 
   const [showMobileNav, setShowMobileNav] = React.useState(false);
 
-  const loggedIn = !!UserService.getUser() && !!UserService.getToken();
+  const loggedIn = !!UserService.getToken();
 
   const ref = React.useRef<HTMLHeadingElement>();
   const [y, setY] = React.useState(0);
@@ -203,7 +202,7 @@ const Header: React.FC = () => {
             )}
             <Flex
               py={[2, 4]}
-              d={["none", "none", "flex"]}
+              d={{ base: "none", md: "flex" }}
               justify="space-between"
               align="center"
             >
@@ -229,13 +228,7 @@ const Header: React.FC = () => {
                 />
               </Box>
               {!pathsToRemoveLastNavItem.includes(router.pathname) && (
-                <Box
-                  d={
-                    !pathsToRemoveLastNavItem.includes(router.pathname)
-                      ? "block"
-                      : "none"
-                  }
-                >
+                <Box>
                   {!loggedIn ? (
                     <Link href="/login" passHref>
                       <OutlinedButton

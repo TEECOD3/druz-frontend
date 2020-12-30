@@ -146,7 +146,29 @@ const Register: React.FC = () => {
   return (
     <PageTransition>
       <Container>
-        <Box mb={{ base: 10, md: 16 }} mt={{ base: 2, md: 16 }}>
+        <Box
+          mb={{ base: 10, md: 16 }}
+          mt={
+            router.query.value === "createYourAccount" ? 2 : { base: 2, md: 16 }
+          }
+        >
+          {router.query.value === "createYourAccount" ? (
+            <Text
+              fontSize={["lg", "xl", "2xl"]}
+              mx="auto"
+              mb={{ base: 6, md: 8 }}
+              maxWidth="700px"
+              color="#38A169"
+              fontWeight={500}
+              textAlign={{ base: "left", md: "center" }}
+            >
+              Now it&apos;s your turn to create an account and dare your friends
+              to tell you what they think about you!!{" "}
+              <span aria-labelledby="blushing face emoji" role="img">
+                😊
+              </span>
+            </Text>
+          ) : null}
           <Stack
             align="flex-start"
             justify="space-between"

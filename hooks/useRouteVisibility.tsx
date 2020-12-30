@@ -2,12 +2,16 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import UserService from "utils/UserService";
 
-const useRouteVisibility = (routeVisibility: "public" | "private"): boolean => {
+const useRouteVisibility = (
+  routeVisibility: "public" | "private" | "any",
+): boolean => {
   const router = useRouter();
   const [shouldRender, setShouldRender] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    if (routeVisibility == "private") {
+    if (routeVisibility == "any") {
+      setShouldRender(true);
+    } else if (routeVisibility == "private") {
       if (UserService.getToken()) {
         setShouldRender(true);
       } else {
