@@ -94,7 +94,7 @@ const Questions: React.FC<Props> = ({ user, yourName }) => {
           mb={[".5rem", "1.3rem"]}
         >
           Answers successfully submitted! <br />{" "}
-          {!isAuthenticated ? "Now, it's your turn" : null}
+          {!isAuthenticated ? "Now, it's your turn 😉" : null}
         </Text>
       ) : (
         <form onSubmit={handleSubmitQuestion}>

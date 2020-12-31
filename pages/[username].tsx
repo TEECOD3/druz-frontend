@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useRouter } from "next/router";
 import axios from "utils/axios";
 import { GetServerSideProps } from "next";
@@ -5,22 +6,64 @@ import UserPage from "views/user";
 import Page from "components/page";
 import useRouteVisibility from "hooks/useRouteVisibility";
 import capitalizeString from "utils/capitalizeString";
+import UserService from "utils/UserService";
 
-const User: React.FC<{ user: UserData }> = ({ user }) => {
+interface Props {
+  user: UserData;
+  error: boolean | undefined;
+  noResponse: boolean | undefined;
+  noUser: boolean | undefined;
+}
+
+const User: React.FC<Props> = ({ user, error, noResponse, noUser }) => {
   const shouldRender = useRouteVisibility("any");
   const router = useRouter();
   const { username } = router.query;
+
+  React.useEffect(() => {
+    if (UserService.getToken()) {
+      const getDashboard = async () => {
+        try {
+          const res = await axios.get("/api/v1/profile/dashboard");
+          const { data } = res;
+          if (data?.data?.user?.name == user?.name) {
+            router.replace("/home");
+          }
+        } catch (err) {
+          // error boundary or something
+        }
+      };
+      getDashboard();
+    }
+  }, [router, user?.name]);
   return (
     <Page
       image={"/images/banner.png"}
-      // @ts-ignore
-      title={`Take a challenge by ${capitalizeString(username)} | Druz`}
-      description={`${capitalizeString(
-        // @ts-ignore
-        username,
-      )} has a challenge for you. Get started by answering their questions!`}
+      title={
+        error || noResponse
+          ? "Druz"
+          : noUser
+          ? "User not found | Druz"
+          : // @ts-ignore
+            `Take a challenge by ${capitalizeString(username)} | Druz`
+      }
+      description={
+        error || noResponse || noUser
+          ? "Druz helps you find out what people think about you by getting them to answer some questions."
+          : `${capitalizeString(
+              // @ts-ignore
+              username,
+            )} has a challenge for you. Get started by answering their questions!`
+      }
     >
-      {shouldRender && <UserPage user={user} />}
+      {shouldRender && (
+        <UserPage
+          error={error}
+          noResponse={noResponse}
+          noUser={noUser}
+          user={user}
+        />
+      )}
     </Page>
   );
 };
@@ -52,9 +95,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   } catch (err) {
     if (err?.response?.status == 404) {
       return {
-        notFound: true,
+        props: {
+          noUser: true,
+          user: { name: context?.params?.username },
+        },
+      };
+    } else if (/^5/.test(err?.response?.status)) {
+      return {
+        props: {
+          error: true,
+        },
       };
     }
+    return {
+      props: {
+        noResponse: true,
+      },
+    };
   }
 };
 
