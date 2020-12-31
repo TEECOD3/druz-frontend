@@ -300,7 +300,6 @@ const Questions: React.FC = () => {
                 <FormControl mb={["1rem", "1.5rem", "2rem"]}>
                   <FormLabel htmlFor="question">Question</FormLabel>
                   <Textarea
-                    color="rgb(26, 32, 44)"
                     name="question"
                     id="question"
                     type="text"
@@ -351,7 +350,6 @@ const Questions: React.FC = () => {
                 <FormControl mb={["1rem", "1.5rem", "2rem"]}>
                   <FormLabel htmlFor="editQuestion">Question</FormLabel>
                   <Textarea
-                    color="rgb(26, 32, 44)"
                     name="editQuestion"
                     id="editQuestion"
                     type="text"
