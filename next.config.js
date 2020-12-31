@@ -7,6 +7,6 @@ const rootEndPoint =
 module.exports = {
   env: {
     BASE_URL: rootEndPoint,
-    DOMAIN: "https://druz.vercel.app",
+    DOMAIN: "https://www.druz.xyz",
   },
 };
