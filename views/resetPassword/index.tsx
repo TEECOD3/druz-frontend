@@ -51,7 +51,7 @@ const ResetPassword: React.FC<Props> = ({ token, email }) => {
         passwordObject,
       );
       resetForm();
-      addToast("password successfully reset!", { appearance: "success" });
+      addToast("password reset successfully!", { appearance: "success" });
       setTimeout(() => {
         router.push("/login");
       }, 1500);

@@ -93,7 +93,7 @@ const Questions: React.FC<Props> = ({ user, yourName }) => {
           mx="auto"
           mb={[".5rem", "1.3rem"]}
         >
-          Answers successfully submitted! <br />{" "}
+          Answers submitted successfully! <br />{" "}
           {!isAuthenticated ? "Now, it's your turn 😉" : null}
         </Text>
       ) : (

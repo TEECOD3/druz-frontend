@@ -51,7 +51,7 @@ const Questions: React.FC = () => {
     try {
       const res = await axios.patch("/api/v1/question", payload);
       const { data } = res;
-      addToast("Question successfully added!", { appearance: "success" });
+      addToast("Question added successfully!", { appearance: "success" });
       setQuestions(data?.data?.questions);
     } catch (err) {
       if (err.response) {
@@ -77,7 +77,7 @@ const Questions: React.FC = () => {
         questionObject,
       );
       const { data } = res;
-      addToast("Question successfully edited!", { appearance: "success" });
+      addToast("Question edited successfully!", { appearance: "success" });
       setQuestions(data?.data?.questions);
     } catch (err) {
       if (err.response) {
@@ -97,7 +97,7 @@ const Questions: React.FC = () => {
     try {
       const res = await axios.delete(`/api/v1/question/${questionId}`);
       const { data } = res;
-      addToast("Question successfully deleted!", { appearance: "success" });
+      addToast("Question deleted successfully!", { appearance: "success" });
       setQuestions(data?.data?.questions);
     } catch (err) {
       if (err.response) {

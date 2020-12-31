@@ -1,4 +1,5 @@
 import * as React from "react";
+import { AppProps } from "next/app";
 import axios from "utils/axios";
 import { useRouter } from "next/router";
 import customTheme from "../utils/customTheme";
@@ -8,7 +9,7 @@ import "react-notifications/lib/notifications.css";
 import { NotificationManager } from "react-notifications";
 import { NotificationContainer } from "react-notifications";
 import PageLoader from "components/pageLoader";
-import UserService from "utils/UserService";
+import * as gtag from "utils/gtag";
 
 interface Props {
   Component: React.FC;
@@ -38,6 +39,16 @@ const MyApp: React.FC<Props> = ({ Component, pageProps }) => {
       },
     );
   }, []);
+
+  React.useEffect(() => {
+    const handleRouteChange = (url: URL) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
   React.useEffect(() => {
     setTimeout(() => {
