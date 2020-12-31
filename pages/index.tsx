@@ -1,9 +1,17 @@
+import * as React from "react";
 import LandingPage from "../views/landing";
 import Page from "../components/page";
-import useRouteVisibility from "hooks/useRouteVisibility";
+import UserService from "utils/UserService";
+import { useRouter } from "next/router";
 
 const Landing: React.FC = () => {
-  const shouldRender = useRouteVisibility("public");
+  const router = useRouter();
+  React.useEffect(() => {
+    if (UserService.getToken()) {
+      router.replace("/home");
+    }
+  }, [router]);
+
   return (
     <Page
       image={"/images/banner.png"}
@@ -12,7 +20,7 @@ const Landing: React.FC = () => {
         "Druz is an interactive, fun, secure and safe app. Create an account, set your questions, share your profile link and see what your friends think about you. All for free!"
       }
     >
-      {shouldRender && <LandingPage />}
+      <LandingPage />
     </Page>
   );
 };
