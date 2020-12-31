@@ -4,7 +4,6 @@ import axios from "utils/axios";
 import { GetServerSideProps } from "next";
 import UserPage from "views/user";
 import Page from "components/page";
-import useRouteVisibility from "hooks/useRouteVisibility";
 import capitalizeString from "utils/capitalizeString";
 import UserService from "utils/UserService";
 
@@ -16,7 +15,6 @@ interface Props {
 }
 
 const User: React.FC<Props> = ({ user, error, noResponse, noUser }) => {
-  const shouldRender = useRouteVisibility("any");
   const router = useRouter();
   const { username } = router.query;
 
@@ -48,22 +46,20 @@ const User: React.FC<Props> = ({ user, error, noResponse, noUser }) => {
             `Take a challenge by ${capitalizeString(username)} | Druz`
       }
       description={
-        error || noResponse || noUser
-          ? "Druz helps you find out what people think about you by getting them to answer some questions."
-          : `${capitalizeString(
+        user
+          ? `${capitalizeString(
               // @ts-ignore
               username,
-            )} has a challenge for you. Get started by answering their questions!`
+            )} has a challenge for you on Druz. Get started by answering their questions!`
+          : "Druz helps you find out what people think about you by getting them to answer some questions."
       }
     >
-      {shouldRender && (
-        <UserPage
-          error={error}
-          noResponse={noResponse}
-          noUser={noUser}
-          user={user}
-        />
-      )}
+      <UserPage
+        error={error}
+        noResponse={noResponse}
+        noUser={noUser}
+        user={user}
+      />
     </Page>
   );
 };

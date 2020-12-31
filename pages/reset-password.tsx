@@ -1,12 +1,10 @@
 import ResetPasswordPage from "../views/resetPassword";
 import Page from "../components/page";
-import useRouteVisibility from "hooks/useRouteVisibility";
 
 const ResetPassword: React.FC<{ token: string; email: string }> = ({
   token,
   email,
 }) => {
-  const shouldRender = useRouteVisibility("public");
   return (
     <Page
       image={"/images/banner.png"}
@@ -15,7 +13,7 @@ const ResetPassword: React.FC<{ token: string; email: string }> = ({
         "Druz is an interactive, fun, secure and safe app. Create an account, set your questions, share your profile link and see what your friends think about you. All for free!"
       }
     >
-      {shouldRender && <ResetPasswordPage token={token} email={email} />}
+      <ResetPasswordPage token={token} email={email} />
     </Page>
   );
 };
