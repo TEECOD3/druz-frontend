@@ -220,7 +220,7 @@ const Settings: React.FC = () => {
                 border={
                   currentViewState == VIEW_STATES.personal
                     ? `${colorMode == "dark" ? "3px" : "2px"} solid #3B9795`
-                    : 0
+                    : "1px solid rgba(0, 0, 0, 0.08)"
                 }
               >
                 <Skeleton
@@ -264,7 +264,7 @@ const Settings: React.FC = () => {
                 border={
                   currentViewState == VIEW_STATES.security
                     ? `${colorMode == "dark" ? "3px" : "2px"} solid #3B9795`
-                    : 0
+                    : "1px solid rgba(0, 0, 0, 0.08)"
                 }
                 onClick={changeToSecurity}
                 cursor="pointer"

@@ -86,9 +86,6 @@ const Home: React.FC = () => {
                 </Text>
                 <InputGroup mb={{ base: 6, md: 8 }}>
                   <CustomInput
-                    backgroundColor={
-                      colorMode == "dark" ? "inherit" : "#d3edff"
-                    }
                     color={colorValue}
                     isReadOnly
                     defaultValue={`https://druz.xyz/${user?.name}`}
@@ -107,14 +104,14 @@ const Home: React.FC = () => {
                     </ChakraButton>
                   </InputRightElement>
                 </InputGroup>
-                <Text
+                {/* <Text
                   textAlign={{ base: "center", md: "left" }}
                   mb={2}
                   fontWeight={500}
                   fontSize="lg"
                 >
                   Share on social media
-                </Text>
+                </Text> */}
                 <HStack
                   align="center"
                   justify={{ base: "center", md: "flex-start" }}
@@ -128,7 +125,7 @@ const Home: React.FC = () => {
                     hashtag="druz_app"
                   >
                     <FaFacebook
-                      size="2.5rem"
+                      size="30px"
                       color="#3B5998"
                       style={{ cursor: "pointer" }}
                     />
@@ -141,7 +138,7 @@ const Home: React.FC = () => {
                     }
                   >
                     <IoLogoWhatsapp
-                      size="2.5rem"
+                      size="30px"
                       color="#2cb742"
                       style={{ cursor: "pointer" }}
                     />
@@ -157,7 +154,7 @@ const Home: React.FC = () => {
                     related={["druz_app"]}
                   >
                     <ImTwitter
-                      size="2.5rem"
+                      size="30px"
                       color="#00aced"
                       style={{ cursor: "pointer" }}
                     />
@@ -173,6 +170,7 @@ const Home: React.FC = () => {
                 direction={{ base: "column", md: "row" }}
               >
                 <Box
+                  border=" 1px solid rgba(0, 0, 0, 0.08)"
                   width="100%"
                   flexBasis="48%"
                   shadow={colorMode == "dark" ? "dark-lg" : "md"}
@@ -235,6 +233,7 @@ const Home: React.FC = () => {
                 </Box>
 
                 <Box
+                  border=" 1px solid rgba(0, 0, 0, 0.08)"
                   flexBasis="48%"
                   width="100%"
                   shadow={colorMode == "dark" ? "dark-lg" : "md"}

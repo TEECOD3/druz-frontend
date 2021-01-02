@@ -136,15 +136,15 @@ const Header: React.FC = () => {
                       width: "5.5rem",
                       borderRadius: "40px 40px 0 0",
                     }}
-                    py="1.2rem"
+                    py=".5rem"
                   >
                     <AiOutlineHome
-                      size="1.5rem"
+                      size="1.4rem"
                       color={navLinkIconColor("/home")}
                     />
                     <Text
                       color={navLinkTextColor("/home")}
-                      fontSize="lg"
+                      fontSize="md"
                       fontWeight={500}
                     >
                       Home
@@ -164,16 +164,16 @@ const Header: React.FC = () => {
                       width: "8rem",
                       borderRadius: "40px 40px 0 0",
                     }}
-                    py="1.2rem"
+                    py=".5rem"
                   >
                     <ResponseIcon
-                      w="1.5rem"
-                      h="1.5rem"
+                      w="1.4rem"
+                      h="1.4rem"
                       color={navLinkIconColor("/responses")}
                     />
                     <Text
                       color={navLinkTextColor("/responses")}
-                      fontSize="lg"
+                      fontSize="md"
                       fontWeight={500}
                     >
                       Responses
@@ -193,15 +193,15 @@ const Header: React.FC = () => {
                       width: "8rem",
                       borderRadius: "40px 40px 0 0",
                     }}
-                    py="1.2rem"
+                    py=".5rem"
                   >
                     <AiOutlineQuestionCircle
-                      size="1.6rem"
+                      size="1.4rem"
                       color={navLinkIconColor("/questions")}
                     />
                     <Text
                       color={navLinkTextColor("/questions")}
-                      fontSize="lg"
+                      fontSize="md"
                       fontWeight={500}
                     >
                       Questions

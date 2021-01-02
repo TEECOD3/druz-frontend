@@ -20,7 +20,6 @@ const Page: React.FC<{
   description,
   image,
   title = "Druz",
-  keywords,
   router,
   excludeWrapper,
 }) => {
@@ -37,7 +36,12 @@ const Page: React.FC<{
         <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         {description && <meta content={description} name="description" />}
-        {keywords && <meta content={keywords} name="keywords" />}
+        <meta
+          content={
+            "Druz, Anonymous, answer, questions, find out what others think about you"
+          }
+          name="keywords"
+        />
         <meta content="follow, index" name="robots" />
         <meta content="#ffffff" name="theme-color" />
         <meta content="#ffffff" name="msapplication-TileColor" />
@@ -75,10 +79,10 @@ const Page: React.FC<{
         <meta content={title} property="og:title" />
         <meta content={description} property="og:description" />
         <meta content={canonical} property="og:url" />
-        {/* <meta
-          content="t28Kl2fGmZjIEgh6q3mGsf-7gGb8115VMQm1qbMMIKc"
+        <meta
+          content="Hpp9X9jyEMHAX90NVA1ZCbOD15F860gBbixu8oXZkMY"
           name="google-site-verification"
-        /> */}
+        />
         {featuredImage ? (
           <>
             <meta content={featuredImage} property="og:image" />
