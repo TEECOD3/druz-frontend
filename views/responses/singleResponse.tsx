@@ -95,7 +95,7 @@ const SingleQuestion: React.FC<IResponse> = ({
           <Text
             onClick={() => {
               onOpen();
-              markAnswerRead(responseId);
+              viewed === false && markAnswerRead(responseId);
               setViewed(true);
             }}
             color="brand.primary"
