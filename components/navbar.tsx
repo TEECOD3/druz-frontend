@@ -102,7 +102,12 @@ const Header: React.FC = () => {
         zIndex="400"
       >
         <Container>
-          <Flex justify="space-between" align="center" m="0 auto">
+          <Flex
+            position="relative"
+            justify="space-between"
+            align="center"
+            m="0 auto"
+          >
             <Heading py={[2, 4]} color="brand.primary" as="h1" size="lg">
               <Link href={loggedIn ? "/home" : "/"}>
                 <a>
@@ -261,7 +266,7 @@ const Header: React.FC = () => {
                         d={isMenuOpen ? "block" : "none"}
                         position="absolute"
                         top="3.5rem"
-                        right="7rem"
+                        right={0}
                         p={4}
                         borderRadius="5px"
                         shadow={colorMode == "dark" ? "dark-lg" : "base"}

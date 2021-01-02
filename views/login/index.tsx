@@ -1,5 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useRouter } from "next/router";
 import {
   Box,
@@ -11,7 +12,6 @@ import {
   FormLabel,
   InputGroup,
   InputRightElement,
-  Button as ChakraButton,
   useColorMode,
 } from "@chakra-ui/react";
 import { useToasts } from "react-toast-notifications";
@@ -116,7 +116,11 @@ const Login: React.FC = () => {
             justify="space-between"
             direction={{ base: "column-reverse", md: "row" }}
           >
-            <Box mt={{ base: "2rem", md: 0 }} flexBasis="40%">
+            <Box
+              d={{ base: "none", md: "block" }}
+              mt={{ base: "2rem", md: 0 }}
+              flexBasis="40%"
+            >
               <Image
                 d={colorMode == "dark" ? "none" : "block"}
                 alt="A Lady multitasking"
@@ -179,17 +183,20 @@ const Login: React.FC = () => {
                         value={formik.values.password}
                       />
                       <InputRightElement height="100%" width="5.5rem">
-                        <ChakraButton
-                          colorScheme="brand.primaryButton"
-                          backgroundColor="brand.primary"
-                          height="2.2rem"
-                          fontWeight="normal"
-                          fontSize="sm"
-                          color="brand.white"
-                          onClick={() => setShowPassword(!showPassword)}
-                        >
-                          {showPassword ? "Hide" : "Show"}
-                        </ChakraButton>
+                        {!showPassword && (
+                          <AiOutlineEye
+                            size="1.8rem"
+                            onClick={() => setShowPassword(!showPassword)}
+                            color={colorMode == "dark" ? "inherit" : "#8E8E93"}
+                          />
+                        )}
+                        {showPassword && (
+                          <AiOutlineEyeInvisible
+                            size="1.8rem"
+                            onClick={() => setShowPassword(!showPassword)}
+                            color={colorMode == "dark" ? "inherit" : "#8E8E93"}
+                          />
+                        )}
                       </InputRightElement>
                     </InputGroup>
                     {formik.touched.password && formik.errors.password ? (

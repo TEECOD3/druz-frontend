@@ -9,8 +9,9 @@ import {
   Heading,
   InputRightElement,
   InputGroup,
-  Button as ChakraButton,
+  useColorMode,
 } from "@chakra-ui/react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useFormik, FormikState } from "formik";
 import PageTransition from "components/pageTransition";
 import Container from "components/container";
@@ -26,6 +27,7 @@ interface Props {
 const ResetPassword: React.FC<Props> = ({ token, email }) => {
   const router = useRouter();
   const { addToast } = useToasts();
+  const { colorMode } = useColorMode();
   const [showPassword, setShowPassword] = React.useState(false);
   const handlePasswordClick = () => setShowPassword(!showPassword);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
@@ -139,17 +141,20 @@ const ResetPassword: React.FC<Props> = ({ token, email }) => {
                   />
 
                   <InputRightElement height="100%" width="5.5rem">
-                    <ChakraButton
-                      colorScheme="brand.primaryButton"
-                      backgroundColor="brand.primary"
-                      height="2.2rem"
-                      fontWeight="normal"
-                      fontSize="sm"
-                      color="brand.white"
-                      onClick={handlePasswordClick}
-                    >
-                      {showPassword ? "Hide" : "Show"}
-                    </ChakraButton>
+                    {!showPassword && (
+                      <AiOutlineEye
+                        size="1.8rem"
+                        onClick={handlePasswordClick}
+                        color={colorMode == "dark" ? "inherit" : "#8E8E93"}
+                      />
+                    )}
+                    {showPassword && (
+                      <AiOutlineEyeInvisible
+                        size="1.8rem"
+                        onClick={handlePasswordClick}
+                        color={colorMode == "dark" ? "inherit" : "#8E8E93"}
+                      />
+                    )}
                   </InputRightElement>
                 </InputGroup>
                 {formik.errors.password && formik.touched.password ? (
@@ -176,17 +181,20 @@ const ResetPassword: React.FC<Props> = ({ token, email }) => {
                   />
 
                   <InputRightElement height="100%" width="5.5rem">
-                    <ChakraButton
-                      colorScheme="brand.primaryButton"
-                      backgroundColor="brand.primary"
-                      height="2.2rem"
-                      fontWeight="normal"
-                      fontSize="sm"
-                      color="brand.white"
-                      onClick={handleConfirmPasswordClick}
-                    >
-                      {showConfirmPassword ? "Hide" : "Show"}
-                    </ChakraButton>
+                    {!showConfirmPassword && (
+                      <AiOutlineEye
+                        size="1.8rem"
+                        color={colorMode == "dark" ? "inherit" : "#8E8E93"}
+                        onClick={handleConfirmPasswordClick}
+                      />
+                    )}
+                    {showConfirmPassword && (
+                      <AiOutlineEyeInvisible
+                        size="1.8rem"
+                        color={colorMode == "dark" ? "inherit" : "#8E8E93"}
+                        onClick={handleConfirmPasswordClick}
+                      />
+                    )}
                   </InputRightElement>
                 </InputGroup>
                 {formik.errors.confirmPassword &&

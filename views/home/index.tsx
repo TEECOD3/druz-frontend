@@ -107,7 +107,12 @@ const Home: React.FC = () => {
                     </ChakraButton>
                   </InputRightElement>
                 </InputGroup>
-                <Text mb={2} fontWeight={500} fontSize="lg">
+                <Text
+                  textAlign={{ base: "center", md: "left" }}
+                  mb={2}
+                  fontWeight={500}
+                  fontSize="lg"
+                >
                   Share on social media
                 </Text>
                 <HStack
