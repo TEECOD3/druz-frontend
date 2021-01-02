@@ -69,7 +69,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ loaded }) => {
         <div className="loader-section"></div>
         <div className="loader-section"></div>{" "}
         <img
-          src="images/page_loader.svg"
+          src="images/page_loader.png"
           alt="Loader"
           style={{
             height: "100px",
