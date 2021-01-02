@@ -92,7 +92,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                       spacing={4}
                     >
                       <AiOutlineHome
-                        size="1.5rem"
+                        size="1.4rem"
                         color={navLinkIconColor("/home")}
                       />
                       <Text
@@ -118,8 +118,8 @@ const MobileNav: React.FC<MobileNavProps> = ({
                       spacing={4}
                     >
                       <ResponseIcon
-                        w="1.5rem"
-                        h="1.5rem"
+                        w="1.4rem"
+                        h="1.4rem"
                         color={navLinkIconColor("/responses")}
                       />
                       <Text
@@ -145,7 +145,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                       spacing={4}
                     >
                       <AiOutlineQuestionCircle
-                        size="1.5rem"
+                        size="1.4rem"
                         color={navLinkIconColor("/questions")}
                       />
                       <Text
@@ -171,8 +171,8 @@ const MobileNav: React.FC<MobileNavProps> = ({
                       spacing={4}
                     >
                       <SettingsIcon
-                        h="1.5rem"
-                        w="1.5rem"
+                        h="1.4rem"
+                        w="1.4rem"
                         color={navLinkIconColor("/settings")}
                       />
                       <Text
@@ -196,7 +196,7 @@ const MobileNav: React.FC<MobileNavProps> = ({
                   }}
                 >
                   <HStack py=".8rem" spacing={4}>
-                    <FiLogOut size="1.5rem" color="#C53030" />
+                    <FiLogOut size="1.4rem" color="#C53030" />
                     <Text fontSize="xl" color="#C53030">
                       Logout
                     </Text>
