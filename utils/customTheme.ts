@@ -18,6 +18,7 @@ const customTheme = extendTheme({
     Heading: {
       baseStyle: {
         fontWeight: 700,
+        fontFamily: "Rubik, sans-serif",
       },
     },
   },
