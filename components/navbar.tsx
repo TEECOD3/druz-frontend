@@ -108,7 +108,13 @@ const Header: React.FC = () => {
             align="center"
             m="0 auto"
           >
-            <Heading py={[2, 4]} color="brand.primary" as="h1" size="lg">
+            <Heading
+              fontWeight={900}
+              py={[2, 4]}
+              color="brand.primary"
+              as="h1"
+              size="lg"
+            >
               <Link href={loggedIn ? "/home" : "/"}>
                 <a>
                   Druz
