@@ -377,7 +377,7 @@ const Questions: React.FC = () => {
                 _hover={{ backgroundColor: "red.600" }}
                 backgroundColor="red.500"
                 color="#fff"
-                onClick={onClose}
+                onClick={onEditClose}
                 display="block"
                 margin="0 0 0 auto"
               >
