@@ -65,7 +65,7 @@ const Footer: React.FC = () => {
             textAlign="center"
             as="span"
           >
-            <Link href="mailto:druzcontact@gmail.com">
+            <Link href="mailto:hello@druz.xyz">
               <a>Contact us</a>
             </Link>
           </Text>
