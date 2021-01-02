@@ -183,7 +183,26 @@ const Home: React.FC = () => {
                 >
                   <Skeleton mb={{ base: 8, md: 12 }} isLoaded={!loading}>
                     <HStack mb={{ base: 8, md: 12 }} justify="space-between">
-                      <ResponseIcon w="1.7rem" h="1.7rem" />
+                      <Box
+                        position="relative"
+                        _before={{
+                          content: `'${user?.unread}'`,
+                          position: "absolute",
+                          padding:
+                            (user?.unread || 1) > 99 ? "1px 4px" : "1px 7px",
+                          top: "-8px",
+                          left: "-8px",
+                          fontSize: "12px",
+                          color: "#fff",
+                          backgroundColor: "#3B9795",
+                          display:
+                            (user?.unread || 0) >= 1 ? "inherit" : "none",
+                          borderRadius: "50%",
+                        }}
+                      >
+                        <ResponseIcon w="1.7rem" h="1.7rem" />
+                      </Box>
+
                       <Text fontSize="2xl" fontWeight="bold">
                         {user?.answers}
                       </Text>

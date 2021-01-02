@@ -10,6 +10,7 @@ import { NotificationManager } from "react-notifications";
 import { NotificationContainer } from "react-notifications";
 import PageLoader from "components/pageLoader";
 import * as gtag from "utils/gtag";
+import UserService from "utils/UserService";
 
 interface Props {
   Component: React.FC;
@@ -32,7 +33,7 @@ const MyApp: React.FC<Props> = ({ Component, pageProps }) => {
         if (err.response.status == 401 && router.pathname !== "/login") {
           setTimeout(() => {
             router.replace("/login");
-            typeof window != "undefined" && localStorage.clear();
+            typeof window != "undefined" && UserService.clearCredentials();
           }, 0);
         }
         return Promise.reject(err);

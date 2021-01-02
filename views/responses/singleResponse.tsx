@@ -16,6 +16,8 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
+import axios from "utils/axios";
+import { WiMoonAltNew } from "react-icons/wi";
 import Moment from "react-moment";
 import { PersonIcon } from "utils/customIcons";
 import { Button } from "components/buttons";
@@ -24,7 +26,8 @@ interface IResponse {
   loading: boolean;
   name?: string;
   answers?: { question: string; answer: string }[];
-  questionId: string;
+  read?: boolean | undefined;
+  responseId: string;
   date?: string;
 }
 
@@ -32,6 +35,8 @@ const SingleQuestion: React.FC<IResponse> = ({
   name,
   loading,
   answers,
+  read,
+  responseId,
   date,
 }) => {
   const { colorMode } = useColorMode();
@@ -40,6 +45,19 @@ const SingleQuestion: React.FC<IResponse> = ({
     "rgb(25 29 39)",
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [viewed, setViewed] = React.useState<boolean | undefined>(read);
+
+  const markAnswerRead = async (responseId: string) => {
+    try {
+      await axios.patch(`/api/v1/answer/read/${responseId}`);
+    } catch (err) {
+      // catch error or something
+    }
+  };
+
+  React.useEffect(() => {
+    setViewed(read);
+  }, [read]);
 
   return (
     <VStack
@@ -75,13 +93,24 @@ const SingleQuestion: React.FC<IResponse> = ({
         </Skeleton>
         <Skeleton isLoaded={!loading}>
           <Text
-            onClick={onOpen}
+            onClick={() => {
+              onOpen();
+              markAnswerRead(responseId);
+              setViewed(true);
+            }}
             color="brand.primary"
             cursor="pointer"
             fontWeight="bold"
           >
             View response
           </Text>
+        </Skeleton>
+        <Skeleton ml={{ base: 2, md: 0 }} isLoaded={!loading}>
+          {viewed === false && (
+            <Box ml={{ base: 2, md: 0 }}>
+              <WiMoonAltNew size=".8rem" color="#3B9795" />
+            </Box>
+          )}
         </Skeleton>
       </HStack>
 

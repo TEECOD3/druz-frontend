@@ -185,6 +185,7 @@ const Login: React.FC = () => {
                       <InputRightElement height="100%" width="5.5rem">
                         {!showPassword && (
                           <AiOutlineEye
+                            cursor="pointer"
                             size="1.8rem"
                             onClick={() => setShowPassword(!showPassword)}
                             color={colorMode == "dark" ? "inherit" : "#8E8E93"}
@@ -192,6 +193,7 @@ const Login: React.FC = () => {
                         )}
                         {showPassword && (
                           <AiOutlineEyeInvisible
+                            cursor="pointer"
                             size="1.8rem"
                             onClick={() => setShowPassword(!showPassword)}
                             color={colorMode == "dark" ? "inherit" : "#8E8E93"}

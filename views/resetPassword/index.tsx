@@ -143,6 +143,7 @@ const ResetPassword: React.FC<Props> = ({ token, email }) => {
                   <InputRightElement height="100%" width="5.5rem">
                     {!showPassword && (
                       <AiOutlineEye
+                        cursor="pointer"
                         size="1.8rem"
                         onClick={handlePasswordClick}
                         color={colorMode == "dark" ? "inherit" : "#8E8E93"}
@@ -150,6 +151,7 @@ const ResetPassword: React.FC<Props> = ({ token, email }) => {
                     )}
                     {showPassword && (
                       <AiOutlineEyeInvisible
+                        cursor="pointer"
                         size="1.8rem"
                         onClick={handlePasswordClick}
                         color={colorMode == "dark" ? "inherit" : "#8E8E93"}
@@ -183,6 +185,7 @@ const ResetPassword: React.FC<Props> = ({ token, email }) => {
                   <InputRightElement height="100%" width="5.5rem">
                     {!showConfirmPassword && (
                       <AiOutlineEye
+                        cursor="pointer"
                         size="1.8rem"
                         color={colorMode == "dark" ? "inherit" : "#8E8E93"}
                         onClick={handleConfirmPasswordClick}
@@ -190,6 +193,7 @@ const ResetPassword: React.FC<Props> = ({ token, email }) => {
                     )}
                     {showConfirmPassword && (
                       <AiOutlineEyeInvisible
+                        cursor="pointer"
                         size="1.8rem"
                         color={colorMode == "dark" ? "inherit" : "#8E8E93"}
                         onClick={handleConfirmPasswordClick}

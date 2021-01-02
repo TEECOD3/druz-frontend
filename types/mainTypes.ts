@@ -3,6 +3,7 @@ export type Answer = {
   user: string;
   name: string;
   answers: { question: string; answer: string }[];
+  read: boolean | undefined;
   date: string;
 }[];
 
@@ -32,4 +33,5 @@ export interface User {
   role?: string;
   questions: number;
   answers: number;
+  unread: number;
 }

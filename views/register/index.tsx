@@ -263,6 +263,7 @@ const Register: React.FC = () => {
                       <InputRightElement height="100%" width="5.5rem">
                         {!showPassword && (
                           <AiOutlineEye
+                            cursor="pointer"
                             size="1.8rem"
                             onClick={() => setShowPassword(!showPassword)}
                             color={colorMode == "dark" ? "inherit" : "#8E8E93"}
@@ -270,6 +271,7 @@ const Register: React.FC = () => {
                         )}
                         {showPassword && (
                           <AiOutlineEyeInvisible
+                            cursor="pointer"
                             size="1.8rem"
                             onClick={() => setShowPassword(!showPassword)}
                             color={colorMode == "dark" ? "inherit" : "#8E8E93"}
@@ -303,6 +305,7 @@ const Register: React.FC = () => {
                       <InputRightElement height="100%" width="5.5rem">
                         {!showConfirmPassword && (
                           <AiOutlineEye
+                            cursor="pointer"
                             size="1.8rem"
                             color={colorMode == "dark" ? "inherit" : "#8E8E93"}
                             onClick={() =>
@@ -312,6 +315,7 @@ const Register: React.FC = () => {
                         )}
                         {showConfirmPassword && (
                           <AiOutlineEyeInvisible
+                            cursor="pointer"
                             size="1.8rem"
                             color={colorMode == "dark" ? "inherit" : "#8E8E93"}
                             onClick={() =>

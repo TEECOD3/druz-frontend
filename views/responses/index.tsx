@@ -130,7 +130,7 @@ const Responses: React.FC = () => {
                 .fill("_")
                 .map((_, idx) => (
                   <SingleResponse
-                    questionId={idx.toString()}
+                    responseId={idx.toString()}
                     loading={loading}
                     key={idx}
                   />
@@ -139,7 +139,8 @@ const Responses: React.FC = () => {
                 <SingleResponse
                   name={response.name}
                   answers={response.answers}
-                  questionId={response._id}
+                  read={response.read}
+                  responseId={response._id}
                   key={response._id}
                   loading={loading}
                   date={response.date}
