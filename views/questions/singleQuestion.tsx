@@ -45,7 +45,7 @@ const SingleQuestion: React.FC<IQuestion> = ({
   return (
     <VStack
       spacing={0}
-      border={colorMode == "dark" ? 0 : "1px solid rgba(0, 0, 0, 0.08)"}
+      border='border=" 1px solid rgba(0, 0, 0, 0.08)"'
       shadow={colorMode == "dark" ? "dark-lg" : "md"}
       borderRadius="5px"
       align="flex-start"

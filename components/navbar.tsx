@@ -52,9 +52,14 @@ const Header: React.FC = () => {
     setShowMobileNav(false);
   };
   const handleLogout = async () => {
-    UserService.clearCredentials();
-    router.replace("/login");
-    await axios.post("/api/v1/auth/logout");
+    try {
+      await axios.post("/api/v1/auth/logout");
+      router.replace("/login");
+    } catch (err) {
+      // catch error
+    } finally {
+      UserService.clearCredentials();
+    }
   };
 
   const navLinkTextColor = (path: string): string => {

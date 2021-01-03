@@ -50,7 +50,7 @@ const User: React.FC<Props> = ({ user, error, noResponse, noUser }) => {
           ? `${capitalizeString(
               // @ts-ignore
               username,
-            )} has a challenge for you on Druz. Get started by answering their questions!`
+            )} has a challenge for you on Druz. Get started by answering their questions and let them know what you think about them!`
           : "Druz helps you find out what people think about you by getting them to answer some questions."
       }
     >

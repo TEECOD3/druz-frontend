@@ -38,7 +38,7 @@ const Page: React.FC<{
         {description && <meta content={description} name="description" />}
         <meta
           content={
-            "Druz, Anonymous, answer, questions, find out what others think about you"
+            "Druz, Anonymous, answer, questions, find out what others think about you, answer questions, anonymous messaging"
           }
           name="keywords"
         />

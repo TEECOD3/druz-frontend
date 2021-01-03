@@ -30,7 +30,7 @@ const Questions: React.FC<Props> = ({ user, yourName }) => {
     controlledAnswers,
     setControlledAnswers,
   ] = React.useState<ControlledAnswers>(
-    questions.map((e, i) => {
+    questions.map((e) => {
       return { question: e.content, answer: "" };
     }),
   );

@@ -157,7 +157,7 @@ const LandingPage: React.FC = () => {
                   Simple To Use
                 </Text>
                 <Text maxWidth={["400px"]}>
-                  Easy to setup, Navigate and answer questions with ease
+                  Easy to setup, Navigate and answer questions with ease.
                 </Text>
               </Box>
             </Stack>

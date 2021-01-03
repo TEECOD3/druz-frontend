@@ -22,7 +22,7 @@ const Wrapper: React.FC<React.ReactNode> = (props) => {
         }
       />
 
-      <Box overflow="hidden" pb="7rem">
+      <Box overflow="hidden" pb="14rem">
         {props.children}
       </Box>
       <Footer />

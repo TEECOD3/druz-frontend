@@ -1,5 +1,4 @@
 import * as React from "react";
-import { AppProps } from "next/app";
 import axios from "utils/axios";
 import { useRouter } from "next/router";
 import customTheme from "../utils/customTheme";
