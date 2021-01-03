@@ -45,6 +45,6 @@ export const questionsData = [
   {
     question: "Who built Druz?",
     answer:
-      "Druz is built by Aigbiluese Eronmonsele. A Software Engineer based in Nigeria. You can send him a mail @ eronmmer@gmail.com or tweet @ erons_xo",
+      "Druz was built by Aigbiluese Eronmonsele. A Software Engineer based in Nigeria. You can send him a mail @ eronmmer@gmail.com or tweet @ erons_xo",
   },
 ];
