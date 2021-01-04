@@ -39,7 +39,7 @@ const Contact: React.FC = () => {
               <a
                 rel="noreferrer"
                 target="_blank"
-                href="https://twitter.com/abeg_app"
+                href="https://twitter.com/druz_app"
               >
                 <ImTwitter color="#00aced" size="48px" />
               </a>
