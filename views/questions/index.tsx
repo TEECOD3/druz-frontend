@@ -28,6 +28,7 @@ import Container from "components/container";
 import { Button } from "components/buttons";
 import SingleQuestion from "./singleQuestion";
 import { Questions as QuestionsType } from "types/mainTypes";
+import AdOne from "components/adOne";
 
 const Questions: React.FC = () => {
   const { addToast } = useToasts();
@@ -285,6 +286,10 @@ const Questions: React.FC = () => {
                   loading={loading}
                 />
               ))}
+
+          <Box textAlign="center" mt={{ base: 8, md: 16 }} mx="auto">
+            <AdOne />
+          </Box>
         </Container>
       </Box>
 

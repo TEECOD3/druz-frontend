@@ -24,6 +24,7 @@ import { Button } from "components/buttons";
 import { color } from "utils/colorValues";
 import SingleResponse from "./singleResponse";
 import { AllAnswers } from "types/mainTypes";
+import AdOne from "components/adOne";
 
 const Responses: React.FC = () => {
   const { addToast } = useToasts();
@@ -243,6 +244,9 @@ const Responses: React.FC = () => {
                 </InputGroup>
               </Box>
             )}
+          </Box>
+          <Box textAlign="center" mt={{ base: 8, md: 16 }} mx="auto">
+            <AdOne />
           </Box>
         </Container>
       </Box>

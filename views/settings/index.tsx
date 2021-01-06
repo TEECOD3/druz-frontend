@@ -31,6 +31,7 @@ import { Button } from "components/buttons";
 import { PersonIcon, KeyIcon } from "utils/customIcons";
 import { User } from "types/mainTypes";
 import UserService from "utils/UserService";
+import AdOne from "components/adOne";
 
 interface IViewStates {
   personal: "PERSONAL";
@@ -465,6 +466,9 @@ const Settings: React.FC = () => {
               </Box>
             </Box>
           </VStack>
+        </Box>
+        <Box textAlign="center" mt={{ base: 8, md: 16 }} mx="auto">
+          <AdOne />
         </Box>
       </Container>
 
