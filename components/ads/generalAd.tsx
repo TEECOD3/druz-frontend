@@ -11,22 +11,16 @@ const AdOne: React.FC = () => {
   }, []);
 
   return (
-    // <ins
-    //   className="adsbygoogle"
-    //   style={{
-    //     display: "block",
-    //   }}
-    //   data-ad-client="ca-pub-6223283242649033"
-    //   data-ad-slot="9725657065"
-    //   data-ad-format="auto"
-    //   data-full-width-responsive="true"
-    // />
-    <>
-      <h1>heading</h1>
-      <h1>heading</h1>
-      <h1>heading</h1>
-      <h1>heading</h1>
-    </>
+    <ins
+      className="adsbygoogle"
+      style={{
+        display: "block",
+      }}
+      data-ad-client="ca-pub-6223283242649033"
+      data-ad-slot="9725657065"
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    />
   );
 };
 
