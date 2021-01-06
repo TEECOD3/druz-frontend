@@ -5,6 +5,7 @@ import Container from "components/container";
 import UserWelcome from "./userWelcome";
 import UserChallenge from "./userChallenge";
 import { useToasts } from "react-toast-notifications";
+import GeneralAd from "components/ads/generalAd";
 
 interface UserProps {
   user: {
@@ -36,25 +37,30 @@ const User: React.FC<UserProps> = ({ user, error, noResponse, noUser }) => {
     <PageTransition>
       <Container>
         {error || noResponse ? null : noUser ? (
-          <Text
-            mt={["3rem", "5rem", "9rem"]}
-            textAlign="center"
-            mb="2rem"
-            fontSize={["lg", "xl"]}
-            width={["100%", "70%"]}
-            mx={["auto", "auto"]}
-          >
-            Oops, There&apos;s no user with the name{" "}
-            <Text as="span" fontWeight="bold">
-              {user?.name}
-            </Text>{" "}
-            <span aria-labelledby="tears face emoji" role="img">
-              😪
-            </span>{" "}
-            <Text as="span">
-              The account may have been deleted or never existed
+          <>
+            <Text
+              mt={["3rem", "5rem", "9rem"]}
+              textAlign="center"
+              mb="2rem"
+              fontSize={["lg", "xl"]}
+              width={["100%", "70%"]}
+              mx={["auto", "auto"]}
+            >
+              Oops, There&apos;s no user with the name{" "}
+              <Text as="span" fontWeight="bold">
+                {user?.name}
+              </Text>{" "}
+              <span aria-labelledby="tears face emoji" role="img">
+                😪
+              </span>{" "}
+              <Text as="span">
+                The account may have been deleted or never existed
+              </Text>
             </Text>
-          </Text>
+            <Box textAlign="center" mt={{ base: 6, md: 12 }} mx="auto">
+              <GeneralAd />
+            </Box>
+          </>
         ) : (
           <Box>
             {startChallenge ? (

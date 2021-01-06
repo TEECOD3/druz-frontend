@@ -2,6 +2,7 @@ import * as React from "react";
 import { Box, Text } from "@chakra-ui/react";
 import capitalizeString from "utils/capitalizeString";
 import { Button } from "components/buttons";
+import GeneralAd from "components/ads/generalAd";
 
 interface Props {
   name: string;
@@ -38,6 +39,9 @@ const UserWelcome: React.FC<Props> = ({ name, handleStartChallenge }) => {
         </span>
       </Text>
       <Button onClick={handleStartChallenge}>Get started!</Button>
+      <Box textAlign="center" mt={{ base: 6, md: 12 }} mx="auto">
+        <GeneralAd />
+      </Box>
     </Box>
   );
 };
