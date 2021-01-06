@@ -9,7 +9,6 @@ const AdOne: React.FC = () => {
       console.log(err);
     }
   }, []);
-
   return (
     <ins
       className="adsbygoogle"
