@@ -7,6 +7,7 @@ import PageTransition from "components/pageTransition";
 import Container from "components/container";
 import { Button } from "components/buttons";
 import CustomInput from "components/customInput";
+import GeneralAd from "components/ads/generalAd";
 
 const ForgotPassword: React.FC = () => {
   const [successfulSubmit, setSuccessfulSubmit] = React.useState<boolean>(
@@ -61,6 +62,10 @@ const ForgotPassword: React.FC = () => {
                 Reset link sent!
               </Text>
             )}
+          </Box>
+
+          <Box textAlign="center" mt={{ base: 6, md: 12 }} mx="auto">
+            <GeneralAd />
           </Box>
 
           <Box

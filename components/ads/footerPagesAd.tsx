@@ -17,7 +17,7 @@ const AdOne: React.FC = () => {
         display: "block",
       }}
       data-ad-client="ca-pub-6223283242649033"
-      data-ad-slot="9725657065"
+      data-ad-slot="2730989401"
       data-ad-format="auto"
       data-full-width-responsive="true"
     />

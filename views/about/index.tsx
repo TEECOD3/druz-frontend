@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Box, Text, Heading } from "@chakra-ui/react";
 import Container from "components/container";
 import PageTransition from "components/pageTransition";
+import FooterPagesAd from "components/ads/footerPagesAd";
 
 const About: React.FC = () => {
   return (
@@ -46,6 +47,9 @@ const About: React.FC = () => {
             </Link>{" "}
             and get started for free!
           </Text>
+        </Box>
+        <Box textAlign="center" mt={{ base: 6, md: 12 }} mx="auto">
+          <FooterPagesAd />
         </Box>
       </Container>
     </PageTransition>

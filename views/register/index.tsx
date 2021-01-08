@@ -22,6 +22,7 @@ import CustomInput from "components/customInput";
 import PageTransition from "components/pageTransition";
 import UserService from "utils/UserService";
 import axios, { setAuthorization } from "utils/axios";
+import GeneralAd from "components/ads/generalAd";
 
 interface IUser {
   name: string;
@@ -359,6 +360,9 @@ const Register: React.FC = () => {
                     </Text>{" "}
                   </Text>
                 </form>
+                <Box textAlign="center" mt={{ base: 10, md: 16 }} mx="auto">
+                  <GeneralAd />
+                </Box>
               </Box>
             </Box>
           </Stack>
