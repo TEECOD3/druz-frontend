@@ -14,7 +14,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import Container from "components/container";
 import PageTransition from "components/pageTransition";
 import { questionsData } from "./questionsData";
-import FooterPagesAd from "components/ads/footerPagesAd";
+import FAQPageAd from "components/ads/FAQPageAd";
 
 const FAQ: React.FC = () => {
   const { colorMode } = useColorMode();
@@ -95,7 +95,7 @@ const FAQ: React.FC = () => {
           </VStack>
 
           <Box textAlign="center" my={{ base: 8, md: 16 }} mx="auto">
-            <FooterPagesAd />
+            <FAQPageAd />
           </Box>
 
           <Box>

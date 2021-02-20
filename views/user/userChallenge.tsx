@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Text, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import Questions from "./questions";
 import { Button } from "components/buttons";
-import GeneralAd from "components/ads/generalAd";
+import UserChallengeAd from "components/ads/userChallengeAd";
 
 interface UserProps {
   user: {
@@ -89,7 +89,7 @@ const UserChallenge: React.FC<UserProps> = ({ user }) => {
     >
       {challengeContent()}
       <Box textAlign="center" mt={{ base: 6, md: 12 }} mx="auto">
-        <GeneralAd />
+        <UserChallengeAd />
       </Box>
     </Box>
   );
