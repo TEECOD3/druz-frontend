@@ -3,9 +3,13 @@ import Link from "next/link";
 import { Box, Text, useColorMode, VStack, HStack } from "@chakra-ui/react";
 import { borderColor } from "utils/colorValues";
 import Container from "components/container";
+import { useScript } from "../hooks/useScript";
 
 const Footer: React.FC = () => {
   const { colorMode } = useColorMode();
+
+  const ref = React.useRef<HTMLDivElement>(null);
+  useScript("https://commerce.coinbase.com/v1/checkout.js?version=201807", ref);
   return (
     <Box
       position="absolute"
@@ -89,6 +93,21 @@ const Footer: React.FC = () => {
               </Text>
             </Link>
           </HStack>{" "}
+          <HStack>
+            <div ref={ref}>
+              <a
+                style={{
+                  background: "#3B9795",
+                  color: "#fff",
+                  textAlign: "center",
+                }}
+                className="donate-with-crypto"
+                href="https://commerce.coinbase.com/checkout/25bf9331-3479-4164-b34b-ef634ef61be5"
+              >
+                Buy me a coffee
+              </a>
+            </div>
+          </HStack>
           <Text fontSize="sm" textAlign="center" fontWeight={500}>
             &copy; Druz {new Date().getFullYear()}
           </Text>

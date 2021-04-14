@@ -38,6 +38,7 @@ const MyApp: React.FC<Props> = ({ Component, pageProps }) => {
         return Promise.reject(err);
       },
     );
+    // eslint-disable-next-line
   }, []);
 
   React.useEffect(() => {
