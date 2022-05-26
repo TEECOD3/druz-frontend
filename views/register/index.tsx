@@ -22,7 +22,7 @@ import CustomInput from "components/customInput";
 import PageTransition from "components/pageTransition";
 import UserService from "utils/UserService";
 import axios, { setAuthorization } from "utils/axios";
-import RegisterAd from "components/ads/registerAd";
+import { AxiosError } from "axios";
 
 interface IUser {
   name: string;
@@ -64,19 +64,19 @@ const Register: React.FC = () => {
       }, 1500);
     } catch (err) {
       UserService.clearCredentials();
-      if (err.response) {
-        const response = err.response;
-        if (response.data && addToast) {
+      if ((err as AxiosError).response) {
+        const response = (err as AxiosError).response;
+        if (response?.data && addToast) {
           addToast(response.data.errors?.[0]?.msg, {
             appearance: "error",
           });
-        } else if (response.status) {
+        } else if (response?.status) {
           const status = response.status;
-          if (/^4/.test(status)) {
+          if (/^4/.test(String(status))) {
             addToast("Invalid values entered. Please try again", {
               appearance: "error",
             });
-          } else if (/^5/.test(status)) {
+          } else if (/^5/.test(String(status))) {
             addToast("Something went wrong. Please refresh and try again", {
               appearance: "error",
             });
@@ -360,9 +360,6 @@ const Register: React.FC = () => {
                     </Text>{" "}
                   </Text>
                 </form>
-                <Box textAlign="center" mt={{ base: 10, md: 16 }} mx="auto">
-                  <RegisterAd />
-                </Box>
               </Box>
             </Box>
           </Stack>

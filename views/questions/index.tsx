@@ -28,7 +28,7 @@ import Container from "components/container";
 import { Button } from "components/buttons";
 import SingleQuestion from "./singleQuestion";
 import { Questions as QuestionsType } from "types/mainTypes";
-import QuestionsAd from "components/ads/questionsAd";
+import { AxiosError } from "axios";
 
 const Questions: React.FC = () => {
   const { addToast } = useToasts();
@@ -55,9 +55,9 @@ const Questions: React.FC = () => {
       addToast("Question added successfully!", { appearance: "success" });
       setQuestions(data?.data?.questions);
     } catch (err) {
-      if (err.response) {
-        const response = err.response;
-        if (response.data) {
+      if ((err as AxiosError).response) {
+        const response = (err as AxiosError).response;
+        if (response?.data) {
           addToast(response.data.errors?.[0]?.msg, { appearance: "error" });
         } else {
           addToast("Something went wrong, please refresh and try again", {
@@ -81,9 +81,9 @@ const Questions: React.FC = () => {
       addToast("Question edited successfully!", { appearance: "success" });
       setQuestions(data?.data?.questions);
     } catch (err) {
-      if (err.response) {
-        const response = err.response;
-        if (response.data) {
+      if ((err as AxiosError).response) {
+        const response = (err as AxiosError).response;
+        if (response?.data) {
           addToast(response.data.errors?.[0]?.msg, { appearance: "error" });
         } else {
           addToast("Something went wrong, please refresh and try again", {
@@ -101,9 +101,9 @@ const Questions: React.FC = () => {
       addToast("Question deleted successfully!", { appearance: "success" });
       setQuestions(data?.data?.questions);
     } catch (err) {
-      if (err.response) {
-        const response = err.response;
-        if (response.data) {
+      if ((err as AxiosError).response) {
+        const response = (err as AxiosError).response;
+        if (response?.data) {
           addToast(response.data.errors?.[0]?.msg, { appearance: "error" });
         } else {
           addToast("Something went wrong, please refresh and try again", {
@@ -286,10 +286,6 @@ const Questions: React.FC = () => {
                   loading={loading}
                 />
               ))}
-
-          <Box textAlign="center" mt={{ base: 8, md: 16 }} mx="auto">
-            <QuestionsAd />
-          </Box>
         </Container>
       </Box>
 

@@ -5,7 +5,6 @@ import Container from "components/container";
 import UserWelcome from "./userWelcome";
 import UserChallenge from "./userChallenge";
 import { useToasts } from "react-toast-notifications";
-import GeneralAd from "components/ads/generalAd";
 
 interface UserProps {
   user: {
@@ -57,9 +56,6 @@ const User: React.FC<UserProps> = ({ user, error, noResponse, noUser }) => {
                 The account may have been deleted or never existed
               </Text>
             </Text>
-            <Box textAlign="center" mt={{ base: 6, md: 12 }} mx="auto">
-              <GeneralAd />
-            </Box>
           </>
         ) : (
           <Box>

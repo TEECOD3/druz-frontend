@@ -2,7 +2,6 @@ import * as React from "react";
 import { Box, Text, Heading } from "@chakra-ui/react";
 import Container from "components/container";
 import PageTransition from "components/pageTransition";
-import FooterPagesAd from "components/ads/footerPagesAd";
 
 const TermsOfUse: React.FC = () => {
   return (
@@ -49,9 +48,6 @@ const TermsOfUse: React.FC = () => {
             content or the use of our services, even if caused or contributed by
             our negligence.
           </Text>
-        </Box>
-        <Box textAlign="center" mt={{ base: 6, md: 12 }} mx="auto">
-          <FooterPagesAd />
         </Box>
       </Container>
     </PageTransition>
