@@ -92,21 +92,6 @@ const Footer: React.FC = () => {
                 Terms of use
               </Text>
             </Link>
-          </HStack>{" "}
-          <HStack>
-            <div ref={ref}>
-              <a
-                style={{
-                  background: "#3B9795",
-                  color: "#fff",
-                  textAlign: "center",
-                }}
-                className="donate-with-crypto"
-                href="https://commerce.coinbase.com/checkout/25bf9331-3479-4164-b34b-ef634ef61be5"
-              >
-                Buy me a coffee
-              </a>
-            </div>
           </HStack>
           <Text fontSize="sm" textAlign="center" fontWeight={500}>
             &copy; Druz {new Date().getFullYear()}
