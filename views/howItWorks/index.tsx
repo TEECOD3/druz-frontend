@@ -4,8 +4,6 @@ import { Box, Text, Heading, Stack, StackProps, Image } from "@chakra-ui/react";
 import Container from "components/container";
 import PageTransition from "components/pageTransition";
 import { Button } from "components/buttons";
-import GeneralAd from "components/ads/generalAd";
-import FooterPagesAd from "components/ads/footerPagesAd";
 
 const HowItWorksStack = (props: StackProps) => {
   return (
@@ -69,9 +67,6 @@ const HowItWorks: React.FC = () => {
                 </Box>
               </Box>
             </HowItWorksStack>
-            <Box textAlign="center" mt={{ base: 6, md: 12 }} mx="auto">
-              <GeneralAd />
-            </Box>
             <HowItWorksStack>
               <Box flexBasis="50%">
                 <Heading size="md" mb="1rem" as="h4">
@@ -135,10 +130,6 @@ const HowItWorks: React.FC = () => {
                 src="/images/responses_screen.jpg"
               />
             </HowItWorksStack>
-          </Box>
-
-          <Box textAlign="center" mt={{ base: 6, md: 12 }} mx="auto">
-            <FooterPagesAd />
           </Box>
         </Box>
 

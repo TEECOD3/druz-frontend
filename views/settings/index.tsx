@@ -31,7 +31,7 @@ import { Button } from "components/buttons";
 import { PersonIcon, KeyIcon } from "utils/customIcons";
 import { User } from "types/mainTypes";
 import UserService from "utils/UserService";
-import SettingsAd from "components/ads/settingsAd";
+import { AxiosError } from "axios";
 
 interface IViewStates {
   personal: "PERSONAL";
@@ -104,8 +104,8 @@ const Settings: React.FC = () => {
         });
         addToast("Profile updated", { appearance: "success" });
       } catch (err) {
-        if (err?.response?.data) {
-          addToast(err?.response?.data?.errors?.[0]?.msg, {
+        if ((err as AxiosError)?.response?.data) {
+          addToast((err as AxiosError)?.response?.data?.errors?.[0]?.msg, {
             appearance: "error",
           });
         }
@@ -134,8 +134,8 @@ const Settings: React.FC = () => {
         });
         addToast("Password updated", { appearance: "success" });
       } catch (err) {
-        if (err?.response?.data) {
-          addToast(err?.response?.data?.errors?.[0]?.msg, {
+        if ((err as AxiosError)?.response?.data) {
+          addToast((err as AxiosError)?.response?.data?.errors?.[0]?.msg, {
             appearance: "error",
           });
         }
@@ -466,9 +466,6 @@ const Settings: React.FC = () => {
               </Box>
             </Box>
           </VStack>
-        </Box>
-        <Box textAlign="center" mt={{ base: 8, md: 16 }} mx="auto">
-          <SettingsAd />
         </Box>
       </Container>
 

@@ -31,7 +31,6 @@ import { color } from "utils/colorValues";
 import axios from "utils/axios";
 import capitalizeString from "utils/capitalizeString";
 import { User } from "types/mainTypes";
-import HomeAd from "components/ads/homeAd";
 
 const Home: React.FC = () => {
   const { addToast } = useToasts();
@@ -278,10 +277,6 @@ const Home: React.FC = () => {
               </Stack>
             </Box>
           </Stack>
-
-          <Box textAlign="center" mt={{ base: 6, md: 12 }} mx="auto">
-            <HomeAd />
-          </Box>
         </Box>
       </Container>
     </PageTransition>

@@ -4,7 +4,6 @@ import { HiOutlineMail } from "react-icons/hi";
 import { ImTwitter } from "react-icons/im";
 import Container from "components/container";
 import PageTransition from "components/pageTransition";
-import ContactPageAd from "components/ads/contactPageAd";
 
 const Contact: React.FC = () => {
   return (
@@ -46,9 +45,6 @@ const Contact: React.FC = () => {
               </a>
             </Box>
           </HStack>
-          <Box textAlign="center" mt={{ base: 6, md: 12 }} mx="auto">
-            <ContactPageAd />
-          </Box>
         </Box>
       </Container>
     </PageTransition>
