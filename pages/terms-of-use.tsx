@@ -1,7 +1,14 @@
 import TermsOfUsePage from "../views/termsOfUse";
 import Page from "../components/page";
+import useAnalytics from "hooks/useAnalytics";
+import React from "react";
 
 const TermsOfUse: React.FC = () => {
+  const analytics = useAnalytics();
+  React.useEffect(() => {
+    analytics.pageViewed("terms-of-use");
+  }, [analytics]);
+
   return (
     <Page
       image={"/images/banner.png"}
