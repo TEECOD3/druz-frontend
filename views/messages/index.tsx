@@ -22,10 +22,10 @@ import Container from "components/container";
 import CustomInput from "components/customInput";
 import { Button } from "components/buttons";
 import { color } from "utils/colorValues";
-import SingleResponse from "./singleResponse";
-import { AllDocs, Answer } from "types/mainTypes";
+import SingleMessage from "./singleMessage";
+import { AllDocs, Message } from "types/mainTypes";
 
-const Responses: React.FC = () => {
+const Messages: React.FC = () => {
   const { addToast } = useToasts();
   const { colorMode } = useColorMode();
   const boxBackgroundColor = useColorModeValue(
@@ -33,9 +33,9 @@ const Responses: React.FC = () => {
     "rgb(25 29 39)",
   );
   const [
-    allResponses,
-    setAllResponses,
-  ] = React.useState<AllDocs<Answer> | null>();
+    allMessages,
+    setAllMessages,
+  ] = React.useState<AllDocs<Message> | null>();
   const [user, setUser] = React.useState("");
   const [loading, setLoading] = React.useState<boolean>(true);
 
@@ -48,14 +48,14 @@ const Responses: React.FC = () => {
     addToast("Link copied to clipboard!", { appearance: "success" });
   };
 
-  const getResponses = async (page = 1) => {
+  const getMessages = async (page = 1) => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `/api/v1/auth/user?alongwith=answers&page=${page}`,
+        `/api/v1/auth/user?alongwith=messages&page=${page}`,
       );
       const { data } = res;
-      setAllResponses(data?.data?.user?.answers);
+      setAllMessages(data?.data?.user?.messages);
       setUser(data?.data?.user?.name);
     } catch (err) {
       // catch error
@@ -65,7 +65,7 @@ const Responses: React.FC = () => {
   };
 
   React.useEffect(() => {
-    getResponses(1);
+    getMessages(1);
   }, []);
 
   return (
@@ -83,7 +83,7 @@ const Responses: React.FC = () => {
               align="center"
             >
               <Heading size="md" as="h1">
-                All Responses
+                All Messages
               </Heading>
             </Stack>
           </Box>
@@ -91,12 +91,10 @@ const Responses: React.FC = () => {
       </Box>
       <Box
         mt={
-          !loading && allResponses && allResponses?.docs?.length <= 0
-            ? 0
-            : "-5px"
+          !loading && allMessages && allMessages?.docs?.length <= 0 ? 0 : "-5px"
         }
         pt={
-          !loading && allResponses && allResponses?.docs?.length <= 0
+          !loading && allMessages && allMessages?.docs?.length <= 0
             ? 0
             : { base: 6, md: 8 }
         }
@@ -105,26 +103,26 @@ const Responses: React.FC = () => {
           {loading ? (
             <Text textAlign="center" mb={4}>
               <Skeleton as="span" isLoaded={!loading}>
-                Showing 1 - 10 of 50 responses
+                Showing 1 - 10 of 50 messages
               </Skeleton>
             </Text>
           ) : !loading &&
-            allResponses &&
-            allResponses?.docs?.length <= 0 ? null : allResponses?.page &&
-            allResponses?.limit &&
-            allResponses?.totalDocs ? (
+            allMessages &&
+            allMessages?.docs?.length <= 0 ? null : allMessages?.page &&
+            allMessages?.limit &&
+            allMessages?.totalDocs ? (
             <Text
               fontWeight="bold"
               textAlign="center"
               mb={4}
               color={colorMode == "dark" ? "inherit" : "brand.grey"}
             >
-              Showing {(allResponses?.page - 1) * allResponses?.limit + 1} -{" "}
-              {allResponses?.docs?.length === allResponses.limit
-                ? allResponses?.page * allResponses?.limit
-                : allResponses?.docs?.length +
-                  (allResponses?.totalPages - 1) * allResponses?.limit}{" "}
-              of {allResponses?.totalDocs} responses
+              Showing {(allMessages?.page - 1) * allMessages?.limit + 1} -{" "}
+              {allMessages?.docs?.length === allMessages.limit
+                ? allMessages?.page * allMessages?.limit
+                : allMessages?.docs?.length +
+                  (allMessages?.totalPages - 1) * allMessages?.limit}{" "}
+              of {allMessages?.totalDocs} messages
             </Text>
           ) : null}
 
@@ -132,21 +130,21 @@ const Responses: React.FC = () => {
             ? new Array(5)
                 .fill("_")
                 .map((_, idx) => (
-                  <SingleResponse
-                    responseId={idx.toString()}
+                  <SingleMessage
+                    messageId={idx.toString()}
                     loading={loading}
                     key={idx}
                   />
                 ))
-            : allResponses?.docs?.map((response) => (
-                <SingleResponse
-                  name={response.name}
-                  answers={response.answers}
-                  read={response.read}
-                  responseId={response._id}
-                  key={response._id}
+            : allMessages?.docs?.map(({ name, message, read, _id, date }) => (
+                <SingleMessage
+                  name={name}
+                  message={message}
+                  read={read}
+                  messageId={_id}
+                  key={_id}
                   loading={loading}
-                  date={response.date}
+                  date={date}
                 />
               ))}
 
@@ -159,13 +157,13 @@ const Responses: React.FC = () => {
             <Button
               small
               _focus={{ outline: 0 }}
-              display={allResponses?.hasPrevPage ? "block" : "none"}
+              display={allMessages?.hasPrevPage ? "block" : "none"}
               mt={["2rem", "2.5rem"]}
               margin="0"
               leftIcon={<ArrowLeftIcon />}
               onClick={() => {
                 typeof window !== "undefined" && window.scrollTo(0, 0);
-                allResponses?.prevPage && getResponses(allResponses.prevPage);
+                allMessages?.prevPage && getMessages(allMessages.prevPage);
               }}
             >
               Newer
@@ -174,20 +172,20 @@ const Responses: React.FC = () => {
             <Button
               small
               _focus={{ outline: 0 }}
-              display={allResponses?.hasNextPage ? "block" : "none"}
+              display={allMessages?.hasNextPage ? "block" : "none"}
               mt={["2rem", "2.5rem"]}
               margin="0"
               rightIcon={<ArrowRightIcon />}
               onClick={() => {
                 typeof window !== "undefined" && window.scrollTo(0, 0);
-                allResponses?.nextPage && getResponses(allResponses.nextPage);
+                allMessages?.nextPage && getMessages(allMessages.nextPage);
               }}
             >
               Older
             </Button>
           </Flex>
           <Box>
-            {!loading && allResponses && allResponses?.docs?.length <= 0 && (
+            {!loading && allMessages && allMessages?.docs?.length <= 0 && (
               <Box>
                 <Image
                   d={colorMode == "dark" ? "none" : "block"}
@@ -210,7 +208,7 @@ const Responses: React.FC = () => {
                   size="md"
                   fontWeight={500}
                 >
-                  You&apos;ve not had any response yet. Share your profile link
+                  You&apos;ve not had any message yet. Share your profile link
                   with your friends and have them take on your challenge{" "}
                   <span role="img" aria-labelledby="hand emoji">
                     👇
@@ -253,4 +251,4 @@ const Responses: React.FC = () => {
   );
 };
 
-export default Responses;
+export default Messages;

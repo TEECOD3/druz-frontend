@@ -10,7 +10,7 @@ const Wrapper: React.FC<React.ReactNode> = (props) => {
   const bg = useColorModeValue(backgroundColor.light, backgroundColor.dark);
   const colorValue = useColorModeValue(color.light, color.dark);
 
-  const pathToReducePadding = ["/questions", "/responses"];
+  const pathToReducePadding = ["/questions", "/responses", "/messages"];
   return (
     <Box bg={bg} color={colorValue} minH="100vh" position="relative">
       <Navbar />

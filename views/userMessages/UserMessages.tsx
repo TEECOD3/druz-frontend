@@ -5,7 +5,6 @@ import PageTransition from "components/pageTransition";
 import Container from "components/container";
 import UserWelcome from "./userWelcome";
 import UserChallenge from "./userChallenge";
-import { NoQuestions } from "./noQuestions";
 
 interface UserQuestionsProps {
   user: {
@@ -18,7 +17,7 @@ interface UserQuestionsProps {
   noUser?: boolean;
 }
 
-const UserQuestions: React.FC<UserQuestionsProps> = ({
+export const UserMessages: React.FC<UserQuestionsProps> = ({
   user,
   error,
   noResponse,
@@ -63,8 +62,6 @@ const UserQuestions: React.FC<UserQuestionsProps> = ({
               </Text>
             </Text>
           </>
-        ) : user.questions.length === 0 ? (
-          <NoQuestions username={user.name} />
         ) : (
           <Box>
             {startChallenge ? (
@@ -81,5 +78,3 @@ const UserQuestions: React.FC<UserQuestionsProps> = ({
     </PageTransition>
   );
 };
-
-export default UserQuestions;

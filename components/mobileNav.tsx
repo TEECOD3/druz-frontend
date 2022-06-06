@@ -12,7 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { CloseIcon, SettingsIcon } from "@chakra-ui/icons";
+import { CloseIcon, SettingsIcon, EmailIcon } from "@chakra-ui/icons";
 import { AiOutlineHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { ResponseIcon } from "utils/customIcons";
@@ -102,6 +102,33 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         onClick={handleRemoveMobileNav}
                       >
                         Home
+                      </Text>
+                    </HStack>
+                  </Link>
+                </ListItem>
+                <ListItem
+                  py=".6rem"
+                  fontWeight="500"
+                  borderBottom={borderBottom("/messages")}
+                >
+                  <Link href="/messages" passHref>
+                    <HStack
+                      as="a"
+                      py={router.pathname == "/messages" ? ".5rem" : ".8rem"}
+                      spacing={4}
+                    >
+                      <EmailIcon
+                        h="1.4rem"
+                        w="1.4rem"
+                        color={navLinkIconColor("/messages")}
+                      />
+                      <Text
+                        color={navLinkTextColor("/messages")}
+                        display="flex"
+                        fontSize="xl"
+                        onClick={handleRemoveMobileNav}
+                      >
+                        Messages
                       </Text>
                     </HStack>
                   </Link>
