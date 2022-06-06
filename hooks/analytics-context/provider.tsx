@@ -6,25 +6,26 @@ interface AnalyticsProviderProps {
   children: React.ReactNode;
 }
 
+const WRITE_KEY = "r0kbaxHCqkEHZ2fqRSQX6u5MCo7pRyIn";
+
 export const AnalyticsProvider: React.FC<AnalyticsProviderProps> = ({
   children,
 }) => {
-  const WRITE_KEY = process.env.REACT_APP_SEGMENT_WRITE_KEY;
-
   const [analytics, setAnalytics] = useState<Analytics | undefined>(undefined);
 
-  const loadAnalytics = async () => {
-    if (!WRITE_KEY || !analytics) {
-      return;
-    }
-
-    const [response] = await AnalyticsBrowser.load({ writeKey: WRITE_KEY });
-    setAnalytics(response);
-  };
-
   useEffect(() => {
-    loadAnalytics();
-  }, [WRITE_KEY]);
+    const loadAnalytics = async () => {
+      if (!WRITE_KEY || !analytics) {
+        return;
+      }
+
+      const [response] = await AnalyticsBrowser.load({ writeKey: WRITE_KEY });
+      setAnalytics(response);
+    };
+    if (process.env.NODE_ENV !== "development") {
+      loadAnalytics();
+    }
+  }, [analytics]);
 
   return (
     <AnalyticsContext.Provider value={{ analytics }}>
