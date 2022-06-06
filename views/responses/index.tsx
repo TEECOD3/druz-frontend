@@ -24,10 +24,12 @@ import { Button } from "components/buttons";
 import { color } from "utils/colorValues";
 import SingleResponse from "./singleResponse";
 import { AllAnswers } from "types/mainTypes";
+import useAnalytics from "hooks/useAnalytics";
 
 const Responses: React.FC = () => {
   const { addToast } = useToasts();
   const { colorMode } = useColorMode();
+  const { handlePageViewed, trackButtonClicked } = useAnalytics();
   const boxBackgroundColor = useColorModeValue(
     "rgba(242, 242, 242, 0.25)",
     "rgb(25 29 39)",
@@ -64,6 +66,10 @@ const Responses: React.FC = () => {
   React.useEffect(() => {
     getResponses(1);
   }, []);
+
+  React.useEffect(() => {
+    handlePageViewed("question response page");
+  }, [handlePageViewed]);
 
   return (
     <PageTransition>
@@ -162,6 +168,7 @@ const Responses: React.FC = () => {
               leftIcon={<ArrowLeftIcon />}
               onClick={() => {
                 typeof window !== "undefined" && window.scrollTo(0, 0);
+
                 allResponses?.prevPage && getResponses(allResponses.prevPage);
               }}
             >
@@ -235,7 +242,10 @@ const Responses: React.FC = () => {
                       fontWeight="normal"
                       fontSize="sm"
                       color="brand.white"
-                      onClick={handleCopy}
+                      onClick={() => {
+                        handleCopy();
+                        trackButtonClicked("copied profile link");
+                      }}
                     >
                       {hasCopied ? "Copied" : "Copy"}
                     </ChakraButton>

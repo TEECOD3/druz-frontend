@@ -10,6 +10,7 @@ import { NotificationContainer } from "react-notifications";
 import PageLoader from "components/pageLoader";
 import * as gtag from "utils/gtag";
 import UserService from "utils/UserService";
+import { AnalyticsProvider } from "../hooks/analytics-context/index";
 
 interface Props {
   Component: React.FC;
@@ -57,15 +58,17 @@ const MyApp: React.FC<Props> = ({ Component, pageProps }) => {
     }, 100);
   }, []);
   return (
-    <ToastProvider autoDismiss autoDismissTimeout={3000}>
-      <ChakraProvider resetCSS theme={customTheme}>
-        <PageLoader loaded={loaded} />
-        <Box d={loaded ? "block" : "none"}>
-          <Component {...pageProps} />
-          <NotificationContainer />
-        </Box>
-      </ChakraProvider>
-    </ToastProvider>
+    <AnalyticsProvider>
+      <ToastProvider autoDismiss autoDismissTimeout={3000}>
+        <ChakraProvider resetCSS theme={customTheme}>
+          <PageLoader loaded={loaded} />
+          <Box d={loaded ? "block" : "none"}>
+            <Component {...pageProps} />
+            <NotificationContainer />
+          </Box>
+        </ChakraProvider>
+      </ToastProvider>
+    </AnalyticsProvider>
   );
 };
 
