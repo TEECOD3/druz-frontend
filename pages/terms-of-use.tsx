@@ -6,7 +6,7 @@ import React from "react";
 const TermsOfUse: React.FC = () => {
   const analytics = useAnalytics();
   React.useEffect(() => {
-    analytics.pageViewed("terms-of-use");
+    analytics.handlePageViewed("terms-of-use");
   }, [analytics]);
 
   return (

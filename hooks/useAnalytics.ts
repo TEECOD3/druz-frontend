@@ -4,7 +4,7 @@ import useAnalyticsContext from "./analytics-context/useAnalyticsContext";
 const useAnalytics = () => {
   const { analytics } = useAnalyticsContext();
 
-  const pageViewed = useCallback(
+  const handlePageViewed = useCallback(
     (name: string, category = "App") => {
       analytics?.page(category, name);
     },
@@ -30,7 +30,7 @@ const useAnalytics = () => {
   );
 
   return {
-    pageViewed,
+    handlePageViewed,
     trackButtonClicked,
     identifyUser,
   };

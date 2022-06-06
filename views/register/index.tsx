@@ -43,12 +43,12 @@ const Register: React.FC = () => {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState<boolean>(
     false,
   );
-  const { pageViewed, trackButtonClicked, identifyUser } = useAnalytics();
+  const { handlePageViewed, trackButtonClicked, identifyUser } = useAnalytics();
   const [loading, setLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
-    pageViewed("registration page");
-  }, [pageViewed]);
+    handlePageViewed("registration page");
+  }, [handlePageViewed]);
 
   const registerUser = async (
     user: IUser,

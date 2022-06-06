@@ -38,7 +38,7 @@ const Questions: React.FC = () => {
     "rgba(242, 242, 242, 0.25)",
     "rgb(25 29 39)",
   );
-  const { pageViewed, trackButtonClicked, identifyUser } = useAnalytics();
+  const { handlePageViewed, trackButtonClicked, identifyUser } = useAnalytics();
 
   const [questions, setQuestions] = React.useState<QuestionsType>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -52,8 +52,8 @@ const Questions: React.FC = () => {
   const [minMaxContent, setMinMaxContent] = React.useState("");
 
   React.useEffect(() => {
-    pageViewed("question page");
-  }, [pageViewed]);
+    handlePageViewed("question page");
+  }, [handlePageViewed]);
 
   const addQuestion = async (payload: { question: string }) => {
     try {

@@ -14,7 +14,7 @@ export const AnalyticsProvider: React.FC<AnalyticsProviderProps> = ({
   const [analytics, setAnalytics] = useState<Analytics | undefined>(undefined);
 
   const loadAnalytics = async () => {
-    if (!WRITE_KEY || analytics) {
+    if (!WRITE_KEY || !analytics) {
       return;
     }
 

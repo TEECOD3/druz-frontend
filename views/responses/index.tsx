@@ -29,7 +29,7 @@ import useAnalytics from "hooks/useAnalytics";
 const Responses: React.FC = () => {
   const { addToast } = useToasts();
   const { colorMode } = useColorMode();
-  const { pageViewed, trackButtonClicked } = useAnalytics();
+  const { handlePageViewed, trackButtonClicked } = useAnalytics();
   const boxBackgroundColor = useColorModeValue(
     "rgba(242, 242, 242, 0.25)",
     "rgb(25 29 39)",
@@ -68,8 +68,8 @@ const Responses: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    pageViewed("question response page");
-  }, [pageViewed]);
+    handlePageViewed("question response page");
+  }, [handlePageViewed]);
 
   return (
     <PageTransition>
