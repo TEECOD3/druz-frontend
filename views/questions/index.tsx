@@ -280,8 +280,8 @@ const Questions: React.FC = () => {
                 size="md"
                 fontWeight={500}
               >
-                You don&apos;t have any questions yet. Add a new question to
-                your profile and have your friends answer them!
+                You don&apos;t have questions yet. Add a new question to your
+                profile and have your friends answer them!
               </Heading>
             </Box>
           ) : (
