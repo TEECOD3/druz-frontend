@@ -12,7 +12,7 @@ const Badge: React.FC<BadgeProps> = ({ text }) => {
       fontWeight={700}
       letterSpacing=".5px"
       backgroundColor="brand.primary"
-      borderRadius={2}
+      borderRadius={3}
       color="white"
       padding="1px 4px"
     >
