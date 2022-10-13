@@ -26,12 +26,13 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { ImTwitter } from "react-icons/im";
 import PageTransition from "components/pageTransition";
 import Container from "components/container";
-import { QuestionIcon, ResponseIcon } from "utils/customIcons";
+import { ResponseIcon } from "utils/customIcons";
 import CustomInput from "components/customInput";
 import { color } from "utils/colorValues";
 import axios from "utils/axios";
 import capitalizeString from "utils/capitalizeString";
 import { User } from "types/mainTypes";
+import Badge from "components/Badge";
 
 const Home: React.FC = () => {
   const { addToast } = useToasts();
@@ -216,14 +217,19 @@ const Home: React.FC = () => {
                     </HStack>
                   </Skeleton>
                   <Skeleton mb={4} isLoaded={!loading}>
-                    <Text
-                      mb={4}
-                      fontSize="lg"
-                      color={colorMode == "dark" ? "inherit" : "brand.greyText"}
-                      fontWeight={500}
-                    >
-                      Messages
-                    </Text>
+                    <HStack mb={4}>
+                      <Text
+                        fontSize="lg"
+                        color={
+                          colorMode == "dark" ? "inherit" : "brand.greyText"
+                        }
+                        fontWeight={500}
+                        mr={-1}
+                      >
+                        Messages
+                      </Text>
+                      <Badge text="New!" />
+                    </HStack>
                   </Skeleton>
 
                   <Skeleton isLoaded={!loading}>

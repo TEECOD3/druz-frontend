@@ -30,6 +30,7 @@ import { OutlinedButton } from "./buttons";
 import { MoonIcon, ResponseIcon } from "utils/customIcons";
 import { backgroundColor, color } from "utils/colorValues";
 import UserService from "utils/UserService";
+import Badge from "components/Badge";
 
 const pathsToRemoveShadow = ["/", "/login", "/register"];
 const pathsToRemoveLastNavItem = ["/register", "/login"];
@@ -176,7 +177,7 @@ const Header: React.FC = () => {
                       height: "3px",
                       position: "absolute",
                       bottom: 0,
-                      width: "8rem",
+                      width: "9rem",
                       borderRadius: "40px 40px 0 0",
                     }}
                     py=".5rem"
@@ -190,9 +191,13 @@ const Header: React.FC = () => {
                       color={navLinkTextColor("/messages")}
                       fontSize="md"
                       fontWeight={500}
+                      mr={{ sm: 0, md: 0, lg: "-6px" }}
                     >
                       Messages
                     </Text>
+                    <Box display={{ sm: "none", lg: "block" }}>
+                      <Badge text="New!" />
+                    </Box>
                   </HStack>
                 </Link>
                 <Link href="/responses" passHref>
