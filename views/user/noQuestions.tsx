@@ -17,8 +17,8 @@ export const NoQuestions: React.FC<NoQuestionsProps> = ({ username }) => {
         width={["100%", "70%"]}
         mx={["auto", "auto"]}
       >
-        Oops, this user doesn&apos;t have any questions setup yet. But you can
-        leave them a message{" "}
+        Oops, this user doesn&apos;t have questions setup yet. But you can leave
+        them a message{" "}
         <Link passHref href={`/${username}`}>
           <Text
             _hover={{ textDecoration: "underline" }}
