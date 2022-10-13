@@ -13,6 +13,7 @@ import {
   useColorModeValue,
   useClipboard,
 } from "@chakra-ui/react";
+import { EmailIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import {
   FacebookShareButton,
@@ -184,10 +185,83 @@ const Home: React.FC = () => {
                       <Box
                         position="relative"
                         _before={{
-                          content: `'${user?.unread}'`,
+                          content: `'${
+                            (user?.unreadMessages || 0) < 100
+                              ? user?.unreadMessages
+                              : "99+"
+                          }'`,
                           position: "absolute",
                           padding:
-                            (user?.unread || 1) > 99 ? "1px 4px" : "1px 7px",
+                            (user?.unreadMessages || 0) > 99
+                              ? "1px 4px"
+                              : "1px 7px",
+                          top: "-8px",
+                          left: "-8px",
+                          fontSize: "12px",
+                          color: "#fff",
+                          backgroundColor: "#3B9795",
+                          display:
+                            (user?.unreadMessages || 0) >= 1
+                              ? "inherit"
+                              : "none",
+                          borderRadius: "50%",
+                        }}
+                      >
+                        <EmailIcon w="1.7rem" h="1.7rem" color="#A0AEC0" />
+                      </Box>
+
+                      <Text fontSize="2xl" fontWeight="bold">
+                        {user?.messages}
+                      </Text>
+                    </HStack>
+                  </Skeleton>
+                  <Skeleton mb={4} isLoaded={!loading}>
+                    <Text
+                      mb={4}
+                      fontSize="lg"
+                      color={colorMode == "dark" ? "inherit" : "brand.greyText"}
+                      fontWeight={500}
+                    >
+                      Messages
+                    </Text>
+                  </Skeleton>
+
+                  <Skeleton isLoaded={!loading}>
+                    <HStack justify="flex-end">
+                      <Text
+                        _hover={{ textDecoration: "underline" }}
+                        fontWeight={500}
+                        color="brand.primary"
+                      >
+                        <Link href="/messages">
+                          <a>View all</a>
+                        </Link>
+                      </Text>
+                    </HStack>
+                  </Skeleton>
+                </Box>
+
+                <Box
+                  border=" 1px solid rgba(0, 0, 0, 0.08)"
+                  width="100%"
+                  flexBasis="48%"
+                  shadow={colorMode == "dark" ? "dark-lg" : "md"}
+                  borderRadius="5px"
+                  mb={{ base: 6, md: 0 }}
+                  py={{ base: 4, md: 6 }}
+                  px={10}
+                >
+                  <Skeleton mb={{ base: 8, md: 12 }} isLoaded={!loading}>
+                    <HStack mb={{ base: 8, md: 12 }} justify="space-between">
+                      <Box
+                        position="relative"
+                        _before={{
+                          content: `'${
+                            (user?.unread || 0) < 100 ? user?.unread : "99+"
+                          }'`,
+                          position: "absolute",
+                          padding:
+                            (user?.unread || 0) > 99 ? "1px 4px" : "1px 7px",
                           top: "-8px",
                           left: "-8px",
                           fontSize: "12px",
@@ -225,49 +299,6 @@ const Home: React.FC = () => {
                         color="brand.primary"
                       >
                         <Link href="/responses">
-                          <a>View all</a>
-                        </Link>
-                      </Text>
-                    </HStack>
-                  </Skeleton>
-                </Box>
-
-                <Box
-                  border=" 1px solid rgba(0, 0, 0, 0.08)"
-                  flexBasis="48%"
-                  width="100%"
-                  shadow={colorMode == "dark" ? "dark-lg" : "md"}
-                  borderRadius="5px"
-                  mb={{ base: 6, md: 0 }}
-                  py={{ base: 4, md: 6 }}
-                  px={10}
-                >
-                  <Skeleton mb={{ base: 8, md: 12 }} isLoaded={!loading}>
-                    <HStack mb={{ base: 8, md: 12 }} justify="space-between">
-                      <QuestionIcon w="1.7rem" h="1.7rem" />
-                      <Text fontSize="2xl" fontWeight="bold">
-                        {user?.questions}
-                      </Text>
-                    </HStack>
-                  </Skeleton>
-                  <Skeleton mb={4} isLoaded={!loading}>
-                    <Text
-                      mb={4}
-                      fontSize="lg"
-                      color={colorMode == "dark" ? "inherit" : "brand.greyText"}
-                      fontWeight={500}
-                    >
-                      Questions
-                    </Text>
-                  </Skeleton>
-                  <Skeleton isLoaded={!loading}>
-                    <HStack justify="flex-end">
-                      <Text
-                        _hover={{ textDecoration: "underline" }}
-                        fontWeight={500}
-                        color="brand.primary"
-                      >
-                        <Link href="/questions">
                           <a>View all</a>
                         </Link>
                       </Text>

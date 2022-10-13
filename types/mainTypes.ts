@@ -7,8 +7,17 @@ export type Answer = {
   date: string;
 }[];
 
-export interface AllAnswers {
-  docs: Answer;
+export type Message = {
+  _id: string;
+  user: string;
+  name: string;
+  message: string;
+  read: boolean | undefined;
+  date: string;
+}[];
+
+export interface AllDocs<T> {
+  docs: T;
   totalDocs: number;
   limit: number;
   totalPages: number;
@@ -33,5 +42,7 @@ export interface User {
   role?: string;
   questions: number;
   answers: number;
+  messages: number;
   unread: number;
+  unreadMessages: number;
 }

@@ -19,6 +19,7 @@ import {
   FormControl,
   Textarea,
   useDisclosure,
+  Image,
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { useToasts } from "react-toast-notifications";
@@ -197,15 +198,7 @@ const Questions: React.FC = () => {
   };
 
   const handleRemoveQuestion = (id: string) => {
-    if (questions.length <= 2) {
-      onMinMaxOpen();
-      setMinMaxContent("You must have at least 2 questions in your profile");
-      setTimeout(() => {
-        onMinMaxClose();
-      }, 3000);
-    } else {
-      deleteQuestion(id);
-    }
+    deleteQuestion(id);
   };
 
   React.useEffect(() => {
@@ -258,32 +251,61 @@ const Questions: React.FC = () => {
       </Box>
       <Box pt={{ base: 6, md: 8 }}>
         <Container>
-          <Text
-            mx="auto"
-            width={{ base: "100%", md: "70%" }}
-            fontWeight="bold"
-            mb={4}
-            color={colorMode == "dark" ? "inherit" : "brand.grey"}
-          >
-            <Skeleton as="span" d="block" isLoaded={!loading}>
-              Showing {questions.length} Questions
-            </Skeleton>
-          </Text>
-
-          {loading
-            ? new Array(8)
-                .fill("_")
-                .map((_, idx) => (
-                  <SingleQuestion
-                    content={"loading"}
-                    handleEditQuestion={handleEditQuestion}
-                    handleRemoveQuestion={handleRemoveQuestion}
-                    questionId={idx.toString()}
-                    loading={loading}
-                    key={idx}
-                  />
-                ))
-            : questions.map((question) => (
+          {loading &&
+            new Array(8)
+              .fill("_")
+              .map((_, idx) => (
+                <SingleQuestion
+                  content={"loading"}
+                  handleEditQuestion={handleEditQuestion}
+                  handleRemoveQuestion={handleRemoveQuestion}
+                  questionId={idx.toString()}
+                  loading={loading}
+                  key={idx}
+                />
+              ))}
+          {!loading && questions && questions?.length <= 0 ? (
+            <Box style={{ marginTop: "-2.3rem" }}>
+              <Image
+                d={colorMode == "dark" ? "none" : "block"}
+                mt="-5px"
+                mx="auto"
+                src="/images/no_response.svg"
+              />
+              <Image
+                d={colorMode == "dark" ? "block" : "none"}
+                mt="-5px"
+                mx="auto"
+                src="/images/no_response_dark.svg"
+              />
+              <Heading
+                mx="auto"
+                maxWidth="500px"
+                textAlign="center"
+                my={6}
+                as="h4"
+                size="md"
+                fontWeight={500}
+              >
+                You don&apos;t have questions yet. Add a new question to your
+                profile and have your friends answer them!
+              </Heading>
+            </Box>
+          ) : (
+            <Box>
+              <Text
+                mx="auto"
+                width={{ base: "100%", md: "70%" }}
+                fontWeight="bold"
+                mb={4}
+                color={colorMode == "dark" ? "inherit" : "brand.grey"}
+              >
+                <Skeleton as="span" d="block" isLoaded={!loading}>
+                  Showing {questions.length} Question
+                  {questions.length > 1 && "s"}
+                </Skeleton>
+              </Text>
+              {questions.map((question) => (
                 <SingleQuestion
                   content={question.content}
                   handleEditQuestion={handleEditQuestion}
@@ -293,6 +315,8 @@ const Questions: React.FC = () => {
                   loading={loading}
                 />
               ))}
+            </Box>
+          )}
         </Container>
       </Box>
 

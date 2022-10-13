@@ -1,8 +1,9 @@
 import * as React from "react";
 import { useRouter } from "next/router";
+import { AxiosError } from "axios";
 import axios from "utils/axios";
 import { GetServerSideProps } from "next";
-import UserPage from "views/user";
+import { UserMessages } from "views/userMessages";
 import Page from "components/page";
 import capitalizeString from "utils/capitalizeString";
 import UserService from "utils/UserService";
@@ -50,11 +51,11 @@ const User: React.FC<Props> = ({ user, error, noResponse, noUser }) => {
           ? `${capitalizeString(
               // @ts-ignore
               username,
-            )} has a challenge for you on Druz. Get started by answering their questions and let them know what you think about them!`
+            )} has a challenge for you on Druz. Get started by leaving them a message and let them know what you think about them!`
           : "Druz helps you find out what people think about you by getting them to answer some questions."
       }
     >
-      <UserPage
+      <UserMessages
         error={error}
         noResponse={noResponse}
         noUser={noUser}
@@ -89,14 +90,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (err) {
-    if (err?.response?.status == 404) {
+    if ((err as AxiosError)?.response?.status == 404) {
       return {
         props: {
           noUser: true,
           user: { name: context?.params?.username },
         },
       };
-    } else if (/^5/.test(err?.response?.status)) {
+    } else if (/^5/.test(String((err as AxiosError)?.response?.status))) {
       return {
         props: {
           error: true,

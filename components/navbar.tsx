@@ -15,7 +15,12 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { useViewportScroll } from "framer-motion";
-import { HamburgerIcon, SettingsIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import {
+  HamburgerIcon,
+  SettingsIcon,
+  ChevronDownIcon,
+  EmailIcon,
+} from "@chakra-ui/icons";
 import { FaSun } from "react-icons/fa";
 import { AiOutlineHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
@@ -159,6 +164,34 @@ const Header: React.FC = () => {
                       fontWeight={500}
                     >
                       Home
+                    </Text>
+                  </HStack>
+                </Link>
+                <Link href="/messages" passHref>
+                  <HStack
+                    as="a"
+                    _after={{
+                      content: '""',
+                      background: borderColor("/messages"),
+                      height: "3px",
+                      position: "absolute",
+                      bottom: 0,
+                      width: "8rem",
+                      borderRadius: "40px 40px 0 0",
+                    }}
+                    py=".5rem"
+                  >
+                    <EmailIcon
+                      h="1.4rem"
+                      w="1.4rem"
+                      color={navLinkIconColor("/messages")}
+                    />
+                    <Text
+                      color={navLinkTextColor("/messages")}
+                      fontSize="md"
+                      fontWeight={500}
+                    >
+                      Messages
                     </Text>
                   </HStack>
                 </Link>
