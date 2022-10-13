@@ -17,6 +17,7 @@ import { AiOutlineHome, AiOutlineQuestionCircle } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { ResponseIcon } from "utils/customIcons";
 import { color, backgroundColor } from "utils/colorValues";
+import Badge from "components/Badge";
 
 interface MobileNavProps {
   handleRemoveMobileNav: () => unknown;
@@ -127,9 +128,11 @@ const MobileNav: React.FC<MobileNavProps> = ({
                         display="flex"
                         fontSize="xl"
                         onClick={handleRemoveMobileNav}
+                        mr="-10px"
                       >
                         Messages
                       </Text>
+                      <Badge text="New!" />
                     </HStack>
                   </Link>
                 </ListItem>
