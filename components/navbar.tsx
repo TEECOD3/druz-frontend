@@ -191,7 +191,7 @@ const Header: React.FC = () => {
                       color={navLinkTextColor("/messages")}
                       fontSize="md"
                       fontWeight={500}
-                      mr={{ sm: 0, md: 0, lg: "-6px" }}
+                      mr={{ sm: 0, md: 0, lg: "-5px" }}
                     >
                       Messages
                     </Text>
