@@ -23,7 +23,6 @@ import PageTransition from "components/pageTransition";
 import UserService from "utils/UserService";
 import axios, { setAuthorization } from "utils/axios";
 import { AxiosError } from "axios";
-import useAnalytics from "hooks/useAnalytics";
 
 interface IUser {
   name: string;
@@ -43,12 +42,7 @@ const Register: React.FC = () => {
   const [showConfirmPassword, setShowConfirmPassword] = React.useState<boolean>(
     false,
   );
-  const { handlePageViewed, trackButtonClicked, identifyUser } = useAnalytics();
   const [loading, setLoading] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    handlePageViewed("registration page");
-  }, [handlePageViewed]);
 
   const registerUser = async (
     user: IUser,
@@ -61,7 +55,6 @@ const Register: React.FC = () => {
       UserService.setToken(data.data.token);
       setAuthorization(data.data.token);
 
-      identifyUser(user.name);
       resetForm();
       addToast("Successfully registered!", {
         appearance: "success",

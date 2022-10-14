@@ -30,7 +30,6 @@ import { Button } from "components/buttons";
 import SingleQuestion from "./singleQuestion";
 import { Questions as QuestionsType } from "types/mainTypes";
 import { AxiosError } from "axios";
-import useAnalytics from "hooks/useAnalytics";
 
 const Questions: React.FC = () => {
   const { addToast } = useToasts();
@@ -39,7 +38,6 @@ const Questions: React.FC = () => {
     "rgba(242, 242, 242, 0.25)",
     "rgb(25 29 39)",
   );
-  const { handlePageViewed, trackButtonClicked, identifyUser } = useAnalytics();
 
   const [questions, setQuestions] = React.useState<QuestionsType>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -51,10 +49,6 @@ const Questions: React.FC = () => {
     onClose: onEditClose,
   } = useDisclosure();
   const [minMaxContent, setMinMaxContent] = React.useState("");
-
-  React.useEffect(() => {
-    handlePageViewed("question page");
-  }, [handlePageViewed]);
 
   const addQuestion = async (payload: { question: string }) => {
     try {
