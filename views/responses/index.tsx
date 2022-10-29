@@ -211,8 +211,9 @@ const Responses: React.FC = () => {
                   size="md"
                   fontWeight={500}
                 >
-                  You&apos;ve not had any response yet. Share your profile link
-                  with your friends and have them take on your challenge{" "}
+                  You&apos;ve not had any response to your questions yet. Share
+                  your profile link with your friends and have them take on your
+                  challenge{" "}
                   <span role="img" aria-labelledby="hand emoji">
                     👇
                   </span>
@@ -229,7 +230,7 @@ const Responses: React.FC = () => {
                     }
                     color={colorValue}
                     isReadOnly
-                    defaultValue={`https://druz.xyz/${user}`}
+                    defaultValue={`https://druz.xyz/${user}/questions`}
                   />
                   <InputRightElement height="100%" width="5.5rem">
                     <ChakraButton
